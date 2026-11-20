@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solfeggio</title>
+<style>
+:root{color-scheme:light;--bg:#fdf8f0;--card:#fff;--ink:#2b2140;--head:#2b2140;--acc:#e8553d;--acc2:#2f8f83;--soft:#f3e9da}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:clip}
+:root[data-t=caramella]{--bg:#ffe9f3;--ink:#4a1d3f;--head:#e8458b;--acc:#ff3d7f;--acc2:#8a4dff;--soft:#ffd6ea}
+:root[data-t=mare]{--bg:#e3f6ff;--ink:#0d3b5c;--head:#0f7fc4;--acc:#ff7a3d;--acc2:#0a9a90;--soft:#cdeefc}
+:root[data-t=giungla]{--bg:#eefbe0;--ink:#24401a;--head:#3a8a2a;--acc:#ff8c1a;--acc2:#2f7dd6;--soft:#d9f2c2}
+:root[data-t=sole]{--bg:#fff8d6;--ink:#4a3500;--head:#f07b00;--acc:#e63946;--acc2:#3a86ff;--soft:#ffefa8}
+:root[data-t=lavanda]{--bg:#f1ebff;--ink:#2e1f5e;--head:#7b5cd6;--acc:#ff5c8a;--acc2:#1fa89a;--soft:#e2d8ff}
+body{transition:background .4s}
+.themes{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.themes button{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:3px solid #fff8;font-size:0}
+.themes button.on{border-color:#fff;transform:scale(1.2)}
+header{background:var(--head);color:#fff;padding:18px 16px 10px;text-align:center}
+header h1{margin:0;font-size:2rem;letter-spacing:2px}
+header h1 .d{display:inline-block;color:var(--acc);animation:pop 1.6s infinite}
+@keyframes pop{0%,60%,100%{transform:scale(1)}30%{transform:scale(1.8)}}
+nav{position:sticky;top:0;z-index:5;background:var(--head);display:flex;gap:8px;justify-content:center;padding:8px}
+nav .tab{color:#fff;background:#ffffff22;border-radius:20px;font-weight:600;flex:1;max-width:300px}
+nav .tab.on{background:var(--acc)}
+.view{animation:fadeV .4s}
+@keyframes fadeV{from{opacity:0;transform:translateY(12px)}}
+main{max-width:820px;margin:auto;padding:12px}
+.title{font-size:1.5rem;margin:22px 4px 4px;color:var(--ink);border-bottom:4px solid var(--acc);display:inline-block}
+.card{background:var(--card);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 2px 10px #0001;opacity:0;transform:translateY(25px);transition:.6s}
+.card.vis{opacity:1;transform:none}
+h2{margin:0 0 8px;font-size:1.2rem;color:var(--acc)}
+.rule{font-size:1.1rem;background:var(--soft);border-left:5px solid var(--acc);padding:10px 12px;border-radius:8px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;justify-content:center}
+button{font:inherit;border:0;border-radius:12px;padding:9px 14px;background:var(--soft);color:var(--ink);cursor:pointer;transition:transform .15s;min-height:44px}
+button:active{transform:scale(.93)}
+button.on{background:var(--acc);color:#fff}
+button.play{background:var(--acc2);color:#fff;font-weight:600}
+button:disabled{opacity:.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.vcard{border:2px solid var(--soft);border-radius:16px;padding:10px;text-align:center}
+.vcard h3{margin:0;font-size:1.1rem}
+.pair{display:flex;justify-content:center;gap:14px;align-items:flex-end}
+.pair small{display:block;font-size:.75rem;opacity:.7}
+.val{font-size:1.25rem;font-weight:800}
+.pieRow{display:flex;justify-content:center;align-items:center;gap:8px;margin:6px 0}
+.pf{transition:stroke-dasharray .25s}
+.cnt{font-weight:700;min-height:1.5em}
+.stage{display:flex;justify-content:center;gap:14px;align-items:flex-end;flex-wrap:wrap;min-height:120px}
+.stage figure{margin:0;text-align:center}
+.big{font-size:1.4rem;text-align:center;font-weight:700;min-height:2em}
+.dotIn{animation:dotIn .8s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes dotIn{0%{transform:translate(40px,-60px) scale(0)}100%{transform:none}}
+.track{position:relative;background:#eee;border-radius:10px;height:44px;margin:6px 0;overflow:hidden}
+.seg{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-right:3px solid #fff;font-size:.9rem}
+.grow{animation:grow .9s ease-out both}
+@keyframes grow{from{width:0}}
+.cursor{position:absolute;top:0;bottom:0;width:4px;background:var(--ink);left:0;display:none}
+.ticks{display:flex;margin-top:-2px}
+.ticks span{flex:1;font-size:.75rem;border-left:2px solid #999;padding-left:3px;transition:.15s}
+.ticks span.hit{color:var(--acc);font-weight:700;transform:scale(1.4);border-color:var(--acc)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;margin-top:10px}
+.cmp>div{background:var(--soft);border-radius:12px;padding:8px}
+.q{font-size:1.1rem;margin:8px 0;text-align:center}
+.ok{color:var(--acc2);font-weight:700;text-align:center;animation:bounce .4s}
+.ko{color:var(--acc);font-weight:700;text-align:center;animation:shake .4s}
+@keyframes bounce{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:none}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+label{font-size:.9rem;display:block;text-align:center}
+footer{text-align:center;font-size:.8rem;opacity:.7;padding:20px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header><h1>SOLFEGGIO<span class="d">●</span></h1><div class="themes" id="themes"></div></header>
+<nav><button class="tab on" data-v="viewValori">Valori delle note e delle pause</button><button class="tab" data-v="viewPunto">Punto di valore</button></nav>
+<main>
+
+<!-- ===== VALORI ===== -->
+<div id="viewValori" class="view">
+<h2 class="title">Valori delle note e delle pause</h2>
+<section class="card">
+<p class="rule">In una battuta da <b>4/4</b> la <b>semibreve</b> riempie tutta la battuta. Ogni figura vale <b>la metà</b> di quella prima.</p>
+<p style="text-align:center">Premi ▶ per sentire quante ne servono a riempire la battuta: la torta si colora pezzo per pezzo.</p>
+<label>Velocità: <input type="range" id="bpm" min="50" max="120" value="70"> <span id="bpmv">70</span> BPM</label>
+</section>
+<div class="grid" id="vgrid"></div>
+</div>
+
+<!-- ===== PUNTO ===== -->
+<div id="viewPunto" class="view" hidden>
+<h2 class="title">Il punto di valore</h2>
+
+<section class="card">
+<h2>Che cos'è?</h2>
+<p>Il <b>punto di valore</b> è un piccolo punto scritto <b>a destra</b> della nota o della pausa.</p>
+<p class="rule">Il punto <b>allunga la figura della metà del suo valore</b>.</p>
+<div class="stage" id="introStage"></div>
+<div class="big" id="introEq"></div>
+<div class="pieRow" id="introPie"></div>
+<p style="text-align:center;margin:0" id="introPt"></p>
+<div class="btns"><button class="play" id="introBtn">✨ Aggiungi il punto</button></div>
+</section>
+
+<section class="card">
+<h2>Ascolta la differenza</h2>
+<div class="btns" id="noteBtns"></div>
+<p style="margin:4px 0"><b>Senza punto</b></p>
+<div class="track" id="t1"></div>
+<p style="margin:4px 0"><b>Con il punto</b></p>
+<div class="track" id="t2"></div>
+<div class="ticks" id="ticks"></div>
+<div class="cmp">
+ <div><b>Senza punto</b><div class="pieRow" id="pie1"></div><div id="pt1"></div></div>
+ <div><b>Con il punto</b><div class="pieRow" id="pie2"></div><div id="pt2"></div></div>
+</div>
+<div class="btns">
+<button class="play" id="p1">▶ Senza punto</button>
+<button class="play" id="p2">▶ Con il punto</button>
+</div>
+</section>
+
+<section class="card">
+<h2>Mettiti alla prova</h2>
+<div class="q" id="qText"></div>
+<div class="btns" id="qBtns"></div>
+<div id="qRes"></div>
+<p style="text-align:center">Punteggio: <b id="score">0</b> / <b id="tot">0</b></p>
+</section>
+</div>
+
+</main>
+<footer>Copyright © Ignazio Paolicelli</footer>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+const ALL=[
+ {k:'semibreve',n:'Semibreve',p:'Pausa di semibreve',v:4,col:'#7b5cd6',fl:0},
+ {k:'minima',n:'Minima',p:'Pausa di minima',v:2,col:'#2f8f83',fl:0},
+ {k:'semiminima',n:'Semiminima',p:'Pausa di semiminima',v:1,col:'#3a6fd8',fl:0},
+ {k:'croma',n:'Croma',p:'Pausa di croma',v:.5,col:'#d69a1c',fl:1},
+ {k:'semicroma',n:'Semicroma',p:'Pausa di semicroma',v:.25,col:'#c2477a',fl:2},
+ {k:'biscroma',n:'Biscroma',p:'Pausa di biscroma',v:.125,col:'#5a8a2b',fl:3}
+];
+const DOT=ALL.slice(0,5);
+const FR={1:'⅛',2:'¼',3:'⅜',4:'½',5:'⅝',6:'¾',7:'⅞'};
+const fr=x=>{const n=Math.round(x*8),w=Math.floor(n/8),r=n%8;return r?((w||'')+FR[r]):String(w)};
+const MEAS={6:'una battuta e mezza',4:'tutta la battuta',3:'tre quarti di battuta',2:'metà battuta',1.5:'tre ottavi di battuta',1:'un quarto di battuta',.75:'tre sedicesimi di battuta',.5:'un ottavo di battuta',.375:'tre trentaduesimi di battuta',.25:'un sedicesimo di battuta',.125:'un trentaduesimo di battuta'};
+const mov=v=>fr(v)+(v===1?' movimento':' movimenti');
+
+const STAFF='<g stroke="#bbb" stroke-width="1.2">'+[30,42,54,66,78].map(y=>`<line x1="2" y1="${y}" x2="68" y2="${y}"/>`).join('')+'</g>';
+function svgNote(o,dot,w=70,anim=false){
+ const open=o.v>=2;
+ let s=`<svg width="${w}" height="${w*1.43}" viewBox="0 0 70 100">${STAFF}`;
+ s+=`<ellipse cx="25" cy="60" rx="9.5" ry="6.5" transform="rotate(-20 25 60)" fill="${open?'#fff':'#2b2140'}" stroke="#2b2140" stroke-width="3"/>`;
+ if(o.v<4)s+=`<line x1="33.5" y1="57" x2="33.5" y2="10" stroke="#2b2140" stroke-width="3"/>`;
+ for(let i=0;i<o.fl;i++)s+=`<path d="M33.5 ${10+i*9} q16 10 12 26 q-2-12-12-16z" fill="#2b2140"/>`;
+ if(dot)s+=`<circle cx="48" cy="60" r="4.5" fill="#e8553d" ${anim?'class="dotIn" style="transform-origin:48px 60px"':''}/>`;
+ return s+'</svg>';
+}
+function svgRest(o,dot,w=70){
+ let s=`<svg width="${w}" height="${w*1.43}" viewBox="0 0 70 100">${STAFF}<g fill="#2b2140" stroke="#2b2140">`;
+ if(o.k==='semibreve')s+=`<rect x="22" y="42" width="24" height="7"/>`;
+ else if(o.k==='minima')s+=`<rect x="22" y="47" width="24" height="7"/>`;
+ else if(o.k==='semiminima')s+=`<path d="M30 30 L40 42 L31 52 L41 64 Q28 59 35 76" fill="none" stroke-width="4" stroke-linejoin="round"/>`;
+ else{const ys=[42,54,66].slice(0,o.fl);
+  ys.forEach((y,i)=>s+=`<circle cx="${32-i*3}" cy="${y}" r="4" stroke="none"/><path d="M${32-i*3} ${y+3} Q${40-i*3} ${y+6} ${46-i*3} ${y-2}" fill="none" stroke-width="2.5"/>`);
+  s+=`<line x1="46" y1="40" x2="${36-o.fl*4}" y2="${70+o.fl*6}" stroke-width="2.8"/>`}
+ if(dot)s+=`<circle cx="54" cy="48" r="4.5" fill="#e8553d" stroke="none"/>`;
+ return s+'</g></svg>';
+}
+/* torta: frazione della battuta 4/4 */
+function pies(v,col,size=70){let h='',n=Math.max(1,Math.ceil(v/4));
+ for(let i=0;i<n;i++){const f=Math.min(4,v-4*i)/4*100;
+  h+=`<svg width="${size}" height="${size}" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16.5" fill="#eee" stroke="#2b2140" stroke-width="1"/><circle class="pf" data-f="${f}" cx="18" cy="18" r="8" fill="none" stroke="${col}" stroke-width="16" pathLength="100" stroke-dasharray="${f} 100" transform="rotate(-90 18 18)"/></svg>`}
+ return h}
+function setPie(svgEls,pct){svgEls.forEach((c,i)=>{const p=Math.max(0,Math.min(100,pct*svgEls.length-100*i));c.style.strokeDasharray=p+' 100'})}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('vis')),{threshold:.1});
+
+/* AUDIO */
+let ac;const bpm=$('bpm');bpm.oninput=()=>$('bpmv').textContent=bpm.value;
+const A=()=>{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();ac.resume();return ac};
+function click(t,acc){const a=A(),o=a.createOscillator(),g=a.createGain();o.frequency.value=acc?1600:1000;g.gain.setValueAtTime(.25,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);o.connect(g).connect(a.destination);o.start(t);o.stop(t+.06)}
+function tone(t,d,f){const a=A(),o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.4,t+.01);g.gain.setValueAtTime(.4,Math.max(t+.02,t+d-.05));g.gain.linearRampToValueAtTime(0,t+d-.005);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d)}
+let timers=[];const later=(f,ms)=>timers.push(setTimeout(f,ms));
+function play(seq,beats,onBeat,onNote,freq=440){
+ timers.forEach(clearTimeout);timers=[];
+ const a=A(),sp=60/bpm.value,t0=a.currentTime+.15;let t=t0;
+ seq.forEach((d,i)=>{tone(t,d*sp,Array.isArray(freq)?freq[i]:freq);const ms=(t-a.currentTime)*1000;onNote&&later(()=>onNote(i),ms);t+=d*sp});
+ for(let i=0;i<beats;i++){click(t0+i*sp,i%4===0);onBeat&&later(()=>onBeat(i),(.15+i*sp)*1000)}
+ const end=(.15+Math.max(beats,seq.reduce((x,y)=>x+y,0))*sp)*1000;
+ later(()=>{onBeat&&onBeat(-1);onNote&&onNote(-1)},end);
+ return sp;
+}
+
+/* ===== VALORI ===== */
+$('vgrid').innerHTML=ALL.map((o,i)=>`<div class="card vcard">
+ <h3 style="color:${o.col}">${o.n}</h3>
+ <div class="pair"><div>${svgNote(o,false,58)}<small>nota</small></div><div>${svgRest(o,false,58)}<small>pausa</small></div></div>
+ <div class="val">${mov(o.v)}</div>
+ <div class="pieRow">${pies(o.v,o.col)}</div>
+ <div>Riempie <b>${MEAS[o.v]}</b></div>
+ <div class="cnt" id="c${i}">In una battuta: ${4/o.v}</div>
+ <button class="play" data-i="${i}">▶ Riempi la battuta</button></div>`).join('');
+document.querySelectorAll('#vgrid button').forEach(b=>b.onclick=()=>{
+ const o=ALL[b.dataset.i],n=4/o.v,card=b.closest('.vcard'),pf=[...card.querySelectorAll('.pf')],c=$('c'+b.dataset.i);
+ setPie(pf,0);c.textContent='0 / '+n;
+ play(Array(n).fill(o.v),4,null,i=>{if(i<0){c.textContent='In una battuta: '+n;return}setPie(pf,(i+1)/n*100);c.textContent=(i+1)+' / '+n},[523,494,440,392]);
+});
+
+/* ===== INTRO PUNTO ===== */
+let introDot=false;const M=ALL[1];
+function intro(){
+ $('introStage').innerHTML=`<figure>${svgNote(M,introDot,100,introDot)}<figcaption>Minima${introDot?' puntata':''}</figcaption></figure><figure>${svgRest(M,introDot,100)}<figcaption>Pausa${introDot?' puntata':''}</figcaption></figure>`;
+ $('introPie').innerHTML=`<svg width="110" height="110" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16.5" fill="#eee" stroke="#2b2140" stroke-width="1"/><circle cx="18" cy="18" r="8" fill="none" stroke="#2f8f83" stroke-width="16" pathLength="100" stroke-dasharray="50 100" transform="rotate(-90 18 18)"/><circle class="pf" cx="18" cy="18" r="8" fill="none" stroke="#e8553d" stroke-width="16" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="-50" transform="rotate(-90 18 18)" style="transition:stroke-dasharray 1s .7s"/>${[0,1,2,3].map(i=>{const a=i*Math.PI/2;return`<line x1="18" y1="18" x2="${18+16.5*Math.sin(a)}" y2="${18-16.5*Math.cos(a)}" stroke="#fff" stroke-width=".8"/>`}).join('')}</svg>`;
+ $('introPt').innerHTML=introDot?'Riempie <b>tre quarti</b> della battuta 4/4: <span style="color:#2f8f83">■ 2</span> + <span style="color:#e8553d">■ 1</span>':'Riempie <b>metà</b> della battuta 4/4';
+ if(!introDot){$('introEq').innerHTML='Vale <span style="color:#2f8f83">2</span> movimenti';$('introBtn').textContent='✨ Aggiungi il punto';return}
+ requestAnimationFrame(()=>requestAnimationFrame(()=>$('introPie').querySelector('.pf').style.strokeDasharray='25 100'));
+ $('introEq').innerHTML='2';
+ setTimeout(()=>$('introEq').innerHTML='2 <span style="color:#e8553d">+ 1</span>',700);
+ setTimeout(()=>$('introEq').innerHTML='2 + 1 = <span style="color:#e8553d;font-size:1.6em">3</span> movimenti!',1400);
+ $('introBtn').textContent='↺ Togli il punto';
+}
+$('introBtn').onclick=()=>{introDot=!introDot;intro();if(introDot)play([3],3,null,null,392)};
+intro();
+
+/* ===== ASCOLTA ===== */
+let cur=ALL[2];const MAXB=6;
+DOT.forEach(o=>{const b=document.createElement('button');b.textContent=o.n;b.onclick=()=>{cur=o;tracks()};o.nb=b;$('noteBtns').appendChild(b)});
+const W=v=>v/MAXB*100+'%';
+function tracks(){
+ DOT.forEach(o=>o.nb.classList.toggle('on',o===cur));
+ const d=cur.v*1.5;
+ $('t1').innerHTML=`<div class="seg grow" style="left:0;width:${W(cur.v)};background:${cur.col}">${fr(cur.v)}</div><div class="cursor"></div>`;
+ $('t2').innerHTML=`<div class="seg grow" style="left:0;width:${W(cur.v)};background:${cur.col}">${fr(cur.v)}</div><div class="seg grow" style="left:${W(cur.v)};width:${W(cur.v/2)};background:#e8553d;animation-delay:.6s">+${fr(cur.v/2)}</div><div class="cursor"></div>`;
+ $('ticks').innerHTML=Array.from({length:MAXB},(_,i)=>`<span>${i+1}</span>`).join('');
+ $('pie1').innerHTML=pies(cur.v,cur.col,64);$('pt1').innerHTML=`${mov(cur.v)}<br>= <b>${MEAS[cur.v]}</b>`;
+ $('pie2').innerHTML=pies(d,'#e8553d',64);$('pt2').innerHTML=`${mov(d)}<br>= <b>${MEAS[d]}</b>`;
+}
+function runCursor(track,dur,sp){
+ const c=track.querySelector('.cursor');
+ c.style.display='block';c.style.transition='none';c.style.left='0';
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{c.style.transition=`left ${dur*sp}s linear .15s`;c.style.left=dur/MAXB*100+'%'}));
+ later(()=>c.style.display='none',(dur*sp+.4)*1000);
+}
+function runPie(box,dur,sp){
+ const pf=[...box.querySelectorAll('.pf')],full=dur/4*100/pf.length*pf.length;
+ setPie(pf,0);const steps=30;
+ for(let s=1;s<=steps;s++)later(()=>setPie(pf,s/steps*100),(.15+dur*sp*s/steps)*1000);
+}
+const tick=i=>document.querySelectorAll('#ticks span').forEach((s,j)=>s.classList.toggle('hit',j===i));
+$('p1').onclick=()=>{const sp=play([cur.v],Math.max(1,Math.ceil(cur.v)),tick);runCursor($('t1'),cur.v,sp);runPie($('pie1'),cur.v,sp)};
+$('p2').onclick=()=>{const d=cur.v*1.5,sp=play([d],Math.ceil(d),tick);runCursor($('t2'),d,sp);runPie($('pie2'),d,sp)};
+tracks();
+
+/* ===== QUIZ ===== */
+let score=0,tot=0;
+function quiz(){
+ const o=DOT[Math.floor(Math.random()*DOT.length)],rest=Math.random()<.35,ans=o.v*1.5;
+ $('qText').innerHTML=`Quanti movimenti vale ${rest?'la <b>pausa di '+o.n.toLowerCase()+' puntata</b>':'la <b>'+o.n.toLowerCase()+' puntata</b>'}?<br>${rest?svgRest(o,true,60):svgNote(o,true,60,true)}`;
+ const opts=[...new Set([ans,o.v,o.v*2,o.v+1])].sort(()=>Math.random()-.5);
+ const box=$('qBtns');box.innerHTML='';$('qRes').innerHTML='';
+ opts.forEach(x=>{const b=document.createElement('button');b.textContent=fr(x);b.onclick=()=>{
+  tot++;const ok=x===ans;if(ok)score++;
+  $('qRes').innerHTML=`<p class="${ok?'ok':'ko'}">${ok?'🎉 Esatto!':'Non proprio…'} ${fr(o.v)} + ${fr(o.v/2)} = ${fr(ans)}</p><div class="pieRow">${pies(ans,'#e8553d',50)}</div><p style="text-align:center">Riempie ${MEAS[ans]}</p>`;
+  b.classList.add('on');$('score').textContent=score;$('tot').textContent=tot;
+  box.querySelectorAll('button').forEach(z=>z.disabled=true);
+  if(ok)play([.25,.25,.5],0,null,null,[523,659,784]);setTimeout(quiz,2600)};box.appendChild(b)});
+}
+quiz();
+
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+const TH=[['classico','#e8553d','Classico'],['caramella','#ff3d7f','Caramella'],['mare','#0f7fc4','Mare'],['giungla','#3a8a2a','Giungla'],['sole','#f07b00','Sole'],['lavanda','#7b5cd6','Lavanda']];
+function setT(t){document.documentElement.dataset.t=t;document.querySelectorAll('#themes button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));try{localStorage.setItem('solfTema',t)}catch(e){}}
+$('themes').innerHTML=TH.map(t=>`<button data-t="${t[0]}" title="${t[2]}" aria-label="Tema ${t[2]}" style="background:${t[1]}">${t[2]}</button>`).join('');
+document.querySelectorAll('#themes button').forEach(b=>b.onclick=()=>setT(b.dataset.t));
+let sv='classico';try{sv=localStorage.getItem('solfTema')||sv}catch(e){}setT(sv);
+document.querySelectorAll('nav .tab').forEach(t=>t.onclick=()=>{
+ document.querySelectorAll('nav .tab').forEach(x=>x.classList.toggle('on',x===t));
+ document.querySelectorAll('.view').forEach(v=>v.hidden=v.id!==t.dataset.v);
+ timers.forEach(clearTimeout);window.scrollTo(0,0);
+ document.querySelectorAll('#'+t.dataset.v+' .card').forEach(c=>c.classList.add('vis'));
+});
+}
+</script>
+</body>
+</html>
