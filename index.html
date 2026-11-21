@@ -197,6 +197,20 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
  <div class="card"><h3>Esercizi con le terzine</h3><p>Leggi a ritmo, poi ascolta e controlla.</p><div id="tzx"></div></div>
 </section>
 
+<section class="pg" id="triadi">
+ <div class="card"><h2>Le triadi</h2>
+  <p>La <b>triade</b> è un <b>accordo di 3 note</b> sovrapposte per <b>terze</b>: è formata da <b>fondamentale</b> (1° grado), <b>terza</b> (3° grado) e <b>quinta</b> (5° grado). È il <b>3° grado</b> che caratterizza l'accordo e ci dice se è maggiore o minore. Sul pentagramma la triade sembra un pupazzo di neve: le tre note stanno <b>tutte sulle righe</b> oppure <b>tutte negli spazi</b>.</p>
+  <div class="vs"><div><b>Maggiore</b>Tra il 1° e il 3° grado ci sono <b style="display:inline;font-size:inherit">2 toni</b>. Suono allegro e luminoso.<br><i>Es. Do – Mi – Sol</i><div id="smM"></div></div><div><b>Minore</b>Tra il 1° e il 3° grado c'è <b style="display:inline;font-size:inherit">1 tono e mezzo</b>. Suono più triste e dolce.<br><i>Es. Do – Mi♭ – Sol</i><div id="smm"></div></div></div></div>
+ <div class="card"><h3>Costruisci una triade</h3>
+  <p style="margin:0">Fondamentale:</p><div class="row2" id="trR"></div>
+  <p style="margin:0">Tipo:</p><div class="row2" id="trT"></div>
+  <div class="grid"><svg id="trS" viewBox="0 0 220 130" style="width:100%;max-width:380px;display:block;margin:auto;color:var(--ink)"></svg>
+   <div><div class="big" id="trN" style="font-size:clamp(30px,5vw,44px)"></div><div class="tn" id="trI"></div><p id="trD" style="font-weight:700"></p></div></div>
+  <svg id="trK" viewBox="0 0 422 120" style="width:100%;max-width:560px;display:block;margin:8px auto;color:var(--ink)"></svg>
+  <div class="row2"><button class="pl" id="trA">▶ Arpeggio (una nota alla volta)</button><button class="pl" id="trC">▶ Accordo (tutte insieme)</button></div></div>
+ <div class="card"><h3>Le triadi sulla scala di Do</h3><p>Su ogni nota della scala di Do si costruisce una triade usando solo i tasti bianchi. Tocca e ascolta: senti la differenza tra maggiori e minori?</p><div class="cards" id="trG"></div></div>
+</section>
+
 <section class="pg" id="battuta">
  <div class="card"><h2>La battuta e il tempo</h2>
   <p>I battiti si raggruppano in <b>battute</b>, separate dalla <b>stanghetta</b>. Il primo battito di ogni battuta è <b>forte</b> (accento), gli altri sono <b>deboli</b>.</p>
@@ -274,13 +288,13 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 <script>
 {
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const PAGES=[['battito','Il battito'],['andamenti','Le velocità'],['ritmo','Il ritmo o la velocità'],['figure','Le figure'],['pause','Le pause'],['battuta','La battuta'],['tempi','Tempi semplici e composti'],['punto','Punto di valore'],['legatura','Legatura di valore'],['terzine','Le terzine'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
+const PAGES=[['battito','Il battito'],['andamenti','Le velocità'],['ritmo','Il ritmo o la velocità'],['figure','Le figure'],['pause','Le pause'],['battuta','La battuta'],['tempi','Tempi semplici e composti'],['punto','Punto di valore'],['legatura','Legatura di valore'],['terzine','Le terzine'],['triadi','Le triadi'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
 const T={w:{l:4,k:'w',s:'TA-A-A-A',n:'Semibreve'},h:{l:2,k:'h',s:'TA-A',n:'Minima'},q:{l:1,k:'q',s:'TA',n:'Semiminima'},e:{l:1,k:'ee',s:'TI-TI',sub:1,n:'Due crome'},c:{l:.5,k:'c',s:'TI'},rw:{l:4,k:'rw',s:'SST',rest:1},rh:{l:2,k:'rh',s:'SST',rest:1},r:{l:1,k:'rq',s:'SST',rest:1,n:'Pausa'},rc:{l:.5,k:'rc',s:'sst',rest:1},hd:{l:3,k:'hd',s:'TA-A-A',n:'Minima puntata'},qd:{l:1.5,k:'qd',s:'TA-I',n:'Semiminima puntata'},e3:{l:1,k:'e3',s:'TI-TI-TI',sub:3},t3:{l:1,k:'t3',s:'TER-ZI-NA',sub:3}};
 const D=t=>T[t.replace('~','')];
 let bpm=90,inst='chitarra';
-const setT=v=>{if(v)document.documentElement.dataset.tema=v;else delete document.documentElement.dataset.tema;$('#tema').value=v;try{localStorage.setItem('ritmoTema',v)}catch(e){}};
+const setT=v=>{if(v)document.documentElement.dataset.tema=v;else delete document.documentElement.dataset.tema;$('#tema').value=v;try{localStorage.setItem('solfTema',v)}catch(e){}};
 $('#tema').onchange=e=>setT(e.target.value);
-try{let v=localStorage.getItem('ritmoTema');if(v===null||v=='notte'||v=='lavagna')v='bosco';setT(v)}catch(e){setT('bosco')}
+try{let v=localStorage.getItem('solfTema');if(v===null||v=='notte'||v=='lavagna')v='bosco';setT(v)}catch(e){setT('bosco')}
 const setI=v=>{inst=v;$('#inst').value=v;try{localStorage.setItem('ritmoSuono',v)}catch(e){}};
 $('#inst').onchange=e=>{setI(e.target.value);stop();A();const t=ac.currentTime+.05,g=ac.createGain();g.connect(ac.destination);tone(g,t,.6)};
 try{setI(localStorage.getItem('ritmoSuono')||'chitarra')}catch(e){}
@@ -334,15 +348,15 @@ function osc(type,f,t,d,dest,vib){const o=ac.createOscillator();o.type=type;o.fr
  if(vib){const l=ac.createOscillator(),lg=ac.createGain();l.frequency.value=5.5;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(vib,t+.25);l.connect(lg).connect(o.frequency);l.start(t);l.stop(t+d+.05)}
  o.connect(dest);o.start(t);o.stop(t+d+.05);return o}
 function lp(fr,dest){const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=fr;f.connect(dest);return f}
-function tone(g,t,d){const v=ac.createGain();v.connect(g);
- if(inst=='chitarra'){const s=ac.createBufferSource();s.buffer=ks(220);const f=lp(3200,v);s.connect(f);v.gain.setValueAtTime(.9,t);v.gain.setValueAtTime(.9,Math.max(t,t+d-.05));v.gain.linearRampToValueAtTime(0,t+d);s.start(t);s.stop(t+d+.05);return}
- if(inst=='piano'){[1,.45,.22,.1].forEach((a,k)=>{const h=ac.createGain();h.connect(v);h.gain.setValueAtTime(0,t);h.gain.linearRampToValueAtTime(a*.35,t+.008);h.gain.exponentialRampToValueAtTime(.0008,t+2.4/(k+1));osc('sine',262*(k+1),t,d,h)});
+function tone(g,t,d,F){const v=ac.createGain();v.connect(g);
+ if(inst=='chitarra'){const s=ac.createBufferSource();s.buffer=ks(F?Math.round(F):220);const f=lp(3200,v);s.connect(f);v.gain.setValueAtTime(.9,t);v.gain.setValueAtTime(.9,Math.max(t,t+d-.05));v.gain.linearRampToValueAtTime(0,t+d);s.start(t);s.stop(t+d+.05);return}
+ if(inst=='piano'){[1,.45,.22,.1].forEach((a,k)=>{const h=ac.createGain();h.connect(v);h.gain.setValueAtTime(0,t);h.gain.linearRampToValueAtTime(a*.35,t+.008);h.gain.exponentialRampToValueAtTime(.0008,t+2.4/(k+1));osc('sine',(F||262)*(k+1),t,d,h)});
   v.gain.setValueAtTime(1,t);v.gain.setValueAtTime(1,Math.max(t,t+d-.06));v.gain.linearRampToValueAtTime(0,t+d);return}
- if(inst=='violino'){env(v,t,d,.09,.22,.17);osc('sawtooth',440,t,d,lp(2600,v),5);return}
- if(inst=='clarinetto'){env(v,t,d,.04,.2,.16);osc('square',294,t,d,lp(1500,v),2);return}
- if(inst=='flauto'){env(v,t,d,.07,.32,.26);osc('sine',587,t,d,v,4);const n=ac.createGain();n.gain.value=.08;n.connect(v);osc('triangle',1174,t,d,n);return}
- if(inst=='campanella'){v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(.35,t+.004);v.gain.exponentialRampToValueAtTime(.001,t+Math.min(d,1.2));osc('sine',784,t,d,v);const h=ac.createGain();h.gain.value=.25;h.connect(v);osc('sine',784*3.93,t,d,h);return}
- env(v,t,d,.015,.3,.24);osc('sine',523,t,d,v)}
+ if(inst=='violino'){env(v,t,d,.09,.22,.17);osc('sawtooth',F||440,t,d,lp(2600,v),5);return}
+ if(inst=='clarinetto'){env(v,t,d,.04,.2,.16);osc('square',F||294,t,d,lp(1500,v),2);return}
+ if(inst=='flauto'){env(v,t,d,.07,.32,.26);osc('sine',F||587,t,d,v,4);const n=ac.createGain();n.gain.value=.08;n.connect(v);osc('triangle',(F||587)*2,t,d,n);return}
+ if(inst=='campanella'){v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(.35,t+.004);v.gain.exponentialRampToValueAtTime(.001,t+Math.min(d,1.2));osc('sine',F||784,t,d,v);const h=ac.createGain();h.gain.value=.25;h.connect(v);osc('sine',(F||784)*3.93,t,d,h);return}
+ env(v,t,d,.015,.3,.24);osc('sine',F||523,t,d,v)}
 function click(g,t,strong,soft){const o=ac.createOscillator(),v=ac.createGain();o.frequency.value=strong?1500:950;
  v.gain.setValueAtTime(strong?.3:(soft?.1:.2),t);v.gain.exponentialRampToValueAtTime(.001,t+.06);o.connect(v).connect(g);o.start(t);o.stop(t+.1)}
 function play(o){const a=A(),g=a.createGain();g.connect(a.destination);const Rn={g,tm:[],end:o.onEnd};run=Rn;
@@ -452,6 +466,56 @@ $('#tpdel').onclick=()=>{stop();clearTimeout(tAuto);tc.pop();tDraw()};
 $('#tpclr').onclick=()=>{stop();clearTimeout(tAuto);tc=[];tDraw()};
 $('#tppl').onclick=e=>{if(tc.length){clearTimeout(tAuto);playT(e.currentTarget,$('#tprh'),tc,{m:4,onEv:i=>$$('#tpie g').forEach(x=>x.classList.toggle('hi',x.id=='tps'+i)),onEnd:()=>$$('#tpie g').forEach(x=>x.classList.remove('hi'))})}};
 tDraw();
+
+/* triadi */
+const NM=['Do','Re','Mi','Fa','Sol','La','Si'],NMI=[0,2,4,5,7,9,11],TRT={M:['maggiore',4,7],m:['minore',3,7],d:['diminuita',3,6],a:['aumentata',4,8]};
+const CLEF='<g transform="translate(-44 -6) scale(.28)"><g transform="translate(150.4 353.2) scale(0.3191 -0.3191)"><path d="M434 2Q464 -103 464 -170Q464 -223 427.0 -257.0Q390 -291 337 -291Q287 -291 250.0 -261.5Q213 -232 213 -190Q213 -160 233.5 -133.5Q254 -107 283.5 -107.0Q313 -107 331.5 -128.5Q350 -150 350 -178Q350 -240 280 -240Q298 -268 338 -268Q353 -268 368.5 -263.5Q384 -259 401.0 -248.0Q418 -237 428.5 -213.5Q439 -190 439 -157Q439 -136 411 -6Q389 -12 356 -12Q259 -12 189.5 60.0Q120 132 120 232Q120 267 131.5 303.0Q143 339 157.5 366.5Q172 394 200.5 428.5Q229 463 248.5 483.5Q268 504 303 539Q280 621 280 689Q280 779 313.0 839.5Q346 900 379 900Q389 900 401.5 887.0Q414 874 426.0 851.0Q438 828 446.5 790.5Q455 753 455 710Q455 551 342 447L368 329Q384 332 397 332Q458 332 500.0 282.5Q542 233 542 162Q542 44 434 2ZM426 746Q426 801 394 801Q358 801 333.0 748.0Q308 695 308 630Q308 588 321 557Q359 580 392.5 639.5Q426 699 426 746ZM498 128Q498 183 466.0 216.0Q434 249 383 249L428 23Q498 52 498 128ZM407 17 361 247Q334 241 311.5 214.0Q289 187 289 158Q289 143 295.0 128.5Q301 114 309.5 104.0Q318 94 327.0 86.0Q336 78 342.0 74.5Q348 71 348 71L340 66Q307 75 277.5 106.0Q248 137 248 184Q248 231 277.5 270.5Q307 310 343 323L325 430Q168 299 168 177Q168 104 223.0 55.0Q278 6 348 6Q365 6 407 17Z"/></g></g>';
+let tr={r:0,t:'M'};
+const accS=a=>a==1?'♯':a==2?'𝄪':a==-1?'♭':a==-2?'𝄫':'';
+function triad(ri,ty){const T=TRT[ty],root=60+NMI[ri];return[[0,0],[2,T[1]],[4,T[2]]].map(([st,se])=>{const li=ri+st,L=li%7,oc=Math.floor(li/7),nat=60+NMI[L]+12*oc,mi=root+se;return{L,step:L+7*oc-2,acc:mi-nat,midi:mi,name:NM[L]+accS(mi-nat)}})}
+const TONI=n=>({3:'1 tono e mezzo',4:'2 toni',6:'3 toni',7:'3 toni e mezzo',8:'4 toni'})[n];
+const frq=m=>440*Math.pow(2,(m-69)/12),TRC=['#ff4f6d','#1fae9e','#ffb703'];
+function trDraw(hi){const N3=triad(tr.r,tr.t),T=TRT[tr.t];let g='';
+ for(let k=0;k<5;k++)g+=`<line x1="4" x2="216" y1="${40+k*12}" y2="${40+k*12}" stroke="currentColor" stroke-width="1.6"/>`;
+ g+=CLEF.replace('<g transform','<g fill="currentColor" transform');
+ N3.forEach((n,i)=>{const y=88-n.step*6,x=130;
+  if(y>=100)for(let ly=100;ly<=y;ly+=12)g+=`<line x1="${x-16}" x2="${x+16}" y1="${ly}" y2="${ly}" stroke="currentColor" stroke-width="1.6"/>`;
+  if(y<=28)for(let ly=28;ly>=y;ly-=12)g+=`<line x1="${x-16}" x2="${x+16}" y1="${ly}" y2="${ly}" stroke="currentColor" stroke-width="1.6"/>`;
+  g+=`<ellipse cx="${x}" cy="${y}" rx="9" ry="6.2" fill="${hi==i||hi==3?TRC[i]:'none'}" stroke="${TRC[i]}" stroke-width="3.2"/>`;
+  if(n.acc)g+=`<text x="${x-26-i%2*0}" y="${y+6}" font-size="18" font-weight="800" text-anchor="middle" fill="currentColor">${accS(n.acc)}</text>`;
+  g+=`<text x="${x+22}" y="${y+5}" font-size="13" font-weight="800" fill="${TRC[i]}">${n.name}</text>`});
+ $('#trS').innerHTML=g;
+ $('#trN').textContent=`${NM[tr.r]} ${T[0]}`;
+ $('#trI').textContent=N3.map(n=>n.name).join(' – ');
+ $('#trD').innerHTML=`<span style="color:${TRC[0]}">Fondamentale (1° grado)</span> · <span style="color:${TRC[1]}">terza (3° grado)</span> · <span style="color:${TRC[2]}">quinta (5° grado)</span><br>Dal 1° al 3° grado: <b>${TONI(T[1])}</b> → è il 3° grado che la rende ${T[0]}.<br>Dal 1° al 5° grado: ${TONI(T[2])}.`;
+ // tastiera 2 ottave da Do4
+ let k='';const W=30,BL=[1,3,6,8,10];const on={};N3.forEach((n,i)=>on[n.midi]=i);
+ for(let i=0;i<14;i++){const m=60+NMI[i%7]+12*Math.floor(i/7),c=on[m];k+=`<rect x="${1+i*W}" y="1" width="${W-1}" height="116" rx="4" fill="${c!=null?(hi==c||hi==3||hi==null?TRC[c]:'#fff'):'#fff'}" stroke="#22204a" stroke-width="1.5"/>`;if(c!=null)k+=`<text x="${1+i*W+W/2}" y="108" text-anchor="middle" font-size="11" font-weight="800" fill="#22204a">${N3[c].name}</text>`}
+ for(let o=0;o<2;o++)[[0,1],[1,3],[3,6],[4,8],[5,10]].forEach(([wi,se])=>{const m=60+se+12*o,c=on[m],x=1+(wi+7*o)*W+W*.68;k+=`<rect x="${x}" y="1" width="${W*.62}" height="72" rx="3" fill="${c!=null?TRC[c]:'#22204a'}" stroke="#22204a"/>`;if(c!=null)k+=`<text x="${x+W*.31}" y="66" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">${N3[c].name}</text>`});
+ $('#trK').innerHTML=k;
+ $$('[data-tr]').forEach(b=>b.classList.toggle('pl',+b.dataset.tr==tr.r));$$('[data-tt]').forEach(b=>b.classList.toggle('pl',b.dataset.tt==tr.t))}
+$('#trR').innerHTML=NM.map((n,i)=>`<button data-tr="${i}">${n}</button>`).join('');
+$('#trT').innerHTML=Object.entries(TRT).map(([k,v])=>`<button data-tt="${k}">${v[0]}</button>`).join('');
+$$('[data-tr]').forEach(b=>b.onclick=()=>{tr.r=+b.dataset.tr;trDraw();trPlay(1)});
+$$('[data-tt]').forEach(b=>b.onclick=()=>{tr.t=b.dataset.tt;trDraw();trPlay(1)});
+let trTm=[];
+function trPlay(arp){stop();trTm.forEach(clearTimeout);trTm=[];const a=A(),g=a.createGain();g.connect(a.destination);const N3=triad(tr.r,tr.t),t0=a.currentTime+.05,st=arp?.55:0;
+ N3.forEach((n,i)=>{tone(g,t0+i*st,arp?1.6-i*.3:1.6,frq(n.midi));trTm.push(setTimeout(()=>trDraw(arp?i:3),(i*st+.05)*1000))});
+ if(arp){N3.forEach(n=>tone(g,t0+3*st,1.4,frq(n.midi)));trTm.push(setTimeout(()=>trDraw(3),(3*st+.05)*1000))}
+ trTm.push(setTimeout(()=>trDraw(),(3*st+1.7)*1000))}
+$('#trA').onclick=()=>trPlay(1);$('#trC').onclick=()=>trPlay(0);
+const GR=[['I','M'],['II','m'],['III','m'],['IV','M'],['V','M'],['VI','m'],['VII','d']];
+$('#trG').innerHTML=GR.map(([g,t],i)=>`<button data-gr="${i}"><b>${g}</b><span>${NM[i]} ${TRT[t][0]}</span><small>${triad(i,t).map(n=>n.name).join(' – ')}</small></button>`).join('');
+$$('[data-gr]').forEach(b=>b.onclick=()=>{const i=+b.dataset.gr;tr={r:i,t:GR[i][1]};trDraw();trPlay(0);$('#trS').scrollIntoView({behavior:'smooth',block:'center'})});
+function semiSvg(r0,n,a,b){const BK=[1,3,6,8,10],W=40,wh=[],end=r0+n+(BK.includes((r0+n)%12)?1:0);for(let m=r0;m<=end;m++)if(!BK.includes(m%12))wh.push(m);
+ const cx=m=>BK.includes(m%12)?(wh.indexOf(m-1)+1)*W+1:wh.indexOf(m)*W+W/2+1;let g='';
+ wh.forEach((m,i)=>{const c=m==r0?TRC[0]:m==r0+n?TRC[1]:'#fff';g+=`<rect x="${1+i*W}" y="40" width="${W-1}" height="62" rx="4" fill="${c}" stroke="#22204a" stroke-width="1.5"/>`});
+ for(let m=r0;m<=r0+n;m++)if(BK.includes(m%12)){const x=cx(m);g+=`<rect x="${x-12}" y="40" width="24" height="38" rx="3" fill="${m==r0+n?TRC[1]:'#22204a'}" stroke="#22204a" stroke-width="1.5"/>`}
+ g+=`<text x="${cx(r0)}" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#22204a">${a}</text>${BK.includes((r0+n)%12)?`<line x1="${cx(r0+n)}" y1="78" x2="${cx(r0+n)}" y2="106" stroke="${TRC[1]}" stroke-width="2.5"/><text x="${cx(r0+n)}" y="122" text-anchor="middle" font-size="15" font-weight="800" fill="currentColor" font-family="'Baloo 2','Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif">${b}</text>`:`<text x="${cx(r0+n)}" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#22204a">${b}</text>`}`;
+ for(let k=0;k<n;k++){const x1=cx(r0+k),x2=cx(r0+k+1),mx=(x1+x2)/2;g+=`<path d="M${x1} 38Q${mx} 14 ${x2} 38" fill="none" stroke="var(--acc)" stroke-width="2.5" marker-end="url(#sa)"/><circle cx="${mx}" cy="20" r="9" fill="var(--acc)"/><text x="${mx}" y="24.5" text-anchor="middle" font-size="12" font-weight="800" fill="var(--on,#fff)">${k+1}</text>`}
+ const w=wh.length*W+2;return `<svg viewBox="0 0 ${w} 128" style="width:100%;max-width:${w*1.1}px;display:block;margin:8px 0 2px;color:var(--ink)"><defs><marker id="sa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5 0 10z" fill="var(--acc)"/></marker></defs>${g}</svg><div style="font-weight:800">${n} semitoni = ${TONI(n)}</div>`}
+$('#smM').innerHTML=semiSvg(60,4,'Do','Mi');$('#smm').innerHTML=semiSvg(60,3,'Do','Mi♭');
+trDraw();
 
 /* torta */
 const PCOL=['#ff4f6d','#1fae9e','#ffb703','#7b61ff','#fb8500','#3a86ff','#8ac926','#f15bb5'];
@@ -639,7 +703,7 @@ $('#qpl').onclick=()=>playT($('#qpl'),null,qz.ans,{m:qz.m});
 $('#qnew').onclick=newQ;lvSet(0);
 
 /* navigazione */
-$('#nav').innerHTML=PAGES.map(([h,t],i)=>`${i==10?'<span class="sep"></span>':''}<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
+$('#nav').innerHTML=PAGES.map(([h,t],i)=>`${i==11?'<span class="sep"></span>':''}<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
 function show(){stop();let h=location.hash.slice(1);if(!PAGES.some(p=>p[0]==h))h='battito';
  $$('.pg').forEach(s=>s.hidden=s.id!=h);$$('#'+h+' .rh').forEach(ties);$$('#nav a').forEach(a=>a.classList.toggle('cur',a.hash=='#'+h));
  const i=PAGES.findIndex(p=>p[0]==h),n=PAGES[i+1];$('#nx').innerHTML=n?`<a class="nxt" href="#${n[0]}">Prossima lezione: ${n[1]} →</a>`:'';scrollTo(0,0)}
