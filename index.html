@@ -1,289 +1,587 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solfeggio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOLFEGGIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--bg:#fdf8f0;--card:#fff;--ink:#2b2140;--head:#2b2140;--acc:#e8553d;--acc2:#2f8f83;--soft:#f3e9da}
+/* VOICE: allegra, chiara, da classe quinta
+   IDEA: il quaderno di musica con il rigo del ritmo
+   PICTURE: note disegnate che si illuminano a tempo, cuore che batte
+   COLOUR and TYPE: giallo sole, inchiostro blu notte, corallo e verde acqua; Baloo 2
+   LAYOUT: barra lezioni in alto, una lezione per volta, schede grandi */
+:root{color-scheme:light dark;--bg:light-dark(#ffd84d,#1b1838);--card:light-dark(#fffdf5,#28244e);--ink:light-dark(#22204a,#fff3c4);--acc:#ff4f6d;--sup:#1fae9e;--mut:light-dark(#5b5880,#b9b4e0)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+:root[data-tema=notte]{color-scheme:dark;--bg:#1b1838;--card:#28244e;--ink:#fff3c4;--mut:#b9b4e0}
+:root[data-tema=mare]{color-scheme:light;--bg:#4cc9f0;--card:#f2fbff;--ink:#0b2545;--acc:#ff6b35;--sup:#2a9d8f;--mut:#3d5a80}
+:root[data-tema=bosco]{color-scheme:light;--bg:#95d5b2;--card:#f4fff6;--ink:#1b4332;--acc:#e76f51;--sup:#2d6a4f;--mut:#40916c}
+:root[data-tema=fragola]{color-scheme:light;--bg:#ffafcc;--card:#fff5f8;--ink:#4a1942;--acc:#d62246;--sup:#3a86ff;--mut:#7a4a6e}
+:root[data-tema=lavagna]{color-scheme:dark;--bg:#2f4f3e;--card:#3b5e4c;--ink:#f5f5ef;--acc:#ffd166;--sup:#8ecae6;--mut:#cfe3d6;--on:#22204a}
+:root[data-tema=lavanda]{color-scheme:light;--bg:#cdb4db;--card:#fbf7ff;--ink:#2b2140;--acc:#f15bb5;--sup:#00a6a6;--mut:#6a5a80}
+select{font:700 16px "Baloo 2",sans-serif;min-height:40px;border-radius:12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:0 8px}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:clip}
-:root[data-t=caramella]{--bg:#ffe9f3;--ink:#4a1d3f;--head:#e8458b;--acc:#ff3d7f;--acc2:#8a4dff;--soft:#ffd6ea}
-:root[data-t=mare]{--bg:#e3f6ff;--ink:#0d3b5c;--head:#0f7fc4;--acc:#ff7a3d;--acc2:#0a9a90;--soft:#cdeefc}
-:root[data-t=giungla]{--bg:#eefbe0;--ink:#24401a;--head:#3a8a2a;--acc:#ff8c1a;--acc2:#2f7dd6;--soft:#d9f2c2}
-:root[data-t=sole]{--bg:#fff8d6;--ink:#4a3500;--head:#f07b00;--acc:#e63946;--acc2:#3a86ff;--soft:#ffefa8}
-:root[data-t=lavanda]{--bg:#f1ebff;--ink:#2e1f5e;--head:#7b5cd6;--acc:#ff5c8a;--acc2:#1fa89a;--soft:#e2d8ff}
-body{transition:background .4s}
-.themes{display:flex;gap:8px;justify-content:center;margin-top:8px}
-.themes button{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:3px solid #fff8;font-size:0}
-.themes button.on{border-color:#fff;transform:scale(1.2)}
-header{background:var(--head);color:#fff;padding:18px 16px 10px;text-align:center}
-header h1{margin:0;font-size:2rem;letter-spacing:2px}
-header h1 .d{display:inline-block;color:var(--acc);animation:pop 1.6s infinite}
-@keyframes pop{0%,60%,100%{transform:scale(1)}30%{transform:scale(1.8)}}
-nav{position:sticky;top:0;z-index:5;background:var(--head);display:flex;gap:8px;justify-content:center;padding:8px}
-nav .tab{color:#fff;background:#ffffff22;border-radius:20px;font-weight:600;flex:1;max-width:300px}
-nav .tab.on{background:var(--acc)}
-.view{animation:fadeV .4s}
-@keyframes fadeV{from{opacity:0;transform:translateY(12px)}}
-main{max-width:820px;margin:auto;padding:12px}
-.title{font-size:1.5rem;margin:22px 4px 4px;color:var(--ink);border-bottom:4px solid var(--acc);display:inline-block}
-.card{background:var(--card);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 2px 10px #0001;opacity:0;transform:translateY(25px);transition:.6s}
-.card.vis{opacity:1;transform:none}
-h2{margin:0 0 8px;font-size:1.2rem;color:var(--acc)}
-.rule{font-size:1.1rem;background:var(--soft);border-left:5px solid var(--acc);padding:10px 12px;border-radius:8px}
-.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;justify-content:center}
-button{font:inherit;border:0;border-radius:12px;padding:9px 14px;background:var(--soft);color:var(--ink);cursor:pointer;transition:transform .15s;min-height:44px}
-button:active{transform:scale(.93)}
-button.on{background:var(--acc);color:#fff}
-button.play{background:var(--acc2);color:#fff;font-weight:600}
-button:disabled{opacity:.5}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.vcard{border:2px solid var(--soft);border-radius:16px;padding:10px;text-align:center}
-.vcard h3{margin:0;font-size:1.1rem}
-.pair{display:flex;justify-content:center;gap:14px;align-items:flex-end}
-.pair small{display:block;font-size:.75rem;opacity:.7}
-.val{font-size:1.25rem;font-weight:800}
-.pieRow{display:flex;justify-content:center;align-items:center;gap:8px;margin:6px 0}
-.pf{transition:stroke-dasharray .25s}
-.cnt{font-weight:700;min-height:1.5em}
-.stage{display:flex;justify-content:center;gap:14px;align-items:flex-end;flex-wrap:wrap;min-height:120px}
-.stage figure{margin:0;text-align:center}
-.big{font-size:1.4rem;text-align:center;font-weight:700;min-height:2em}
-.dotIn{animation:dotIn .8s cubic-bezier(.3,1.8,.5,1) both}
-@keyframes dotIn{0%{transform:translate(40px,-60px) scale(0)}100%{transform:none}}
-.track{position:relative;background:#eee;border-radius:10px;height:44px;margin:6px 0;overflow:hidden}
-.seg{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-right:3px solid #fff;font-size:.9rem}
-.grow{animation:grow .9s ease-out both}
-@keyframes grow{from{width:0}}
-.cursor{position:absolute;top:0;bottom:0;width:4px;background:var(--ink);left:0;display:none}
-.ticks{display:flex;margin-top:-2px}
-.ticks span{flex:1;font-size:.75rem;border-left:2px solid #999;padding-left:3px;transition:.15s}
-.ticks span.hit{color:var(--acc);font-weight:700;transform:scale(1.4);border-color:var(--acc)}
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;margin-top:10px}
-.cmp>div{background:var(--soft);border-radius:12px;padding:8px}
-.q{font-size:1.1rem;margin:8px 0;text-align:center}
-.ok{color:var(--acc2);font-weight:700;text-align:center;animation:bounce .4s}
-.ko{color:var(--acc);font-weight:700;text-align:center;animation:shake .4s}
-@keyframes bounce{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:none}}
-@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-label{font-size:.9rem;display:block;text-align:center}
-footer{text-align:center;font-size:.8rem;opacity:.7;padding:20px}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Baloo 2",system-ui,sans-serif;overflow-x:clip}
+header{padding:20px max(4vw,14px) 10px;max-width:1240px;margin:auto}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.05;margin:0;font-weight:800}
+h2{font-size:clamp(28px,4vw,38px);line-height:1.1;margin:0 0 6px;text-wrap:balance}
+h3{margin:0;font-size:20px;line-height:1.2}
+p{margin:4px 0 12px;max-width:70ch}
+.top{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:end;justify-content:space-between}
+.sub{margin:0;color:var(--mut);font-weight:700}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+nav a,button{font:700 16px "Baloo 2",sans-serif;min-height:44px;padding:6px 16px;border-radius:999px;border:3px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+nav a.cur{background:var(--ink);color:var(--bg)}
+button:focus-visible,nav a:focus-visible,input:focus-visible,.tk:focus-visible{outline:4px solid var(--acc);outline-offset:2px}
+button.pl{background:var(--acc);color:var(--on,#fff);border-color:var(--acc)}
+button.pl.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.vel{display:flex;align-items:center;gap:10px;font-weight:700;background:var(--card);border-radius:999px;padding:4px 16px;border:3px solid var(--ink)}
+input[type=range]{accent-color:var(--acc);width:150px;height:32px}
+output{font-weight:800;min-width:3ch;text-align:right}
+main{max-width:1240px;margin:auto;padding:10px max(4vw,14px) 30px}
+.lay{max-width:1240px;margin:auto;padding:0 max(4vw,14px)}
+nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:6px 0 4px}
+nav a{min-height:40px;padding:4px 10px 4px 6px;font-size:15px;border-width:2px;border-radius:12px;line-height:1.15}
+nav a b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;font-size:14px}
+nav a.cur b{background:var(--acc);color:var(--on,#fff)}
+.card{background:var(--card);border-radius:24px;padding:clamp(16px,3vw,28px);box-shadow:0 6px 0 color-mix(in srgb,var(--ink) 18%,transparent);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;align-items:center}
+.heart{width:min(210px,56vw);display:block;margin:auto;transition:transform .12s ease-out;filter:drop-shadow(0 10px 0 color-mix(in srgb,var(--ink) 20%,transparent))}
+.heart.p{transform:scale(1.18)}
+.big{font-size:clamp(44px,8vw,72px);font-weight:800;line-height:1}
+.tn{font-size:22px;font-weight:700;color:var(--acc)}
+.row2{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.dots{display:flex;gap:12px;margin:10px 0;justify-content:center}
+.dots i{width:22px;height:22px;border-radius:50%;border:3px solid var(--ink);transition:background .1s,transform .1s}
+.dots i:first-child{width:30px;height:30px}
+.dots i.on{background:var(--acc);border-color:var(--acc);transform:scale(1.25)}
+.rh{position:relative;display:flex;align-items:flex-start;padding:8px 4px;min-height:96px;overflow-x:auto;background:linear-gradient(var(--ink),var(--ink)) 0 63px/100% 2px no-repeat;color:var(--ink)}
+.tk{display:flex;flex-direction:column;align-items:center;border-radius:14px;cursor:default;transition:background .08s,transform .08s;flex-shrink:0}
+.tk svg{display:block}
+.tk.on{background:color-mix(in srgb,var(--acc) 35%,transparent);transform:translateY(-4px)}
+.tk.rs.on{background:color-mix(in srgb,var(--sup) 40%,transparent)}
+.sy{font-weight:800;font-size:15px;white-space:nowrap}
+.bar{flex:none;width:3px;height:40px;margin-top:36px;background:var(--ink)}
+.bar.end{width:6px;box-shadow:-6px 0 0 -1px var(--card)}
+.sig{flex:none;display:flex;flex-direction:column;font:800 22px/1 "Baloo 2";margin:34px 8px 0 2px;text-align:center}
+.row{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) auto;gap:12px 18px;align-items:center}
+.row .dots{grid-column:2;margin:0;justify-content:flex-start}
+.row .pl{grid-row:1/3;grid-column:3}
+.lab{display:flex;align-items:center;gap:10px;grid-row:1/3}
+.lab p{margin:0;color:var(--mut);font-weight:700}
+.sym{color:var(--acc)}
+.eq{font-size:20px;font-weight:800;text-align:center;background:var(--ink);color:var(--bg);border-radius:18px;padding:10px 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.cards button{flex-direction:column;border-radius:20px;padding:10px;height:auto}
+.cards button b{font-size:24px}
+.cards button small{color:var(--mut);font-size:14px}
+#crh .tk{cursor:pointer;border:2px dashed color-mix(in srgb,var(--ink) 30%,transparent);margin:0 2px}
+.opt{width:100%;border-radius:20px;padding:6px 10px;display:block;height:auto}
+.opt.ok{border-color:var(--sup);background:color-mix(in srgb,var(--sup) 25%,var(--card))}
+.opt.no{border-color:var(--acc);animation:sh .3s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#qmsg{font-size:22px;font-weight:800;min-height:1.5em}
+.nxt{display:inline-flex;align-items:center;min-height:44px;padding:6px 18px;border-radius:999px;background:var(--acc);color:var(--on,#fff);font-weight:800;text-decoration:none}
+.tl{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.bks{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.bk{width:34px;height:34px;border-radius:8px;border:3px solid var(--acc);transition:background .1s}.bk.d{border-color:var(--sup);border-radius:50%}.bk.on{background:var(--acc)}.bk.d.on{background:var(--sup)}
+.pie{width:120px;height:120px;border-radius:50%;border:4px solid var(--ink);flex:none;background:color-mix(in srgb,var(--ink) 12%,transparent)}
+.dcard{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+#hsvg{width:100%;max-width:440px;display:block;margin:auto;color:var(--ink)}
+.mh{width:46px;transition:transform .1s;flex:none}.mh.p{transform:scale(1.25)}
+.acs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.ac{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;margin:0}
+.ac p{grid-column:1/3;margin:0;color:var(--mut);font-weight:700}.ac button{grid-column:1/3;justify-self:start}
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin:12px 0}
+.vs div{border:3px solid var(--ink);border-radius:18px;padding:12px 16px}.vs b{font-size:24px;display:block}
+.pop{animation:pop .45s ease-out;transform-box:view-box;transform-origin:110px 110px}@keyframes pop{from{transform:scale(.2);opacity:0}}
+#pie .hi path{stroke:var(--ink);stroke-width:6}
+@media(prefers-reduced-motion:reduce){.pop{animation:none}}
+.lab .sym svg{width:62px;height:124px}
+.tema{display:flex;align-items:center;gap:4px;background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:2px 4px 2px 10px}.tema select{border:0;min-height:36px;font-size:15px;background:transparent}
+footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;font-size:14px}
+@media(max-width:700px){.row{grid-template-columns:minmax(0,1fr) auto}.lab{grid-row:auto;grid-column:1/3}.row .rh,.row .dots{grid-column:1/3}.row .pl{grid-row:auto;grid-column:1/3;justify-self:start}}
+@media(prefers-reduced-motion:reduce){.heart,.tk,.dots i{transition:none}.heart.p{transform:scale(1.05)}.tk.on{transform:none}.opt.no{animation:none}}
 </style>
 </head>
 <body>
-<header><h1>SOLFEGGIO<span class="d">●</span></h1><div class="themes" id="themes"></div></header>
-<nav><button class="tab on" data-v="viewValori">Valori delle note e delle pause</button><button class="tab" data-v="viewPunto">Punto di valore</button></nav>
+<header>
+ <div class="top">
+  <div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1>SOLFEGGIO</h1><label class="tema" title="Tema"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.3-1.2-1.6-1.2-2.7 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4c0-4.3-4-7.7-9-7.7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="11" r="1.5" fill="#ff4f6d"/><circle cx="10" cy="7" r="1.5" fill="#1fae9e"/><circle cx="14.5" cy="7" r="1.5" fill="#ffb703"/><circle cx="17" cy="10.5" r="1.5" fill="#7b61ff"/></svg><select id="tema"><option value="">Sole</option><option value="notte">Notte</option><option value="mare">Mare</option><option value="bosco">Bosco</option><option value="fragola">Fragola</option><option value="lavanda">Lavanda</option><option value="lavagna">Lavagna</option></select></label></div><p class="sub">Ritmo, figure e solfeggio per la classe quinta</p></div>
+  <label class="vel">Suono <select id="inst"><option value="chitarra">Chitarra</option><option value="piano">Pianoforte</option><option value="violino">Violino</option><option value="clarinetto">Clarinetto</option><option value="flauto">Flauto</option><option value="campanella">Campanella</option><option value="nota">Nota semplice</option></select></label>
+  <label class="vel">Velocità <input type="range" id="bpm" min="40" max="200" value="90"><output id="bpmo">90</output></label>
+ </div>
+</header>
+<div class="lay"><nav id="nav"></nav></div>
 <main>
-
-<!-- ===== VALORI ===== -->
-<div id="viewValori" class="view">
-<h2 class="title">Valori delle note e delle pause</h2>
-<section class="card">
-<p class="rule">In una battuta da <b>4/4</b> la <b>semibreve</b> riempie tutta la battuta. Ogni figura vale <b>la metà</b> di quella prima.</p>
-<p style="text-align:center">Premi ▶ per sentire quante ne servono a riempire la battuta: la torta si colora pezzo per pezzo.</p>
-<label>Velocità: <input type="range" id="bpm" min="50" max="120" value="70"> <span id="bpmv">70</span> BPM</label>
-</section>
-<div class="grid" id="vgrid"></div>
-</div>
-
-<!-- ===== PUNTO ===== -->
-<div id="viewPunto" class="view" hidden>
-<h2 class="title">Il punto di valore</h2>
-
-<section class="card">
-<h2>Che cos'è?</h2>
-<p>Il <b>punto di valore</b> è un piccolo punto scritto <b>a destra</b> della nota o della pausa.</p>
-<p class="rule">Il punto <b>allunga la figura della metà del suo valore</b>.</p>
-<div class="stage" id="introStage"></div>
-<div class="big" id="introEq"></div>
-<div class="pieRow" id="introPie"></div>
-<p style="text-align:center;margin:0" id="introPt"></p>
-<div class="btns"><button class="play" id="introBtn">✨ Aggiungi il punto</button></div>
+<section class="pg" id="battito">
+ <div class="card grid">
+  <div><h2>Il battito: il cuore della musica</h2>
+   <p>Ogni musica ha un battito regolare, come il cuore: si chiama <b>pulsazione</b>. Premi «Avvia» e batti le mani insieme al cuore.</p>
+   <p>La <b>velocità</b> del battito si chiama <b>andamento</b>. Si misura in battiti al minuto.</p>
+   <div class="big"><span id="bb">90</span> <small style="font-size:22px">battiti al minuto</small></div>
+   <div class="tn" id="tname"></div>
+   <div class="row2"><button data-b="50">Largo</button><button data-b="72">Adagio</button><button data-b="96">Andante</button><button data-b="140">Allegro</button><button data-b="184">Presto</button></div>
+   <button class="pl" id="hb" data-t="▶ Avvia">▶ Avvia</button>
+  </div>
+  <div><svg class="heart" id="heart" viewBox="0 0 100 90"><path d="M50 86C20 62 4 46 4 28 4 14 15 4 28 4c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 34-46 58z" fill="var(--acc)"/><path d="M22 18c-6 2-9 8-9 13" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/></svg>
+   <div class="dots" id="hdots"><i></i><i></i><i></i><i></i></div></div>
+ </div>
 </section>
 
-<section class="card">
-<h2>Ascolta la differenza</h2>
-<div class="btns" id="noteBtns"></div>
-<p style="margin:4px 0"><b>Senza punto</b></p>
-<div class="track" id="t1"></div>
-<p style="margin:4px 0"><b>Con il punto</b></p>
-<div class="track" id="t2"></div>
-<div class="ticks" id="ticks"></div>
-<div class="cmp">
- <div><b>Senza punto</b><div class="pieRow" id="pie1"></div><div id="pt1"></div></div>
- <div><b>Con il punto</b><div class="pieRow" id="pie2"></div><div id="pt2"></div></div>
-</div>
-<div class="btns">
-<button class="play" id="p1">▶ Senza punto</button>
-<button class="play" id="p2">▶ Con il punto</button>
+<section class="pg" id="andamenti">
+ <div class="card"><h2>Le velocità della musica: gli andamenti</h2>
+  <p>La velocità del battito si chiama <b>andamento</b> e si scrive in italiano all'inizio del brano: i musicisti di tutto il mondo usano queste parole! Accanto c'è il numero di battiti al minuto. Premi «Ascolta» e batti le mani con il cuore.</p></div>
+ <div class="acs" id="acs"></div>
+</section>
+
+<section class="pg" id="ritmo">
+ <div class="card"><h2>Ritmo o velocità? Non confondiamoli!</h2>
+  <div class="vs"><div><b>Il ritmo</b>è il <b style="display:inline;font-size:inherit">disegno</b> dei suoni lunghi e corti e dei silenzi: lo scrivono le figure e le pause. Risponde alla domanda: <i>come sono i suoni?</i></div>
+  <div><b>La velocità</b>(l'andamento) è <b style="display:inline;font-size:inherit">quanto in fretta</b> va il battito. Risponde alla domanda: <i>quanto veloce suono?</i></div></div>
+  <p>Se cambio la velocità, il ritmo resta lo stesso: i suoni restano lunghi e corti allo stesso modo, ma tutto va più piano o più in fretta. Se cambio le figure, cambia il ritmo anche se la velocità è uguale.</p></div>
+ <div class="card"><h3>1. Stesso ritmo, velocità diverse</h3><div class="rh" id="rva"></div>
+  <div class="row2"><button class="pl" data-t="▶ Lento (60)" id="rv1">▶ Lento (60)</button><button class="pl" data-t="▶ Veloce (150)" id="rv2">▶ Veloce (150)</button></div>
+  <p>Il disegno delle note non cambia: cambia solo la velocità.</p></div>
+ <div class="card"><h3>2. Stessa velocità, ritmi diversi</h3><div class="rh" id="rvb"></div><div class="rh" id="rvc"></div>
+  <div class="row2"><button class="pl" data-t="▶ Primo ritmo (100)" id="rv3">▶ Primo ritmo (100)</button><button class="pl" data-t="▶ Secondo ritmo (100)" id="rv4">▶ Secondo ritmo (100)</button></div>
+  <p>Il battito va sempre alla stessa velocità, ma le figure cambiano: cambia il ritmo.</p></div>
+</section>
+
+<section class="pg" id="figure">
+ <div class="card"><h2>Le figure musicali: quanto dura un suono</h2>
+  <p>Ogni nota ha una <b>durata</b>: per quanti battiti il suono resta acceso. Più la figura è «vuota», più il suono è lungo. Premi «Ascolta» e guarda le note illuminarsi mentre i pallini contano i battiti.</p>
+  <div class="eq">1 semibreve = 2 minime = 4 semiminime = 8 crome</div></div>
+ <div id="tfig"></div>
+</section>
+
+<section class="pg" id="pause">
+ <div class="card"><h2>Le pause: il silenzio che si conta</h2>
+  <p>La <b>pausa</b> è un silenzio, ma anche il silenzio ha una durata e si conta! Ogni figura ha la sua pausa, che dura lo stesso tempo. Ascolta: il battito continua, ma la nota tace.</p>
+  <div class="eq">Pausa di semibreve: appesa sotto la riga · Pausa di minima: seduta sopra la riga</div></div>
+ <div id="tpau"></div>
+</section>
+
+<section class="pg" id="punto">
+ <div class="card"><h2>Il punto di valore</h2>
+  <p>Il <b>punto</b> si scrive a destra della nota e <b>aggiunge metà del suo valore</b>. Ogni quadratino vale ½ battito; i cerchietti sono la parte aggiunta dal punto. La torta mostra quanta parte di una battuta in 4/4 viene riempita.</p></div>
+ <div id="dcards"></div>
+ <div class="card"><h3>Esercizi con il punto</h3><div id="dex"></div></div>
+</section>
+
+<section class="pg" id="legatura">
+ <div class="card"><h2>La legatura di valore</h2>
+  <p>La <b>legatura di valore</b> è un archetto che unisce <b>due note uguali</b>: la seconda non si suona di nuovo, ma si <b>somma</b> alla prima. Così possiamo creare durate lunghe e anche attraversare la stanghetta.</p>
+  <p>Ascolta ogni esempio con e senza legatura e senti la differenza.</p></div>
+ <div id="lgx"></div>
+</section>
+
+<section class="pg" id="battuta">
+ <div class="card"><h2>La battuta e il tempo</h2>
+  <p>I battiti si raggruppano in <b>battute</b>, separate dalla <b>stanghetta</b>. Il primo battito di ogni battuta è <b>forte</b> (accento), gli altri sono <b>deboli</b>.</p>
+  <p>La frazione all'inizio si chiama <b>tempo</b>: il numero sopra dice quanti battiti ci sono in ogni battuta, il 4 sotto dice che ogni battito vale una semiminima.</p>
+  <div class="row2"><button data-m="2">2/4 marcia</button><button data-m="3">3/4 valzer</button><button data-m="4">4/4 il più usato</button></div>
+  <div class="grid">
+   <div><div class="rh" id="brh"></div><div class="dots" id="bdots"></div><button class="pl" id="bpl" data-t="▶ Ascolta">▶ Ascolta</button></div>
+   <div style="text-align:center"><div class="big" id="bnum">1</div><div class="tn" id="bfd">forte</div><p style="margin:auto">Conta ad alta voce e batti forte le mani sul primo battito!</p></div>
+  </div></div>
+ <div class="card"><h2>La battuta è una torta</h2>
+  <p>Immagina la battuta come una <b>torta</b>. Il tempo dice in quante <b>fette</b> è tagliata: in 4/4 ci sono 4 fette, in 3/4 tre, in 2/4 due (cambia il tempo con i pulsanti qui sopra). Ogni nota che inseriamo <b>prende le sue fette</b>: la semiminima 1 fetta, la minima 2, la croma mezza fetta. Quando la torta è finita, la battuta è <b>piena</b>!</p>
+  <div class="grid"><div><svg id="pie" viewBox="-12 -12 244 244" style="width:100%;max-width:340px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="pinfo" style="text-align:center"></div></div>
+  <div><div class="cards" id="ppal"></div><div class="rh" id="prh" style="margin-top:10px"></div>
+   <div class="row2"><button class="pl" id="ppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="pdot">• Aggiungi il punto</button><button id="pdel">Togli l'ultima</button><button id="pclr">Svuota la torta</button></div></div></div></div>
+</section>
+
+<section class="pg" id="tempi">
+ <div class="card"><h2>Tempi semplici e tempi composti</h2>
+  <div class="vs"><div><b>Tempo semplice</b>Ogni battito si divide in <b style="display:inline;font-size:inherit">2</b> parti: TI-TI.<br>Il numero sotto è <b style="display:inline;font-size:inherit">4</b>: 2/4, 3/4, 4/4.<br>Il battito vale una semiminima.<br>Si conta: <i>UNO-e, DUE-e…</i></div>
+  <div><b>Tempo composto</b>Ogni battito si divide in <b style="display:inline;font-size:inherit">3</b> parti: TI-TI-TI.<br>Il numero sotto è <b style="display:inline;font-size:inherit">8</b>: 6/8, 9/8, 12/8.<br>Il battito vale una semiminima puntata (3 crome).<br>Si conta: <i>UNO-due-tre, DUE-due-tre…</i></div></div>
+  <div class="eq">Trucco: nei tempi composti dividi il numero sopra per 3 e trovi i battiti! Esempio: 6/8 → 6 : 3 = 2 battiti (da tre crome ciascuno)</div>
+  <p style="margin-top:12px">Ogni tempo semplice ha un «fratello» composto con gli stessi battiti: cambia solo come si divide il battito. Ascolta le coppie: il battito è uguale, ma dentro ci sono 2 oppure 3 note.</p></div>
+ <div id="tsc"></div>
+</section>
+
+<section class="pg" id="mano">
+ <div class="card"><h2>Solfeggiare con la mano</h2>
+  <p>Quando solfeggiamo, la mano batte il tempo: ogni battito ha un movimento. Il primo movimento va sempre <b>giù</b>, l'ultimo sempre <b>su</b>, e dopo ogni movimento la mano torna al <b>punto iniziale</b>. Negli ottavi (6/8, 9/8, 12/8) ogni movimento vale 3 ottavi: al 1° la mano <b>tocca</b>, al 2° è <b>al centro</b>, al 3° <b>torna al punto iniziale</b>. Muovi la mano insieme a quella disegnata.</p>
+  <div class="row2"><button data-mm="2">2/4</button><button data-mm="3">3/4</button><button data-mm="4">4/4</button><button data-mm="6">6/8</button><button data-mm="9">9/8</button><button data-mm="12">12/8</button></div>
+  <div class="grid"><svg id="hsvg" viewBox="0 0 320 300"></svg>
+   <div style="text-align:center"><div class="big" id="hnum">1</div><div class="tn" id="hwd">giù</div><div id="hmv" style="font-weight:700;color:var(--mut)"></div>
+    <div class="rh" id="hrh"></div><button class="pl" id="hpl" data-t="▶ Avvia">▶ Avvia</button></div></div></div>
+</section>
+
+<section class="pg" id="leggi">
+ <div class="card"><h2>Leggi il ritmo con le sillabe</h2>
+  <p>Per leggere il ritmo diamo a ogni figura una sillaba. Tocca una scheda per sentirla.</p>
+  <div class="cards" id="lcards"></div></div>
+ <div class="card"><h3>Esercizi di lettura</h3><p>Leggi le sillabe a tempo, poi ascolta e controlla. Puoi cambiare la velocità in alto.</p><div id="lex"></div></div>
+</section>
+
+<section class="pg" id="filastrocca">
+ <div class="card"><h2>Le filastrocche del ritmo</h2>
+  <div class="row2" id="fsel"></div><h3 id="ftit"></h3>
+  <div class="vs" style="grid-template-columns:1fr"><div id="ftx" style="font-size:22px;font-weight:700;line-height:1.5"></div></div>
+  <p>Leggila a ritmo battendo le mani: ogni sillaba è una nota. Sulle pause stiamo zitti!</p>
+  <div id="frh"></div>
+  <div class="row2"><button class="pl" id="fpl" data-t="▶ Ascolta la filastrocca">▶ Ascolta la filastrocca</button></div></div>
+</section>
+
+<section class="pg" id="componi">
+ <div class="card"><h2>Componi il tuo ritmo</h2>
+  <p>Tocca una figura o una pausa per aggiungerla. Con «Aggiungi il punto» metti il punto di valore all'ultima minima o semiminima. Con «Lega l'ultima nota» la unisci con una legatura alla nota che aggiungerai dopo. Ogni battuta in 4/4 contiene 4 battiti: se una figura non ci sta, passa alla battuta dopo. Poi ascolta e suona il tuo ritmo con le mani o con gli strumenti della classe.</p>
+  <div class="tn" id="cinfo" style="margin-top:12px"></div>
+  <div class="rh" id="crh"></div>
+  <div class="row2"><button class="pl" id="cpl" data-t="▶ Ascolta">▶ Ascolta</button><label class="vel"><input type="checkbox" id="cbt" checked style="width:22px;height:22px;accent-color:var(--acc)"> Senti il battito</label><button id="cdot">• Aggiungi il punto</button><button id="clg">Lega l'ultima nota</button><button id="cdel">Cancella l'ultima</button><button id="crnd">Ritmo a sorpresa</button><button id="cclr">Ricomincia</button></div>
+  <h3>Figure</h3><div class="cards" id="pf"></div>
+  <h3 style="margin-top:12px">Pause</h3><div class="cards" id="pp"></div>
 </div>
 </section>
 
-<section class="card">
-<h2>Mettiti alla prova</h2>
-<div class="q" id="qText"></div>
-<div class="btns" id="qBtns"></div>
-<div id="qRes"></div>
-<p style="text-align:center">Punteggio: <b id="score">0</b> / <b id="tot">0</b></p>
+<section class="pg" id="quiz">
+ <div class="card"><h2>Ascolta e gioca</h2>
+  <p>Scegli il livello, premi «Ascolta» e trova quale dei tre ritmi hai sentito. Ogni domanda è diversa: cambiano figure, pause e tempo!</p>
+  <div class="row2" id="qlv"></div>
+  <div class="row2"><button class="pl" id="qpl" data-t="▶ Ascolta">▶ Ascolta</button><button id="qnew">Nuova domanda</button></div>
+  <div id="qmsg"></div><div id="qsc" class="tn"></div>
+  <div class="grid" id="qopts" style="margin-top:10px"></div></div>
 </section>
-</div>
-
+<div id="nx"></div>
 </main>
 <footer>Copyright © Ignazio Paolicelli</footer>
 
 <script>
 {
-const $=id=>document.getElementById(id);
-const ALL=[
- {k:'semibreve',n:'Semibreve',p:'Pausa di semibreve',v:4,col:'#7b5cd6',fl:0},
- {k:'minima',n:'Minima',p:'Pausa di minima',v:2,col:'#2f8f83',fl:0},
- {k:'semiminima',n:'Semiminima',p:'Pausa di semiminima',v:1,col:'#3a6fd8',fl:0},
- {k:'croma',n:'Croma',p:'Pausa di croma',v:.5,col:'#d69a1c',fl:1},
- {k:'semicroma',n:'Semicroma',p:'Pausa di semicroma',v:.25,col:'#c2477a',fl:2},
- {k:'biscroma',n:'Biscroma',p:'Pausa di biscroma',v:.125,col:'#5a8a2b',fl:3}
-];
-const DOT=ALL.slice(0,5);
-const FR={1:'⅛',2:'¼',3:'⅜',4:'½',5:'⅝',6:'¾',7:'⅞'};
-const fr=x=>{const n=Math.round(x*8),w=Math.floor(n/8),r=n%8;return r?((w||'')+FR[r]):String(w)};
-const MEAS={6:'una battuta e mezza',4:'tutta la battuta',3:'tre quarti di battuta',2:'metà battuta',1.5:'tre ottavi di battuta',1:'un quarto di battuta',.75:'tre sedicesimi di battuta',.5:'un ottavo di battuta',.375:'tre trentaduesimi di battuta',.25:'un sedicesimo di battuta',.125:'un trentaduesimo di battuta'};
-const mov=v=>fr(v)+(v===1?' movimento':' movimenti');
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const PAGES=[['battito','Il battito'],['andamenti','Le velocità'],['ritmo','Ritmo o velocità?'],['figure','Le figure'],['pause','Le pause'],['punto','Punto di valore'],['legatura','Legatura di valore'],['battuta','La battuta'],['tempi','Tempi semplici e composti'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
+const T={w:{l:4,k:'w',s:'TA-A-A-A',n:'Semibreve'},h:{l:2,k:'h',s:'TA-A',n:'Minima'},q:{l:1,k:'q',s:'TA',n:'Semiminima'},e:{l:1,k:'ee',s:'TI-TI',sub:1,n:'Due crome'},c:{l:.5,k:'c',s:'TI'},rw:{l:4,k:'rw',s:'SST',rest:1},rh:{l:2,k:'rh',s:'SST',rest:1},r:{l:1,k:'rq',s:'SST',rest:1,n:'Pausa'},rc:{l:.5,k:'rc',s:'sst',rest:1},hd:{l:3,k:'hd',s:'TA-A-A',n:'Minima puntata'},qd:{l:1.5,k:'qd',s:'TA-I',n:'Semiminima puntata'},e3:{l:1,k:'e3',s:'TI-TI-TI',sub:3}};
+const D=t=>T[t.replace('~','')];
+let bpm=90,inst='chitarra';
+const setT=v=>{if(v)document.documentElement.dataset.tema=v;else delete document.documentElement.dataset.tema;$('#tema').value=v;try{localStorage.setItem('ritmoTema',v)}catch(e){}};
+$('#tema').onchange=e=>setT(e.target.value);
+try{setT(localStorage.getItem('ritmoTema')||'')}catch(e){}
+const setI=v=>{inst=v;$('#inst').value=v;try{localStorage.setItem('ritmoSuono',v)}catch(e){}};
+$('#inst').onchange=e=>{setI(e.target.value);stop();A();const t=ac.currentTime+.05,g=ac.createGain();g.connect(ac.destination);tone(g,t,.6)};
+try{setI(localStorage.getItem('ritmoSuono')||'chitarra')}catch(e){}
 
-const STAFF='<g stroke="#bbb" stroke-width="1.2">'+[30,42,54,66,78].map(y=>`<line x1="2" y1="${y}" x2="68" y2="${y}"/>`).join('')+'</g>';
-function svgNote(o,dot,w=70,anim=false){
- const open=o.v>=2;
- let s=`<svg width="${w}" height="${w*1.43}" viewBox="0 0 70 100">${STAFF}`;
- s+=`<ellipse cx="25" cy="60" rx="9.5" ry="6.5" transform="rotate(-20 25 60)" fill="${open?'#fff':'#2b2140'}" stroke="#2b2140" stroke-width="3"/>`;
- if(o.v<4)s+=`<line x1="33.5" y1="57" x2="33.5" y2="10" stroke="#2b2140" stroke-width="3"/>`;
- for(let i=0;i<o.fl;i++)s+=`<path d="M33.5 ${10+i*9} q16 10 12 26 q-2-12-12-16z" fill="#2b2140"/>`;
- if(dot)s+=`<circle cx="48" cy="60" r="4.5" fill="#e8553d" ${anim?'class="dotIn" style="transform-origin:48px 60px"':''}/>`;
- return s+'</svg>';
-}
-function svgRest(o,dot,w=70){
- let s=`<svg width="${w}" height="${w*1.43}" viewBox="0 0 70 100">${STAFF}<g fill="#2b2140" stroke="#2b2140">`;
- if(o.k==='semibreve')s+=`<rect x="22" y="42" width="24" height="7"/>`;
- else if(o.k==='minima')s+=`<rect x="22" y="47" width="24" height="7"/>`;
- else if(o.k==='semiminima')s+=`<path d="M30 30 L40 42 L31 52 L41 64 Q28 59 35 76" fill="none" stroke-width="4" stroke-linejoin="round"/>`;
- else{const ys=[42,54,66].slice(0,o.fl);
-  ys.forEach((y,i)=>s+=`<circle cx="${32-i*3}" cy="${y}" r="4" stroke="none"/><path d="M${32-i*3} ${y+3} Q${40-i*3} ${y+6} ${46-i*3} ${y-2}" fill="none" stroke-width="2.5"/>`);
-  s+=`<line x1="46" y1="40" x2="${36-o.fl*4}" y2="${70+o.fl*6}" stroke-width="2.8"/>`}
- if(dot)s+=`<circle cx="54" cy="48" r="4.5" fill="#e8553d" stroke="none"/>`;
- return s+'</g></svg>';
-}
-/* torta: frazione della battuta 4/4 */
-function pies(v,col,size=70){let h='',n=Math.max(1,Math.ceil(v/4));
- for(let i=0;i<n;i++){const f=Math.min(4,v-4*i)/4*100;
-  h+=`<svg width="${size}" height="${size}" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16.5" fill="#eee" stroke="#2b2140" stroke-width="1"/><circle class="pf" data-f="${f}" cx="18" cy="18" r="8" fill="none" stroke="${col}" stroke-width="16" pathLength="100" stroke-dasharray="${f} 100" transform="rotate(-90 18 18)"/></svg>`}
- return h}
-function setPie(svgEls,pct){svgEls.forEach((c,i)=>{const p=Math.max(0,Math.min(100,pct*svgEls.length-100*i));c.style.strokeDasharray=p+' 100'})}
+function N(k,line){let w=k=='ee'?60:k=='e3'?86:40,b='';
+ const hd=(x,f)=>`<ellipse cx="${x}" cy="55" rx="8.5" ry="6" transform="rotate(-22 ${x} 55)" ${f?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="3"'}/>`;
+ const st=x=>`<line x1="${x+7.5}" y1="53" x2="${x+7.5}" y2="14" stroke="currentColor" stroke-width="2.5"/>`;
+ if(k=='w')b='<ellipse cx="20" cy="55" rx="10" ry="6.5" fill="none" stroke="currentColor" stroke-width="4"/>';
+ if(k=='h')b=hd(18,0)+st(18);
+ if(k=='q')b=hd(18,1)+st(18);
+ if(k=='hd')b=hd(18,0)+st(18)+'<circle cx="32" cy="51" r="3.4" fill="currentColor"/>';
+ if(k=='qd')b=hd(18,1)+st(18)+'<circle cx="32" cy="51" r="3.4" fill="currentColor"/>';
+ if(k=='c')b=hd(16,1)+st(16)+'<path d="M23.5 14c2 9 12 12 10 25-1-8-6-11-10-12z" fill="currentColor"/>';
+ if(k=='ee')b=hd(14,1)+st(14)+hd(42,1)+st(42)+'<rect x="20.3" y="13" width="30.4" height="6" fill="currentColor"/>';
+ if(k=='e3')b=hd(14,1)+st(14)+hd(42,1)+st(42)+hd(70,1)+st(70)+'<rect x="20.3" y="13" width="58.4" height="6" fill="currentColor"/>';
+ if(k=='rw')b='<rect x="10" y="56" width="20" height="7" fill="currentColor"/>';
+ if(k=='rh')b='<rect x="10" y="48" width="20" height="7" fill="currentColor"/>';
+ if(k=='rq')b='<path d="M15 30l9 10-8 9 9 10c-8-3-12 3-6 10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>';
+ if(k=='rc')b='<circle cx="15" cy="44" r="4.5" fill="currentColor"/><path d="M15 47c5 1 9-1 11-6l-8 27" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>';
+ if(line)b='<line x1="0" y1="56" x2="'+w+'" y2="56" stroke="currentColor" stroke-width="2" opacity=".45"/>'+b;
+ return `<svg data-k="${k}" viewBox="0 0 ${w} 80" width="${w}" height="80" aria-hidden="true">${b}</svg>`}
 
-const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('vis')),{threshold:.1});
+function R(el,toks,o={}){let h='',acc=0;
+ if(o.sig)h+=`<div class="sig"><b>${o.sig}</b><b>${o.den||4}</b></div>`;
+ toks.forEach((t,i)=>{const d=D(t),w=d.k=='ee'?60:d.k=='e3'?86:40;
+  h+=`<div class="tk${d.rest?' rs':''}${t.endsWith('~')?' ti':''}" data-i="${i}" ${o.tap?'tabindex="0" role="button"':''} style="flex-grow:${d.l};min-width:${Math.max(w+6,d.l*56)}px">${N(d.k)}${o.syl?`<span class="sy">${o.lyr?o.lyr[i]:d.s}</span>`:''}</div>`;
+  acc+=d.l;if(o.m&&Math.abs(acc%o.m)<1e-6&&i<toks.length-1)h+='<i class="bar"></i>'});
+ if(o.m)h+='<i class="bar end"></i>';el.innerHTML=h+'<svg class="tl"></svg>';ties(el)}
+const HX={w:20,h:18,q:18,c:16,hd:18,qd:18,rw:20,rh:20,rq:20,rc:15};
+function hx(tk,last){const v=tk.querySelector('svg'),k=v.dataset.k;return v.getBoundingClientRect().left+(k=='ee'?(last?42:14):HX[k])}
+function ties(el){const tl=el.querySelector('.tl');if(!tl||!el.offsetWidth)return;const L=el.getBoundingClientRect().left-el.scrollLeft,tks=[...el.querySelectorAll('.tk')];let p='';
+ tks.forEach((tk,j)=>{if(!tk.classList.contains('ti')||!tks[j+1])return;const a=hx(tk,1)-L+5,b=hx(tks[j+1],0)-L-5;p+=`M${a} 70Q${(a+b)/2} 84 ${b} 70`});
+ tl.setAttribute('width',el.scrollWidth);tl.setAttribute('height',100);tl.innerHTML=p?`<path d="${p}" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>`:''}
+addEventListener('resize',()=>$$('.rh').forEach(ties));
+function hl(el,i){if(!el)return;el.querySelectorAll('.tk.on').forEach(x=>x.classList.remove('on'));if(i>=0)el.querySelector(`.tk[data-i="${i}"]`)?.classList.add('on')}
+function evs(toks){let s=0,tie=false;const e=[];toks.forEach((t,i)=>{const d=D(t),last=e[e.length-1];
+ if(tie&&!d.rest&&last&&!last.rest){last.l+=d.sub?.5:d.l;e.push({s,l:0,vis:1,i});if(d.sub)e.push({s:s+.5,l:.5,i})}
+ else if(d.sub){const k=d.sub==3?3:2;for(let j=0;j<k;j++)e.push({s:s+j/k,l:1/k,i})}else e.push({s,l:d.l,rest:d.rest,i});
+ tie=t.endsWith('~')&&!d.rest;s+=d.l});return{e:e.filter(x=>x.vis||x.l>0),beats:Math.ceil(s)}}
+function dots(el,b){if(el)[...el.children].forEach((d,k)=>d.classList.toggle('on',k==b))}
 
-/* AUDIO */
-let ac;const bpm=$('bpm');bpm.oninput=()=>$('bpmv').textContent=bpm.value;
-const A=()=>{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();ac.resume();return ac};
-function click(t,acc){const a=A(),o=a.createOscillator(),g=a.createGain();o.frequency.value=acc?1600:1000;g.gain.setValueAtTime(.25,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);o.connect(g).connect(a.destination);o.start(t);o.stop(t+.06)}
-function tone(t,d,f){const a=A(),o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.4,t+.01);g.gain.setValueAtTime(.4,Math.max(t+.02,t+d-.05));g.gain.linearRampToValueAtTime(0,t+d-.005);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d)}
-let timers=[];const later=(f,ms)=>timers.push(setTimeout(f,ms));
-function play(seq,beats,onBeat,onNote,freq=440){
- timers.forEach(clearTimeout);timers=[];
- const a=A(),sp=60/bpm.value,t0=a.currentTime+.15;let t=t0;
- seq.forEach((d,i)=>{tone(t,d*sp,Array.isArray(freq)?freq[i]:freq);const ms=(t-a.currentTime)*1000;onNote&&later(()=>onNote(i),ms);t+=d*sp});
- for(let i=0;i<beats;i++){click(t0+i*sp,i%4===0);onBeat&&later(()=>onBeat(i),(.15+i*sp)*1000)}
- const end=(.15+Math.max(beats,seq.reduce((x,y)=>x+y,0))*sp)*1000;
- later(()=>{onBeat&&onBeat(-1);onNote&&onNote(-1)},end);
- return sp;
-}
+/* audio */
+let ac=null,run=null,cur=null;
+function A(){ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state=='suspended')ac.resume();return ac}
+const KS={};
+function ks(f){if(KS[f])return KS[f];const sr=ac.sampleRate,n=Math.round(sr/f),len=sr*4,bf=ac.createBuffer(1,len,sr),x=bf.getChannelData(0);
+ for(let i=0;i<n;i++)x[i]=Math.random()*2-1;for(let i=n;i<len;i++)x[i]=(x[i-n]+x[i-n+1])*.4985;return KS[f]=bf}
+function env(v,t,d,at,pk,su){v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(pk,t+at);v.gain.linearRampToValueAtTime(su,t+at+.12);v.gain.setValueAtTime(su,Math.max(t+at+.13,t+d-.06));v.gain.linearRampToValueAtTime(0,t+d)}
+function osc(type,f,t,d,dest,vib){const o=ac.createOscillator();o.type=type;o.frequency.value=f;
+ if(vib){const l=ac.createOscillator(),lg=ac.createGain();l.frequency.value=5.5;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(vib,t+.25);l.connect(lg).connect(o.frequency);l.start(t);l.stop(t+d+.05)}
+ o.connect(dest);o.start(t);o.stop(t+d+.05);return o}
+function lp(fr,dest){const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=fr;f.connect(dest);return f}
+function tone(g,t,d){const v=ac.createGain();v.connect(g);
+ if(inst=='chitarra'){const s=ac.createBufferSource();s.buffer=ks(220);const f=lp(3200,v);s.connect(f);v.gain.setValueAtTime(.9,t);v.gain.setValueAtTime(.9,Math.max(t,t+d-.05));v.gain.linearRampToValueAtTime(0,t+d);s.start(t);s.stop(t+d+.05);return}
+ if(inst=='piano'){[1,.45,.22,.1].forEach((a,k)=>{const h=ac.createGain();h.connect(v);h.gain.setValueAtTime(0,t);h.gain.linearRampToValueAtTime(a*.35,t+.008);h.gain.exponentialRampToValueAtTime(.0008,t+2.4/(k+1));osc('sine',262*(k+1),t,d,h)});
+  v.gain.setValueAtTime(1,t);v.gain.setValueAtTime(1,Math.max(t,t+d-.06));v.gain.linearRampToValueAtTime(0,t+d);return}
+ if(inst=='violino'){env(v,t,d,.09,.22,.17);osc('sawtooth',440,t,d,lp(2600,v),5);return}
+ if(inst=='clarinetto'){env(v,t,d,.04,.2,.16);osc('square',294,t,d,lp(1500,v),2);return}
+ if(inst=='flauto'){env(v,t,d,.07,.32,.26);osc('sine',587,t,d,v,4);const n=ac.createGain();n.gain.value=.08;n.connect(v);osc('triangle',1174,t,d,n);return}
+ if(inst=='campanella'){v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(.35,t+.004);v.gain.exponentialRampToValueAtTime(.001,t+Math.min(d,1.2));osc('sine',784,t,d,v);const h=ac.createGain();h.gain.value=.25;h.connect(v);osc('sine',784*3.93,t,d,h);return}
+ env(v,t,d,.015,.3,.24);osc('sine',523,t,d,v)}
+function click(g,t,strong,soft){const o=ac.createOscillator(),v=ac.createGain();o.frequency.value=strong?1500:950;
+ v.gain.setValueAtTime(strong?.3:(soft?.1:.2),t);v.gain.exponentialRampToValueAtTime(.001,t+.06);o.connect(v).connect(g);o.start(t);o.stop(t+.1)}
+function play(o){const a=A(),g=a.createGain();g.connect(a.destination);const Rn={g,tm:[],end:o.onEnd};run=Rn;
+ const pass=()=>{if(run!==Rn)return;const B=typeof o.bpm=='function'?o.bpm():(o.bpm||bpm);if(!B){stop();return}const spb=60/B,t0=a.currentTime+.08;
+  for(let b=0;b<o.beats;b++){if(o.clicks!==false)click(g,t0+b*spb,o.acc&&b%o.acc==0,o.ev&&o.ev.length);Rn.tm.push(setTimeout(()=>o.onBeat&&o.onBeat(b),(.08+b*spb)*1000))}
+  (o.ev||[]).forEach(e=>{if(!e.rest&&!e.vis)tone(g,t0+e.s*spb,e.l*spb*.88);Rn.tm.push(setTimeout(()=>o.onEv&&e.i>=0&&o.onEv(e.i),(.08+e.s*spb)*1000))});
+  Rn.tm.push(setTimeout(()=>{if(o.loop)pass();else stop()},(.08+o.beats*spb)*1000))};
+ pass()}
+function stop(){if(run){run.tm.forEach(clearTimeout);try{run.g.disconnect()}catch(e){}const f=run.end;run=null;f&&f()}
+ if(cur){cur.classList.remove('on');cur.textContent=cur.dataset.t;cur=null}}
+function toggle(btn,fn){if(cur===btn){stop();return}stop();cur=btn;btn.classList.add('on');btn.textContent='■ Ferma';fn()}
+function playT(btn,el,toks,o={}){toggle(btn,()=>{const{e,beats}=evs(toks);play({ev:e,beats,loop:o.loop,acc:o.m,bpm:o.bpm,clicks:o.clicks,onEv:i=>{hl(el,i);o.onEv&&o.onEv(i)},onBeat:o.onBeat,onEnd:()=>{hl(el,-1);o.onEnd&&o.onEnd()}})})}
 
-/* ===== VALORI ===== */
-$('vgrid').innerHTML=ALL.map((o,i)=>`<div class="card vcard">
- <h3 style="color:${o.col}">${o.n}</h3>
- <div class="pair"><div>${svgNote(o,false,58)}<small>nota</small></div><div>${svgRest(o,false,58)}<small>pausa</small></div></div>
- <div class="val">${mov(o.v)}</div>
- <div class="pieRow">${pies(o.v,o.col)}</div>
- <div>Riempie <b>${MEAS[o.v]}</b></div>
- <div class="cnt" id="c${i}">In una battuta: ${4/o.v}</div>
- <button class="play" data-i="${i}">▶ Riempi la battuta</button></div>`).join('');
-document.querySelectorAll('#vgrid button').forEach(b=>b.onclick=()=>{
- const o=ALL[b.dataset.i],n=4/o.v,card=b.closest('.vcard'),pf=[...card.querySelectorAll('.pf')],c=$('c'+b.dataset.i);
- setPie(pf,0);c.textContent='0 / '+n;
- play(Array(n).fill(o.v),4,null,i=>{if(i<0){c.textContent='In una battuta: '+n;return}setPie(pf,(i+1)/n*100);c.textContent=(i+1)+' / '+n},[523,494,440,392]);
-});
+/* velocità */
+const tName=b=>b<60?'Largo: molto lento':b<80?'Adagio: lento':b<110?'Andante: come chi cammina':b<124?'Moderato: né lento né veloce':b<170?'Allegro: veloce':'Presto: velocissimo';
+function setB(v){bpm=+v;$('#bpm').value=bpm;$('#bpmo').textContent=bpm;$('#bb').textContent=bpm;$('#tname').textContent=tName(bpm)}
+$('#bpm').addEventListener('input',e=>setB(e.target.value));
+$$('[data-b]').forEach(b=>b.onclick=()=>setB(b.dataset.b));
+setB(90);
 
-/* ===== INTRO PUNTO ===== */
-let introDot=false;const M=ALL[1];
-function intro(){
- $('introStage').innerHTML=`<figure>${svgNote(M,introDot,100,introDot)}<figcaption>Minima${introDot?' puntata':''}</figcaption></figure><figure>${svgRest(M,introDot,100)}<figcaption>Pausa${introDot?' puntata':''}</figcaption></figure>`;
- $('introPie').innerHTML=`<svg width="110" height="110" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16.5" fill="#eee" stroke="#2b2140" stroke-width="1"/><circle cx="18" cy="18" r="8" fill="none" stroke="#2f8f83" stroke-width="16" pathLength="100" stroke-dasharray="50 100" transform="rotate(-90 18 18)"/><circle class="pf" cx="18" cy="18" r="8" fill="none" stroke="#e8553d" stroke-width="16" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="-50" transform="rotate(-90 18 18)" style="transition:stroke-dasharray 1s .7s"/>${[0,1,2,3].map(i=>{const a=i*Math.PI/2;return`<line x1="18" y1="18" x2="${18+16.5*Math.sin(a)}" y2="${18-16.5*Math.cos(a)}" stroke="#fff" stroke-width=".8"/>`}).join('')}</svg>`;
- $('introPt').innerHTML=introDot?'Riempie <b>tre quarti</b> della battuta 4/4: <span style="color:#2f8f83">■ 2</span> + <span style="color:#e8553d">■ 1</span>':'Riempie <b>metà</b> della battuta 4/4';
- if(!introDot){$('introEq').innerHTML='Vale <span style="color:#2f8f83">2</span> movimenti';$('introBtn').textContent='✨ Aggiungi il punto';return}
- requestAnimationFrame(()=>requestAnimationFrame(()=>$('introPie').querySelector('.pf').style.strokeDasharray='25 100'));
- $('introEq').innerHTML='2';
- setTimeout(()=>$('introEq').innerHTML='2 <span style="color:#e8553d">+ 1</span>',700);
- setTimeout(()=>$('introEq').innerHTML='2 + 1 = <span style="color:#e8553d;font-size:1.6em">3</span> movimenti!',1400);
- $('introBtn').textContent='↺ Togli il punto';
-}
-$('introBtn').onclick=()=>{introDot=!introDot;intro();if(introDot)play([3],3,null,null,392)};
-intro();
+/* battito */
+let hc=0;
+$('#hb').onclick=()=>toggle($('#hb'),()=>{hc=0;play({beats:1,loop:true,onBeat:()=>{const h=$('#heart');h.classList.add('p');setTimeout(()=>h.classList.remove('p'),130);dots($('#hdots'),hc++%4)},onEnd:()=>dots($('#hdots'),-1)})});
 
-/* ===== ASCOLTA ===== */
-let cur=ALL[2];const MAXB=6;
-DOT.forEach(o=>{const b=document.createElement('button');b.textContent=o.n;b.onclick=()=>{cur=o;tracks()};o.nb=b;$('noteBtns').appendChild(b)});
-const W=v=>v/MAXB*100+'%';
-function tracks(){
- DOT.forEach(o=>o.nb.classList.toggle('on',o===cur));
- const d=cur.v*1.5;
- $('t1').innerHTML=`<div class="seg grow" style="left:0;width:${W(cur.v)};background:${cur.col}">${fr(cur.v)}</div><div class="cursor"></div>`;
- $('t2').innerHTML=`<div class="seg grow" style="left:0;width:${W(cur.v)};background:${cur.col}">${fr(cur.v)}</div><div class="seg grow" style="left:${W(cur.v)};width:${W(cur.v/2)};background:#e8553d;animation-delay:.6s">+${fr(cur.v/2)}</div><div class="cursor"></div>`;
- $('ticks').innerHTML=Array.from({length:MAXB},(_,i)=>`<span>${i+1}</span>`).join('');
- $('pie1').innerHTML=pies(cur.v,cur.col,64);$('pt1').innerHTML=`${mov(cur.v)}<br>= <b>${MEAS[cur.v]}</b>`;
- $('pie2').innerHTML=pies(d,'#e8553d',64);$('pt2').innerHTML=`${mov(d)}<br>= <b>${MEAS[d]}</b>`;
-}
-function runCursor(track,dur,sp){
- const c=track.querySelector('.cursor');
- c.style.display='block';c.style.transition='none';c.style.left='0';
- requestAnimationFrame(()=>requestAnimationFrame(()=>{c.style.transition=`left ${dur*sp}s linear .15s`;c.style.left=dur/MAXB*100+'%'}));
- later(()=>c.style.display='none',(dur*sp+.4)*1000);
-}
-function runPie(box,dur,sp){
- const pf=[...box.querySelectorAll('.pf')],full=dur/4*100/pf.length*pf.length;
- setPie(pf,0);const steps=30;
- for(let s=1;s<=steps;s++)later(()=>setPie(pf,s/steps*100),(.15+dur*sp*s/steps)*1000);
-}
-const tick=i=>document.querySelectorAll('#ticks span').forEach((s,j)=>s.classList.toggle('hit',j===i));
-$('p1').onclick=()=>{const sp=play([cur.v],Math.max(1,Math.ceil(cur.v)),tick);runCursor($('t1'),cur.v,sp);runPie($('pie1'),cur.v,sp)};
-$('p2').onclick=()=>{const d=cur.v*1.5,sp=play([d],Math.ceil(d),tick);runCursor($('t2'),d,sp);runPie($('pie2'),d,sp)};
-tracks();
+/* andamenti */
+const AND=[['Grave',40,'molto lento e solenne'],['Largo',50,'lento e ampio, come un fiume calmo'],['Lento',56,'piano piano, senza fretta'],['Adagio',70,'lento, con calma e dolcezza'],['Andante',90,'come chi cammina tranquillo'],['Andantino',100,'un po\u2019 più mosso dell\u2019andante'],['Moderato',112,'né lento né veloce'],['Allegretto',120,'abbastanza veloce e leggero'],['Allegro',140,'veloce e allegro'],['Vivace',160,'veloce, pieno di energia'],['Presto',180,'molto veloce, come chi corre'],['Prestissimo',200,'il più veloce possibile!'],['Accelerando',0,'la velocità aumenta un po\u2019 alla volta (da 60 a 170)'],['Rallentando',0,'la velocità diminuisce un po\u2019 alla volta (da 170 a 50)']];
+$('#acs').innerHTML=AND.map(([n,b,d],i)=>`<div class="card ac">${'<svg class="mh" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 86C20 62 4 46 4 28 4 14 15 4 28 4c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 34-46 58z" fill="var(--acc)"/></svg>'}<div><h3>${n}</h3><span class="tn" style="font-size:17px" id="acb${i}">${b?b+' battiti al minuto':i==12?'accel.':'rall.'}</span></div><p>${d}</p><button class="pl" data-t="▶ Ascolta" id="ap${i}">▶ Ascolta</button></div>`).join('');
+AND.forEach(([n,b],i)=>{const card=$('#ap'+i).parentElement,h=card.querySelector('.mh');
+ $('#ap'+i).onclick=e=>toggle(e.currentTarget,()=>{let v=i==12?60:170;
+  const f=b?b:()=>{const c=v;if(i==12){if(v>170)return 0;v+=5}else{if(v<50)return 0;v-=5}$('#acb'+i).textContent=c+' battiti al minuto';return c};
+  play({beats:1,loop:true,bpm:f,onBeat:()=>{h.classList.add('p');setTimeout(()=>h.classList.remove('p'),110)},onEnd:()=>{if(!b)$('#acb'+i).textContent=i==12?'accel.':'rall.'}})})});
 
-/* ===== QUIZ ===== */
-let score=0,tot=0;
-function quiz(){
- const o=DOT[Math.floor(Math.random()*DOT.length)],rest=Math.random()<.35,ans=o.v*1.5;
- $('qText').innerHTML=`Quanti movimenti vale ${rest?'la <b>pausa di '+o.n.toLowerCase()+' puntata</b>':'la <b>'+o.n.toLowerCase()+' puntata</b>'}?<br>${rest?svgRest(o,true,60):svgNote(o,true,60,true)}`;
- const opts=[...new Set([ans,o.v,o.v*2,o.v+1])].sort(()=>Math.random()-.5);
- const box=$('qBtns');box.innerHTML='';$('qRes').innerHTML='';
- opts.forEach(x=>{const b=document.createElement('button');b.textContent=fr(x);b.onclick=()=>{
-  tot++;const ok=x===ans;if(ok)score++;
-  $('qRes').innerHTML=`<p class="${ok?'ok':'ko'}">${ok?'🎉 Esatto!':'Non proprio…'} ${fr(o.v)} + ${fr(o.v/2)} = ${fr(ans)}</p><div class="pieRow">${pies(ans,'#e8553d',50)}</div><p style="text-align:center">Riempie ${MEAS[ans]}</p>`;
-  b.classList.add('on');$('score').textContent=score;$('tot').textContent=tot;
-  box.querySelectorAll('button').forEach(z=>z.disabled=true);
-  if(ok)play([.25,.25,.5],0,null,null,[523,659,784]);setTimeout(quiz,2600)};box.appendChild(b)});
-}
-quiz();
+/* ritmo o velocità */
+const RVA=['q','e','q','r','e','e','h'],RVB=['h','q','q','w'];
+R($('#rva'),RVA,{m:4,sig:4,syl:1});R($('#rvb'),RVA,{m:4,sig:4,syl:1});R($('#rvc'),RVB,{m:4,sig:4,syl:1});
+$('#rv1').onclick=e=>playT(e.currentTarget,$('#rva'),RVA,{m:4,bpm:60});
+$('#rv2').onclick=e=>playT(e.currentTarget,$('#rva'),RVA,{m:4,bpm:150});
+$('#rv3').onclick=e=>playT(e.currentTarget,$('#rvb'),RVA,{m:4,bpm:100});
+$('#rv4').onclick=e=>playT(e.currentTarget,$('#rvc'),RVB,{m:4,bpm:100});
 
-document.querySelectorAll('.card').forEach(c=>io.observe(c));
-const TH=[['classico','#e8553d','Classico'],['caramella','#ff3d7f','Caramella'],['mare','#0f7fc4','Mare'],['giungla','#3a8a2a','Giungla'],['sole','#f07b00','Sole'],['lavanda','#7b5cd6','Lavanda']];
-function setT(t){document.documentElement.dataset.t=t;document.querySelectorAll('#themes button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));try{localStorage.setItem('solfTema',t)}catch(e){}}
-$('themes').innerHTML=TH.map(t=>`<button data-t="${t[0]}" title="${t[2]}" aria-label="Tema ${t[2]}" style="background:${t[1]}">${t[2]}</button>`).join('');
-document.querySelectorAll('#themes button').forEach(b=>b.onclick=()=>setT(b.dataset.t));
-let sv='classico';try{sv=localStorage.getItem('solfTema')||sv}catch(e){}setT(sv);
-document.querySelectorAll('nav .tab').forEach(t=>t.onclick=()=>{
- document.querySelectorAll('nav .tab').forEach(x=>x.classList.toggle('on',x===t));
- document.querySelectorAll('.view').forEach(v=>v.hidden=v.id!==t.dataset.v);
- timers.forEach(clearTimeout);window.scrollTo(0,0);
- document.querySelectorAll('#'+t.dataset.v+' .card').forEach(c=>c.classList.add('vis'));
-});
+/* figure e pause */
+const FIG=[['Semibreve','dura 4 battiti',['w'],'w'],['Minima','dura 2 battiti',['h','h'],'h'],['Semiminima','dura 1 battito',['q','q','q','q'],'q'],['Croma','dura ½ battito: 2 crome = 1 battito',['e','e','e','e'],'c']];
+const PAU=[['Pausa di semibreve','4 battiti di silenzio',['rw'],'rw'],['Pausa di minima','2 battiti di silenzio',['rh','rh'],'rh'],['Pausa di semiminima','1 battito di silenzio',['r','r','r','r'],'rq'],['Pausa di croma','½ battito di silenzio',Array(8).fill('rc'),'rc']];
+const DL={w:4,h:2,q:1,c:.5,rw:4,rh:2,rq:1,rc:.5};
+function tree(id,data){const box=$('#'+id);
+ box.innerHTML=data.map((r,j)=>`<div class="row card"><div class="lab"><span class="sym">${N(r[3],1)}</span><div><h3>${r[0]}</h3><p>${r[1]}</p><p style="font-size:14px;display:flex;align-items:center;gap:6px;opacity:.85">${mini(DL[r[3]],4,r[3][0]=='r'?'#8d8aa8':'#ff4f6d').replace(/width="48" height="48"/,'width="34" height="34"')}${DL[r[3]]==.5?'½':DL[r[3]]} ${DL[r[3]]>1?'fette':'fetta'} della torta in 4/4</p></div></div><div class="rh"></div><div class="dots"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta">▶ Ascolta</button></div>`).join('');
+ [...box.children].forEach((c,j)=>{const el=c.querySelector('.rh'),d=c.querySelector('.dots');R(el,data[j][2],{m:4,syl:1});
+  c.querySelector('.pl').onclick=e=>playT(e.currentTarget,el,data[j][2],{m:4,onBeat:b=>dots(d,b),onEnd:()=>dots(d,-1)})})}
+tree('tfig',FIG);tree('tpau',PAU);
+
+/* battuta */
+let met=4;
+function setM(m){stop();met=m;R($('#brh'),Array(m*2).fill('q'),{m,sig:m});$('#bdots').innerHTML='<i></i>'.repeat(m);$('#bnum').textContent='1';$('#bfd').textContent='forte';
+ $$('[data-m]').forEach(b=>b.classList.toggle('pl',+b.dataset.m==m));try{pieReset()}catch(e){}}
+$$('[data-m]').forEach(b=>b.onclick=()=>setM(+b.dataset.m));
+$('#bpl').onclick=()=>playT($('#bpl'),$('#brh'),Array(met*2).fill('q'),{m:met,loop:true,onBeat:b=>{const k=b%met;dots($('#bdots'),k);$('#bnum').textContent=k+1;$('#bfd').textContent=k?'debole':'forte'},onEnd:()=>dots($('#bdots'),-1)});
+setM(4);
+
+/* punto */
+const DOT=[['hd','Minima puntata','2 battiti + 1 del punto = 3 battiti',4,2],['qd','Semiminima puntata','1 battito + ½ del punto = 1 battito e ½',2,1]];
+$('#dcards').innerHTML=DOT.map(([t,n,x,a,b],j)=>`<div class="card dcard"><span class="sym">${N(t,1)}</span><div style="flex:1 1 260px"><h3>${n}</h3><p style="margin:0">${x}</p><div class="bks" id="bk${j}">${'<i class="bk"></i>'.repeat(a)+'<i class="bk d"></i>'.repeat(b)}</div><button class="pl" data-t="▶ Ascolta" id="dp${j}">▶ Ascolta</button></div><div class="pie" id="pie${j}"></div></div>`).join('');
+function pie(el,k,a){const A=Math.min(k,a)/8*100,B=Math.max(0,k-a)/8*100;el.style.background=`conic-gradient(var(--acc) 0 ${A}%,var(--sup) ${A}% ${A+B}%,color-mix(in srgb,var(--ink) 12%,transparent) ${A+B}% 100%)`}
+DOT.forEach(([t,n,x,a,b],j)=>{const bx=$('#bk'+j),pe=$('#pie'+j);pie(pe,a+b,a);
+ $('#dp'+j).onclick=e=>toggle(e.currentTarget,()=>{const bk=[...bx.children];bk.forEach(z=>z.classList.remove('on'));pie(pe,0,a);
+  const ev=[{s:0,l:(a+b)/2,i:-1}].concat(bk.map((z,k)=>({s:k/2,l:0,vis:1,i:k})));
+  play({ev,beats:4,acc:4,onEv:k=>{bk[k].classList.add('on');pie(pe,k+1,a)},onEnd:()=>{}})})});
+const DEX=[['hd','q','qd','c','h'],['q','qd','c','q','hd','q'],['qd','c','qd','c','w']];
+$('#dex').innerHTML=DEX.map((x,i)=>`<div style="margin-bottom:14px"><h3>Esercizio ${i+1}</h3><div class="rh" id="dx${i}"></div><button class="pl" data-t="▶ Ascolta" id="dxb${i}">▶ Ascolta</button></div>`).join('');
+DEX.forEach((x,i)=>{R($('#dx'+i),x,{m:4,sig:4,syl:1});$('#dxb'+i).onclick=e=>playT(e.currentTarget,$('#dx'+i),x,{m:4})});
+
+/* legatura */
+const LGX=[[['h~','q','q'],'Minima legata a semiminima: 2 + 1 = 3 battiti, come la minima puntata'],[['q~','q','h','q','q','h'],'Due semiminime legate: 1 + 1 = 2 battiti'],[['q','q','q','q~','q','q','h'],'La legatura attraversa la stanghetta: 1 + 1 = 2 battiti'],[['w~','w'],'Semibreve legata a semibreve: 4 + 4 = 8 battiti']];
+$('#lgx').innerHTML=LGX.map(([x,t],i)=>`<div class="card"><h3>${t}</h3><div class="rh" id="lg${i}"></div><div class="row2"><button class="pl" data-t="▶ Con legatura" id="lgc${i}">▶ Con legatura</button><button data-t="▶ Senza legatura" id="lgs${i}">▶ Senza legatura</button></div></div>`).join('');
+LGX.forEach(([x],i)=>{const el=$('#lg'+i);R(el,x,{m:4,sig:4,syl:0});
+ $('#lgc'+i).onclick=e=>playT(e.currentTarget,el,x,{m:4});
+ $('#lgs'+i).onclick=e=>playT(e.currentTarget,el,x.map(t=>t.replace('~','')),{m:4})});
+
+/* torta */
+const PCOL=['#ff4f6d','#1fae9e','#ffb703','#7b61ff','#fb8500','#3a86ff','#8ac926','#f15bb5'];
+let pc=[];const psum=()=>pc.reduce((x,t)=>x+D(t).l,0),plb=l=>l==.5?'½':l==1.5?'1½':l;
+function pieDraw(nw,msg){const m=met,C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*f-Math.PI/2),C+r*Math.sin(2*Math.PI*f-Math.PI/2)];
+ let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`,acc=0;
+ const sec=(fa,fb,fill,lb,op)=>{let d;if(fb-fa>.999)d=`M${C} ${C-Rr}A${Rr} ${Rr} 0 1 1 ${C-.01} ${C-Rr}Z`;else{const a=pt(fa,Rr),b=pt(fb,Rr);d=`M${C} ${C}L${a[0]} ${a[1]}A${Rr} ${Rr} 0 ${fb-fa>.5?1:0} 1 ${b[0]} ${b[1]}Z`}
+  const q=pt((fa+fb)/2,fb-fa>.999?0:62);return `<path d="${d}" fill="${fill}" opacity="${op||1}"/><text x="${q[0]}" y="${q[1]+7}" text-anchor="middle" font-weight="800" font-size="19" fill="#fff" stroke="#0005" stroke-width=".6">${lb}</text>`};
+ pc.forEach((t,i)=>{const d0=D(t),f0=acc/m,f1=(acc+d0.l)/m,col=d0.rest?'#8d8aa8':PCOL[i%8];acc+=d0.l;
+  let h;if(d0.k=='hd'||d0.k=='qd'){const b=d0.l/1.5,fm=f0+b/m;h=sec(f0,fm,col,plb(b))+sec(fm,f1,col,'+'+plb(b/2),.5)}else h=sec(f0,f1,col,d0.rest?'sst':plb(d0.l));
+  g+=`<g id="ps${i}" class="${i==nw?'pop':''}">${h}</g>`});
+ for(let k=0;k<m*2;k++){const e=pt(k/(m*2),Rr);g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${k%2?1.5:3.5}" ${k%2?'stroke-dasharray="4 5" opacity=".6"':''}/>`}
+ g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="5"/>`;
+ for(let k=0;k<m;k++){const e=pt((k+.5)/m,112);g+=`<text x="${e[0]}" y="${e[1]+5}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
+ $('#pie').innerHTML=g;R($('#prh'),pc,{m,sig:m,syl:1});const u=psum();
+ $('#pinfo').textContent=msg||(u>=m?'Battuta piena: la torta è finita!':`Fette prese: ${plb(u)} su ${m} · restano ${plb(m-u)}`)}
+let pAuto=0;
+function pieReset(){clearTimeout(pAuto);stop();pc=[];pieDraw();palDraw()}
+const PPAL=[['w','Semibreve'],['h','Minima'],['q','Semiminima'],['c','Croma'],['rw','Pausa di semibreve'],['rh','Pausa di minima'],['r','Pausa di semim.'],['rc','Pausa di croma']];
+function mini(l,m,col){const C=24,Rr=21,pt=f=>[C+Rr*Math.cos(2*Math.PI*f-Math.PI/2),C+Rr*Math.sin(2*Math.PI*f-Math.PI/2)],f=Math.min(l,m)/m;let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`;
+ if(f>.999)g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="${col}"/>`;else{const a=pt(0),b=pt(f);g+=`<path d="M${C} ${C}L${a[0]} ${a[1]}A${Rr} ${Rr} 0 ${f>.5?1:0} 1 ${b[0]} ${b[1]}Z" fill="${col}"/>`}
+ for(let k=0;k<m*2;k++){const e=pt(k/(m*2));g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${k%2?1:2}" ${k%2?'stroke-dasharray="2 2" opacity=".6"':''}/>`}
+ return `<svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">${g}<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>`}
+function palDraw(){$('#ppal').innerHTML=PPAL.map(([t,n],i)=>{const l=D(t).l;return `<button data-pa="${t}"><span style="display:flex;align-items:center;gap:6px">${N(D(t).k,1)}${mini(l,met,D(t).rest?'#8d8aa8':PCOL[i%8])}</span><span>${n}</span><small>${plb(l)} ${l>1?'fette':'fetta'}${l>met?` · non ci sta in ${met}/4`:''}</small></button>`}).join('')}
+palDraw();
+$('#ppal').addEventListener('click',ev=>{const b=ev.target.closest('[data-pa]');if(!b)return;stop();const t=b.dataset.pa,l=D(t).l,u=psum();
+ if(u+l>met){pieDraw(-1,u>=met?'La torta è finita! Svuotala per ricominciare.':`Non ci sta! Restano solo ${plb(met-u)} ${met-u>1?'fette':'fetta'}.`);return}
+ pc.push(t);pieDraw(pc.length-1);const{e,beats}=evs([t]);play({ev:e,beats});
+ if(psum()>=met){pieDraw(pc.length-1,'Battuta piena! Ora la torta si svuota per inserire altre note…');clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},2200)}});
+const DOTM={h:'hd',q:'qd'},UND={hd:'h',qd:'q'};
+function dotCalc(b){const l=D(b).l;return `${D(b).n} puntata: ${plb(l)} + ${plb(l/2)} (metà) = ${plb(l*1.5)}`}
+$('#pdot').onclick=()=>{stop();const i=pc.length-1;if(i<0){pieDraw(-1,'Inserisci prima una nota.');return}const t=pc[i];
+ if(UND[t]){pc[i]=UND[t];pieDraw(i,'Punto tolto.');return}
+ if(!DOTM[t]){pieDraw(-1,'Il punto lo mettiamo su minima o semiminima.');return}
+ const add=D(t).l/2;if(psum()+add>met){pieDraw(-1,`Non c'è spazio per il punto: servono ancora ${plb(add)} ${add>1?'fette':'fetta'}.`);return}
+ pc[i]=DOTM[t];pieDraw(i,dotCalc(t)+' fette');const{e,beats}=evs([pc[i]]);play({ev:e,beats});
+ if(psum()>=met){clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},3000)}};
+$('#pdel').onclick=()=>{stop();pc.pop();pieDraw()};
+$('#pclr').onclick=pieReset;
+$('#ppl').onclick=e=>{if(pc.length)playT(e.currentTarget,$('#prh'),pc,{m:met,onEv:i=>{hl($('#prh'),i);$$('#pie g').forEach(x=>x.classList.toggle('hi',x.id=='ps'+i))},onEnd:()=>$$('#pie g').forEach(x=>x.classList.remove('hi'))})};
+pieReset();
+
+/* tempi */
+$('#tsc').innerHTML=[2,3,4].map(n=>`<div class="card"><h3>${n}/4 e ${n*3}/8: ${n} battiti per battuta</h3>
+ <div class="grid" style="align-items:start"><div><p style="margin:0"><b>${n}/4</b> semplice: 2 crome per battito</p><div class="rh" id="ts${n}"></div><div class="dots" id="tsd${n}">${'<i></i>'.repeat(n)}</div><button class="pl" data-t="▶ Ascolta ${n}/4" id="tsb${n}">▶ Ascolta ${n}/4</button></div>
+ <div><p style="margin:0"><b>${n*3}/8</b> composto: 3 crome per battito</p><div class="rh" id="tc${n}"></div><div class="dots" id="tcd${n}">${'<i></i>'.repeat(n)}</div><button class="pl" data-t="▶ Ascolta ${n*3}/8" id="tcb${n}">▶ Ascolta ${n*3}/8</button></div></div></div>`).join('');
+[2,3,4].forEach(n=>{const a=Array(n).fill('e'),c=Array(n).fill('e3');
+ R($('#ts'+n),a,{m:n,sig:n,syl:1});R($('#tc'+n),c,{m:n,sig:n*3,den:8,syl:1});
+ $('#tsb'+n).onclick=e=>playT(e.currentTarget,$('#ts'+n),a.concat(a),{m:n,onBeat:b=>dots($('#tsd'+n),b%n),onEnd:()=>dots($('#tsd'+n),-1)});
+ $('#tcb'+n).onclick=e=>playT(e.currentTarget,$('#tc'+n),c.concat(c),{m:n,onBeat:b=>dots($('#tcd'+n),b%n),onEnd:()=>dots($('#tcd'+n),-1)})});
+
+/* mano */
+const PT={G:[160,255],S:[50,150],X:[270,150],U:[160,45]},H=[160,150];
+const MV={2:['G','U'],3:['G','S','U'],4:['G','S','X','U'],6:['G','U'],9:['G','S','U'],12:['G','S','X','U']},WD={G:'giù',S:'sinistra',X:'destra',U:'su'};
+let hm=4,hT0=0,hOn=false;const cmp=()=>hm>4;
+const mid=P=>[(P[0]+H[0])/2,(P[1]+H[1])/2];
+function stations(){const st=[];MV[hm].forEach(k=>{const P=PT[k];if(cmp())st.push(P,mid(P),H);else st.push(P,H)});return st}
+function hDraw(){const m=MV[hm];let g='<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5 0 10z" fill="currentColor" opacity=".5"/></marker></defs>';
+ m.forEach(k=>{const P=PT[k],a=[H[0]+(P[0]-H[0])*.2,H[1]+(P[1]-H[1])*.2],b=[H[0]+(P[0]-H[0])*.78,H[1]+(P[1]-H[1])*.78];g+=`<path d="M${a[0]} ${a[1]}L${b[0]} ${b[1]}" stroke="currentColor" stroke-width="3" stroke-dasharray="8 7" opacity=".45" marker-end="url(#ar)"/>`;
+  if(cmp()){const q=mid(P);g+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="currentColor" opacity=".5"/>`}});
+ g+=`<circle cx="${H[0]}" cy="${H[1]}" r="10" fill="none" stroke="currentColor" stroke-width="3"/><text x="${H[0]+16}" y="${H[1]-14}" font-size="13" font-weight="700" fill="currentColor">punto iniziale</text>`;
+ m.forEach((k,j)=>{const P=PT[k],an=k=='S'?'end':k=='X'?'start':'middle',lx=P[0]+(k=='S'?-22:k=='X'?22:0),ly=P[1]+(k=='G'?40:k=='U'?-24:6);
+  g+=`<circle class="hp" cx="${P[0]}" cy="${P[1]}" r="17" fill="var(--card)" stroke="currentColor" stroke-width="3"/><text x="${P[0]}" y="${P[1]+7}" text-anchor="middle" font-weight="800" font-size="20" fill="currentColor">${j+1}</text><text x="${lx}" y="${ly}" text-anchor="${an}" font-weight="700" font-size="17" fill="currentColor">${WD[k]}</text>`});
+ g+='<g id="hand" fill="var(--acc)" stroke="var(--ink)" stroke-width="2"><rect x="-17" y="-2" width="9" height="26" rx="4.5"/><rect x="-7" y="-6" width="9" height="30" rx="4.5"/><rect x="3" y="-4" width="9" height="28" rx="4.5"/><rect x="13" y="1" width="8" height="24" rx="4"/><rect x="-19" y="16" width="42" height="34" rx="14"/><rect x="-32" y="20" width="22" height="10" rx="5" transform="rotate(-35 -21 25)"/></g>';
+ $('#hsvg').innerHTML=g;hPos(H[0],H[1]);
+ R($('#hrh'),cmp()?Array(hm/3).fill('e3'):Array(hm).fill('q'),{m:cmp()?hm/3:hm,sig:hm,den:cmp()?8:4});
+ $('#hnum').textContent='1';$('#hwd').textContent='giù';$('#hmv').textContent=cmp()?`${hm/3} movimenti da 3 ottavi`:`${hm} movimenti`;
+ $$('[data-mm]').forEach(b=>b.classList.toggle('pl',+b.dataset.mm==hm))}
+function hPos(x,y){$('#hand')?.setAttribute('transform',`translate(${x} ${y-22})`)}
+function frame(){if(!hOn)return;const st=stations(),n=st.length,u=60000/bpm*(cmp()?1:.5),t=Math.max(0,(performance.now()-hT0)/u),i=Math.floor(t)%n,f=t-Math.floor(t),e=f*f*(3-2*f),a=st[i],b=st[(i+1)%n];
+ hPos(a[0]+(b[0]-a[0])*e,a[1]+(b[1]-a[1])*e);requestAnimationFrame(frame)}
+function hBeat(k){if(k==0)hT0=performance.now();const g=cmp()?k/3|0:k,sb=k%3,m=MV[hm];
+ $$('#hsvg .hp').forEach((c,j)=>c.setAttribute('fill',j==g?'var(--acc)':'var(--card)'));
+ $('#hnum').textContent=cmp()?(k+1)+'/8':k+1;
+ $('#hwd').textContent=cmp()?(sb==0?WD[m[g]]+': tocca':sb==1?'al centro':'punto iniziale'):WD[m[g]];
+ $('#hmv').textContent='Movimento '+(g+1)}
+$$('[data-mm]').forEach(b=>b.onclick=()=>{stop();hm=+b.dataset.mm;hDraw()});
+$('#hpl').onclick=e=>toggle(e.currentTarget,()=>{const{e:ev,beats}=evs(Array(hm).fill('q'));hT0=performance.now()+80;hOn=true;requestAnimationFrame(frame);
+ play({ev,beats,acc:cmp()?3:hm,loop:true,onBeat:hBeat,onEv:i=>hl($('#hrh'),cmp()?i/3|0:i),onEnd:()=>{hOn=false;hl($('#hrh'),-1);hDraw()}})});
+hDraw();
+
+/* leggi */
+const LC=[['q','1 battito'],['e','1 battito, 2 suoni'],['h','2 battiti'],['w','4 battiti'],['r','1 battito di silenzio']];
+$('#lcards').innerHTML=LC.map(([t,x])=>`<button data-l="${t}" data-t="">${N(D(t).k,1)}<b>${D(t).s}</b><span>${D(t).n}</span><small>${x}</small></button>`).join('');
+$$('[data-l]').forEach(b=>b.onclick=()=>{stop();const{e,beats}=evs([b.dataset.l]);play({ev:e,beats})});
+const EX=[['q','q','e','q','e','e','h'],['q','r','q','r','e','q','h'],['e','e','q','q','e','r','q','q'],['w','q','e','q','r']];
+$('#lex').innerHTML=EX.map((x,i)=>`<div style="margin-bottom:14px"><h3>Esercizio ${i+1}</h3><div class="rh" id="ex${i}"></div><button class="pl" data-t="▶ Ascolta" id="exb${i}">▶ Ascolta</button></div>`).join('');
+EX.forEach((x,i)=>{R($('#ex'+i),x,{m:4,sig:4,syl:1});$('#exb'+i).onclick=e=>playT(e.currentTarget,$('#ex'+i),x,{m:4})});
+
+/* filastrocca */
+const FILS=[
+{t:'Il cuore fa',v:[['Tic tac, tic tac, il cuore fa.',['q','q','q','q','e','q','h'],['Tic','tac,','tic','tac,','il cuo-','re','fa.']],
+ ['Luuungo… e corto corto corto corto,',['h','h','e','e','e','e'],['Luuun-','go…','cor-to','cor-to','cor-to','cor-to']],
+ ['e la pausa… zitti tutti, sì!',['e','e','r','r','e','e','q','r'],['e la','pau-sa…','sst','sst','zit-ti','tut-ti,','sì!','sst']],
+ ['Batti le mani: il ritmo è qui!',['e','e','q','r','e','e','h'],['Bat-ti','le ma-','ni:','sst','il rit-','mo è','qui!']]]},
+{t:'Lumaca e leprotto',v:[['La lumaca lenta va,',['e','e','q','q','h','r','r'],['La lu-','ma-ca','len-','ta','va,','sst','sst']],
+ ['il leprotto corre corre e salta qua!',['e','e','e','e','e','q','h'],['il le-','prot-to','cor-re','cor-re','e sal-','ta','qua!']],
+ ['Leeenta, leeenta,',['h','h','h','h'],['Leeen-','ta,','leeen-','ta,']],
+ ['svelto svelto svelto svelto, ecco qui!',['e','e','e','e','e','q','r','r'],['svel-to','svel-to','svel-to','svel-to,','ec-co','qui!','sst','sst']]]},
+{t:'La pausa',v:[['Batto, batto, poi mi fermo:',['e','e','q','q','e','r','r','r'],['Bat-to,','bat-to,','poi','mi','fer-mo:','sst','sst','sst']],
+ ['sst! La pausa fa così.',['r','e','q','q','e','r','r','r'],['sst!','La pau-','sa','fa','co-sì.','sst','sst','sst']],
+ ['Conto anche il silenzio…',['e','e','e','q','rw'],['Con-to','an-che il','si-len-','zio…','sst']],
+ ['e poi riparto ancora qui!',['e','e','e','e','h','r','r'],['e poi','ri-par-','to an-','co-ra','qui!','sst','sst']]]},
+{t:'Il trenino',v:[['Ciuf ciuf ciuf, il trenino va,',['q','q','q','r','e','e','h'],['Ciuf','ciuf','ciuf,','sst','il tre-','ni-no','va,']],
+ ['corre corre sui binari e poi si ferma là.',['e','e','e','e','e','e','q','q'],['cor-re','cor-re','sui bi-','na-ri','e poi','si fer-','ma','là.']],
+ ['Fiiii! Fischia forte,',['w','e','q','q','r'],['Fiiii!','Fi-schia','for-','te,','sst']],
+ ['tutti a bordo, si va!',['e','e','q','q','rw'],['tut-ti a','bor-do,','si','va!','sst']]]},
+{t:'Il puntino',v:[['Il puntino è un amico,',['qd','c','e','q','e','q','q','r'],['Il','pun-','ti-no','è','un a-','mi-','co,','sst']],
+ ['fa più lunga la nota: sììì,',['e','e','e','q','hd','r'],['fa più','lun-ga','la no-','ta:','sììì,','sst']],
+ ['meeezzo valore in più!',['hd','q','e','e','h'],['Meeez-','zo','va-lo-','re in','più!']],
+ ['TA-A-A e TA-I, che bello!',['hd','q','qd','c','e','q'],['TA-A-A','e','TA-','I,','che bel-','lo!']]]},
+{t:'La legatura',v:[['Due note per la mano',['q','e','e','q','h','r','r'],['Due','no-te','per la','ma-','no','sst','sst']],
+ ['la legatura le tiene insieme così:',['e','e','e','e','e','e','q','r'],['la le-','ga-tu-','ra le','tie-ne','in-sie-','me co-','sì:','sst']],
+ ['Uuuuno, duuuue!',['h~','q','q','h~','h'],['Uuuu-','…','no,','duuuu-','e!']],
+ ['Non si suona due volte, si somma e va!',['e','e','e','e','e','q','h'],['Non si','suo-na','due vol-','te, si','som-ma','e','va!']]]}];
+let fi=0,FALL=[],FMAP=[];
+function fShow(i){stop();fi=i;const F=FILS[i];$('#ftit').textContent=F.t;
+ $('#ftx').innerHTML=F.v.map((f,k)=>`<span id="fl${k}" style="display:block;border-radius:10px;padding:0 8px">${f[0]}</span>`).join('');
+ $('#frh').innerHTML=F.v.map((f,k)=>`<div class="rh" id="fr${k}"></div>`).join('');
+ F.v.forEach((f,k)=>R($('#fr'+k),f[1],{m:4,sig:k?0:4,syl:1,lyr:f[2]}));
+ FALL=[].concat(...F.v.map(f=>f[1]));FMAP=[];F.v.forEach((f,k)=>f[1].forEach((t,j)=>FMAP.push([k,j])));
+ $$('#fsel button').forEach((b,k)=>b.classList.toggle('pl',k==i))}
+$('#fsel').innerHTML=FILS.map((F,i)=>`<button data-f="${i}">${i+1}. ${F.t}</button>`).join('');
+$$('#fsel button').forEach(b=>b.onclick=()=>fShow(+b.dataset.f));
+function fHl(k){FILS[fi].v.forEach((f,i)=>{const on=k>=0&&FMAP[k][0]==i;hl($('#fr'+i),on?FMAP[k][1]:-1);$('#fl'+i).style.background=on?'color-mix(in srgb,var(--acc) 30%,transparent)':''})}
+$('#fpl').onclick=e=>toggle(e.currentTarget,()=>{const{e:ev,beats}=evs(FALL);play({ev,beats,acc:4,onEv:fHl,onEnd:()=>fHl(-1)})});
+fShow(0);
+
+/* componi */
+const MAXB=16;let cells=['q','q','e','q'];
+const sum=a=>a.reduce((x,t)=>x+D(t).l,0);
+const PF=[['w','Semibreve'],['h','Minima'],['q','Semiminima'],['e','Due crome'],['c','Croma']],PP=[['rw','P. di semibreve'],['rh','P. di minima'],['r','P. di semiminima'],['rc','P. di croma']];
+const pal=(id,L)=>{$('#'+id).innerHTML=L.map(([t,n])=>`<button data-a="${t}">${N(D(t).k,1)}<b>${D(t).s}</b><span>${n}</span><small>${D(t).l==.5?'½':D(t).l} ${D(t).l>1?'battiti':'battito'}</small></button>`).join('')};
+pal('pf',PF);pal('pp',PP);
+function cr(msg){R($('#crh'),cells,{m:4,sig:4,syl:1});const s=sum(cells),n=Math.floor(s/4)+(s%4?1:0),left=(4-s%4)%4;
+ $('#cinfo').textContent=msg||(s>=MAXB?'Ritmo completo: 4 battute!':`Battute: ${Math.max(n,1)} su 4${left?` · nella battuta restano ${left} battiti`:''}`)}
+function addT(t){stop();const s=sum(cells),l=D(t).l;if(s+l>MAXB){cr('Il ritmo è pieno: cancella qualcosa.');return}
+ const used=s%4;if(used+l>4){cr(`Non ci sta! In questa battuta restano solo ${4-used} battiti.`);return}
+ cells.push(t);cr()}
+$$('[data-a]').forEach(b=>b.onclick=()=>{addT(b.dataset.a);const{e,beats}=evs([b.dataset.a]);play({ev:e,beats,clicks:false})});
+$('#clg').onclick=()=>{stop();const i=cells.length-1;if(i<0||D(cells[i]).rest){cr('Scegli prima una nota da legare.');return}cells[i]=cells[i].endsWith('~')?cells[i].slice(0,-1):cells[i]+'~';cr(cells[i].endsWith('~')?'Ora aggiungi la nota a cui legarla.':'')};
+$('#cdot').onclick=()=>{stop();const i=cells.length-1;if(i<0){cr('Inserisci prima una nota.');return}const tie=cells[i].endsWith('~'),t=cells[i].replace('~','');
+ if(UND[t]){cells[i]=UND[t]+(tie?'~':'');cr('Punto tolto.');return}
+ if(!DOTM[t]){cr('Il punto lo mettiamo su minima o semiminima.');return}
+ const s0=sum(cells.slice(0,-1)),nl=D(t).l*1.5;if(s0%4+nl>4){cr(`Il punto non ci sta in questa battuta.`);return}
+ cells[i]=DOTM[t]+(tie?'~':'');cr(dotCalc(t)+' battiti');const{e,beats}=evs([DOTM[t]]);play({ev:e,beats})};
+$('#cdel').onclick=()=>{stop();cells.pop();cr()};
+$('#cpl').onclick=()=>{if(cells.length)playT($('#cpl'),$('#crh'),cells,{m:4,loop:true,clicks:$('#cbt').checked})};
+const rnd=n=>{let a;do{a=Array.from({length:n},()=>['q','e','r','q','e'][Math.random()*5|0])}while(a.every(x=>x=='r'));return a};
+const ALL=['w','h','q','e','c','rw','rh','r','rc','q','e','h'];
+function rndM(){const m=[];let s=0;while(s<4){const ok=ALL.filter(t=>D(t).l<=4-s&&!(D(t).l==.5&&s%1==0&&4-s<1));const t=ok[Math.random()*ok.length|0];m.push(t);s+=D(t).l}return m}
+$('#crnd').onclick=()=>{stop();let a;do{a=[].concat(rndM(),rndM(),rndM(),rndM())}while(a.every(t=>D(t).rest));cells=a;cr()};
+$('#cclr').onclick=()=>{stop();cells=[];cr()};
+cr();
+
+/* quiz */
+const LV=[{n:'Facile',ms:[4],bars:1,p:['q','q','e','r','h']},{n:'Medio',ms:[2,3,4],bars:1,p:['q','e','r','h','rh','c','w']},{n:'Difficile',ms:[2,3,4],bars:2,p:['q','e','r','h','rh','hd','qd','c','rc','w']},{n:'Campione',ms:[3,4],bars:2,p:['q','e','e','r','h','hd','qd','c','rc','rw','rh','h~']}];
+const qz={ans:null,sc:0,tot:0,first:true,done:false,lv:0,m:4};
+function bar(m,pool){const a=[];let s=0;
+ while(s<m-1e-9){const left=m-s;let ok=left%1?['c','rc']:pool.filter(t=>D(t).l<=left&&!(t=='qd'&&left<2));if(!ok.length)ok=['q'];
+  let t=ok[Math.random()*ok.length|0];if(t=='c'&&!(left%1))t='e';if(t=='rc'&&!(left%1))t='r';a.push(t);s+=D(t).l;if(t=='qd'){a.push('c');s+=.5}}
+ if(a[a.length-1].endsWith('~'))a[a.length-1]=a[a.length-1].slice(0,-1);return a}
+function gen(){const L=LV[qz.lv];let a;do{a=[];for(let i=0;i<L.bars;i++)a=a.concat(bar(qz.m,L.p))}while(a.every(t=>D(t).rest)||a.some((t,i)=>t.endsWith('~')&&(!a[i+1]||D(a[i+1]).rest)));return a}
+function newQ(){stop();const L=LV[qz.lv];qz.m=L.ms[Math.random()*L.ms.length|0];const c=gen(),o=[c];let g=0;
+ while(o.length<3&&g++<200){const x=gen();if(!o.some(y=>y.join()==x.join()))o.push(x)}
+ o.sort(()=>Math.random()-.5);Object.assign(qz,{ans:c,first:true,done:false});
+ $('#qopts').innerHTML=o.map(x=>`<button class="opt" data-k="${x.join()}"><div class="rh"></div></button>`).join('');
+ $$('#qopts .opt').forEach((b,i)=>{R(b.firstElementChild,o[i],{m:qz.m,sig:qz.m,syl:1});b.onclick=()=>ans(b)});
+ $('#qmsg').textContent=`Tempo ${qz.m}/4 · ascolta e scegli il ritmo giusto!`}
+function ans(b){if(qz.done)return;const ok=b.dataset.k==qz.ans.join();
+ if(qz.first)qz.tot++;
+ if(ok){b.classList.add('ok');qz.done=true;if(qz.first)qz.sc++;$('#qmsg').textContent=['Bravissimo!','Esatto!','Ottimo orecchio!','Perfetto!'][Math.random()*4|0]+' Premi «Nuova domanda».'}
+ else{b.classList.remove('no');void b.offsetWidth;b.classList.add('no');$('#qmsg').textContent='Non è questo: ascolta ancora e riprova.'}
+ qz.first=false;$('#qsc').textContent=`Giusti al primo tentativo: ${qz.sc} su ${qz.tot}`}
+$('#qlv').innerHTML=LV.map((L,i)=>`<button data-lv="${i}">${L.n}</button>`).join('');
+const lvSet=i=>{qz.lv=i;$$('[data-lv]').forEach(b=>b.classList.toggle('pl',+b.dataset.lv==i));newQ()};
+$$('[data-lv]').forEach(b=>b.onclick=()=>lvSet(+b.dataset.lv));
+$('#qpl').onclick=()=>playT($('#qpl'),null,qz.ans,{m:qz.m});
+$('#qnew').onclick=newQ;lvSet(0);
+
+/* navigazione */
+$('#nav').innerHTML=PAGES.map(([h,t],i)=>`<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
+function show(){stop();let h=location.hash.slice(1);if(!PAGES.some(p=>p[0]==h))h='battito';
+ $$('.pg').forEach(s=>s.hidden=s.id!=h);$$('#'+h+' .rh').forEach(ties);$$('#nav a').forEach(a=>a.classList.toggle('cur',a.hash=='#'+h));
+ const i=PAGES.findIndex(p=>p[0]==h),n=PAGES[i+1];$('#nx').innerHTML=n?`<a class="nxt" href="#${n[0]}">Prossima lezione: ${n[1]} →</a>`:'';scrollTo(0,0)}
+addEventListener('hashchange',show);show();
 }
 </script>
 </body>
