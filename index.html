@@ -188,7 +188,7 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <div class="eq">1 battito = 2 crome = 1 terzina (3 crome)</div></div>
  <div class="card"><h3>La torta delle terzine</h3>
   <p>Ogni fetta è un battito. Due crome dividono la fetta in <b>2 pezzi</b>, la terzina la divide in <b>3 pezzi</b> uguali. Tocca le figure e riempi la torta in 4/4!</p>
-  <div class="grid"><div><svg id="tpie" viewBox="-12 -12 244 244" style="width:100%;max-width:320px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="tpinfo" style="text-align:center"></div></div>
+  <div class="grid"><div><svg id="tpie" viewBox="-60 -30 340 280" style="width:100%;max-width:320px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="tpinfo" style="text-align:center"></div></div>
   <div><div class="cards" id="tpal"></div><div class="rh" id="tprh" style="margin-top:10px"></div>
    <div class="row2"><button class="pl" id="tppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="tpdel">Togli l'ultima</button><button id="tpclr">Svuota la torta</button></div></div></div></div>
  <div class="card"><h3>Ascolta la differenza: il battito è sempre uguale</h3>
@@ -207,8 +207,9 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
    <div style="text-align:center"><div class="big" id="bnum">1</div><div class="tn" id="bfd">forte</div><p style="margin:auto">Conta ad alta voce e batti forte le mani sul primo battito!</p></div>
   </div></div>
  <div class="card"><h2>La battuta è una torta</h2>
-  <p>Immagina la battuta come una <b>torta</b>. Il tempo dice in quante <b>fette</b> è tagliata: in 4/4 ci sono 4 fette, in 3/4 tre, in 2/4 due (cambia il tempo con i pulsanti qui sopra). Ogni nota che inseriamo <b>prende le sue fette</b>: la semiminima 1 fetta, la minima 2, la croma mezza fetta. Quando la torta è finita, la battuta è <b>piena</b>!</p>
-  <div class="grid"><div><svg id="pie" viewBox="-12 -12 244 244" style="width:100%;max-width:340px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="pinfo" style="text-align:center"></div></div>
+  <p>Immagina la battuta come una <b>torta</b>. Il tempo dice in quante <b>fette</b> è tagliata: in 4/4 ci sono 4 fette, in 3/4 tre, in 2/4 due (scegli il tempo con i pulsanti qui sotto: ci sono anche 5/4, 2/2 e i tempi in ottavi, dove ogni fetta vale 3 crome). Ogni nota che inseriamo <b>prende le sue fette</b>: la semiminima 1 fetta, la minima 2, la croma mezza fetta. Quando la torta è finita, la battuta è <b>piena</b>!</p>
+  <div class="row2" id="ptm"></div>
+  <div class="grid"><div><svg id="pie" viewBox="-60 -30 340 280" style="width:100%;max-width:340px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="pinfo" style="text-align:center"></div></div>
   <div><div class="cards" id="ppal"></div><div class="rh" id="prh" style="margin-top:10px"></div>
    <div class="row2"><button class="pl" id="ppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="pdot">• Aggiungi il punto</button><button id="pdel">Togli l'ultima</button><button id="pclr">Svuota la torta</button></div></div></div></div>
 </section>
@@ -395,7 +396,7 @@ tree('tfig',FIG);tree('tpau',PAU);
 /* battuta */
 let met=4;
 function setM(m){stop();met=m;R($('#brh'),Array(m*2).fill('q'),{m,sig:m});$('#bdots').innerHTML='<i></i>'.repeat(m);$('#bnum').textContent='1';$('#bfd').textContent='forte';
- $$('[data-m]').forEach(b=>b.classList.toggle('pl',+b.dataset.m==m));try{pieReset()}catch(e){}}
+ $$('[data-m]').forEach(b=>b.classList.toggle('pl',+b.dataset.m==m))}
 $$('[data-m]').forEach(b=>b.onclick=()=>setM(+b.dataset.m));
 $('#bpl').onclick=()=>playT($('#bpl'),$('#brh'),Array(met*2).fill('q'),{m:met,loop:true,onBeat:b=>{const k=b%met;dots($('#bdots'),k);$('#bnum').textContent=k+1;$('#bfd').textContent=k?'debole':'forte'},onEnd:()=>dots($('#bdots'),-1)});
 setM(4);
@@ -437,7 +438,7 @@ function tDraw(nw,msg){const m=4,C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*
  tc.forEach((t,i)=>{const d=D(t),f0=acc/m,f1=(acc+d.l)/m,col=d.rest?'#8d8aa8':TCOL[i%6],n=d.sub||1;acc+=d.l;let h='';
   for(let j=0;j<n;j++)h+=sec(f0+(f1-f0)*j/n,f0+(f1-f0)*(j+1)/n,col,d.rest?'sst':n==3?'⅓':n==2?'½':String(d.l));
   g+=`<g id="tps${i}" class="${i==nw?'pop':''}">${h}</g>`});
- for(let k=0;k<m;k++){const e=pt(k/m,Rr);g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="3.5"/>`;const l=pt((k+.5)/m,112);g+=`<text x="${l[0]}" y="${l[1]+5}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
+ for(let k=0;k<m;k++){const e=pt(k/m,Rr);g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="3.5"/>`;const l=pt((k+.5)/m,114);g+=`<text x="${l[0]}" y="${l[1]+(l[1]>C+20?14:l[1]<C-20?-4:5)}" text-anchor="${l[0]<C-20?'end':l[0]>C+20?'start':'middle'}" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
  g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="5"/>`;
  $('#tpie').innerHTML=g;R($('#tprh'),tc,{m,sig:m,syl:1});const u=tsum();
  $('#tpinfo').textContent=msg||(u>=m?'Battuta piena!':`Fette prese: ${u} su 4`)}
@@ -454,44 +455,50 @@ tDraw();
 
 /* torta */
 const PCOL=['#ff4f6d','#1fae9e','#ffb703','#7b61ff','#fb8500','#3a86ff','#8ac926','#f15bb5'];
-let pc=[];const psum=()=>pc.reduce((x,t)=>x+D(t).l,0),plb=l=>l==.5?'½':l==1.5?'1½':l;
-function pieDraw(nw,msg){const m=met,C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*f-Math.PI/2),C+r*Math.sin(2*Math.PI*f-Math.PI/2)];
+let pc=[],TT={n:'4/4',num:4,den:4,tot:4,beat:1,sub:.5};
+const fmt=x=>{const w=Math.floor(x+1e-6),r=x-w,f=[[.25,'¼'],[1/3,'⅓'],[.5,'½'],[2/3,'⅔'],[.75,'¾']].find(z=>Math.abs(z[0]-r)<.02);return w?w+(f?f[1]:''):(f?f[1]:'0')};
+const psum=()=>pc.reduce((x,t)=>x+D(t).l,0),plb=l=>l==.5?'½':l==1.5?'1½':l;
+function pieDraw(nw,msg){const m=TT.tot,bt=TT.beat,sb=TT.sub,nb=Math.round(m/bt),C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*f-Math.PI/2),C+r*Math.sin(2*Math.PI*f-Math.PI/2)];
  let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`,acc=0;
  const sec=(fa,fb,fill,lb,op)=>{let d;if(fb-fa>.999)d=`M${C} ${C-Rr}A${Rr} ${Rr} 0 1 1 ${C-.01} ${C-Rr}Z`;else{const a=pt(fa,Rr),b=pt(fb,Rr);d=`M${C} ${C}L${a[0]} ${a[1]}A${Rr} ${Rr} 0 ${fb-fa>.5?1:0} 1 ${b[0]} ${b[1]}Z`}
   const q=pt((fa+fb)/2,fb-fa>.999?0:62);return `<path d="${d}" fill="${fill}" opacity="${op||1}"/><text x="${q[0]}" y="${q[1]+7}" text-anchor="middle" font-weight="800" font-size="19" fill="#fff" stroke="#0005" stroke-width=".6">${lb}</text>`};
  pc.forEach((t,i)=>{const d0=D(t),f0=acc/m,f1=(acc+d0.l)/m,col=d0.rest?'#8d8aa8':PCOL[i%8];acc+=d0.l;
-  let h;if(d0.k=='hd'||d0.k=='qd'){const b=d0.l/1.5,fm=f0+b/m;h=sec(f0,fm,col,plb(b))+sec(fm,f1,col,'+'+plb(b/2),.5)}else h=sec(f0,f1,col,d0.rest?'sst':plb(d0.l));
+  let h;if(d0.k=='hd'||d0.k=='qd'){const b=d0.l/1.5,fm=f0+b/m;h=sec(f0,fm,col,fmt(b/bt))+sec(fm,f1,col,'+'+fmt(b/2/bt),.5)}else h=sec(f0,f1,col,d0.rest?'sst':fmt(d0.l/bt));
   g+=`<g id="ps${i}" class="${i==nw?'pop':''}">${h}</g>`});
- for(let k=0;k<m*2;k++){const e=pt(k/(m*2),Rr);g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${k%2?1.5:3.5}" ${k%2?'stroke-dasharray="4 5" opacity=".6"':''}/>`}
+ {const n=Math.round(m/sb);for(let k=0;k<n;k++){const e=pt(k/n,Rr),so=Math.abs(k*sb/bt-Math.round(k*sb/bt))<1e-6;g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${so?3.5:1.5}" ${so?'':'stroke-dasharray="4 5" opacity=".6"'}/>`}}
  g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="5"/>`;
- for(let k=0;k<m;k++){const e=pt((k+.5)/m,112);g+=`<text x="${e[0]}" y="${e[1]+5}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
- $('#pie').innerHTML=g;R($('#prh'),pc,{m,sig:m,syl:1});const u=psum();
- $('#pinfo').textContent=msg||(u>=m?'Battuta piena: la torta è finita!':`Fette prese: ${plb(u)} su ${m} · restano ${plb(m-u)}`)}
+ for(let k=0;k<nb;k++){const e=pt((k+.5)/nb,114);g+=`<text x="${e[0]}" y="${e[1]+(e[1]>C+20?14:e[1]<C-20?-4:5)}" text-anchor="${e[0]<C-20?'end':e[0]>C+20?'start':'middle'}" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
+ $('#pie').innerHTML=g;R($('#prh'),pc,{m,sig:TT.num,den:TT.den,syl:1});const u=psum();
+ $('#pinfo').textContent=msg||(u>=m?'Battuta piena: la torta è finita!':`Fette prese: ${fmt(u/bt)} su ${nb} · restano ${fmt((m-u)/bt)}`)}
 let pAuto=0;
 function pieReset(){clearTimeout(pAuto);stop();pc=[];pieDraw();palDraw()}
 const PPAL=[['w','Semibreve'],['h','Minima'],['q','Semiminima'],['c','Croma'],['rw','Pausa di semibreve'],['rh','Pausa di minima'],['r','Pausa di semim.'],['rc','Pausa di croma']];
-function mini(l,m,col){const C=24,Rr=21,pt=f=>[C+Rr*Math.cos(2*Math.PI*f-Math.PI/2),C+Rr*Math.sin(2*Math.PI*f-Math.PI/2)],f=Math.min(l,m)/m;let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`;
+function mini(l,m,col,bt=1,sb=.5){const C=24,Rr=21,pt=f=>[C+Rr*Math.cos(2*Math.PI*f-Math.PI/2),C+Rr*Math.sin(2*Math.PI*f-Math.PI/2)],f=Math.min(l,m)/m;let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`;
  if(f>.999)g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="${col}"/>`;else{const a=pt(0),b=pt(f);g+=`<path d="M${C} ${C}L${a[0]} ${a[1]}A${Rr} ${Rr} 0 ${f>.5?1:0} 1 ${b[0]} ${b[1]}Z" fill="${col}"/>`}
- for(let k=0;k<m*2;k++){const e=pt(k/(m*2));g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${k%2?1:2}" ${k%2?'stroke-dasharray="2 2" opacity=".6"':''}/>`}
+ {const n=Math.round(m/sb);for(let k=0;k<n;k++){const e=pt(k/n),so=Math.abs(k*sb/bt-Math.round(k*sb/bt))<1e-6;g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="${so?2:1}" ${so?'':'stroke-dasharray="2 2" opacity=".6"'}/>`}}
  return `<svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">${g}<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>`}
-function palDraw(){$('#ppal').innerHTML=PPAL.map(([t,n],i)=>{const l=D(t).l;return `<button data-pa="${t}"><span style="display:flex;align-items:center;gap:6px">${N(D(t).k,1)}${mini(l,met,D(t).rest?'#8d8aa8':PCOL[i%8])}</span><span>${n}</span><small>${plb(l)} ${l>1?'fette':'fetta'}${l>met?` · non ci sta in ${met}/4`:''}</small></button>`}).join('')}
+function palDraw(){$('#ppal').innerHTML=PPAL.map(([t,n],i)=>{const l=D(t).l;return `<button data-pa="${t}"><span style="display:flex;align-items:center;gap:6px">${N(D(t).k,1)}${mini(l,TT.tot,D(t).rest?'#8d8aa8':PCOL[i%8],TT.beat,TT.sub)}</span><span>${n}</span><small>${fmt(l/TT.beat)} ${l/TT.beat>1?'fette':'fetta'}${l>TT.tot?` · non ci sta in ${TT.n}`:''}</small></button>`}).join('')}
 palDraw();
 $('#ppal').addEventListener('click',ev=>{const b=ev.target.closest('[data-pa]');if(!b)return;stop();const t=b.dataset.pa,l=D(t).l,u=psum();
- if(u+l>met){pieDraw(-1,u>=met?'La torta è finita! Svuotala per ricominciare.':`Non ci sta! Restano solo ${plb(met-u)} ${met-u>1?'fette':'fetta'}.`);return}
+ if(u+l>TT.tot){pieDraw(-1,u>=TT.tot?'La torta è finita! Svuotala per ricominciare.':`Non ci sta! Restano solo ${fmt((TT.tot-u)/TT.beat)} di fetta.`);return}
  pc.push(t);pieDraw(pc.length-1);const{e,beats}=evs([t]);play({ev:e,beats});
- if(psum()>=met){pieDraw(pc.length-1,'Battuta piena! Ora la torta si svuota per inserire altre note…');clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},2200)}});
+ if(psum()>=TT.tot-1e-9){pieDraw(pc.length-1,'Battuta piena! Ora la torta si svuota per inserire altre note…');clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},2200)}});
 const DOTM={h:'hd',q:'qd'},UND={hd:'h',qd:'q'};
 function dotCalc(b){const l=D(b).l;return `${D(b).n} puntata: ${plb(l)} + ${plb(l/2)} (metà) = ${plb(l*1.5)}`}
 $('#pdot').onclick=()=>{stop();const i=pc.length-1;if(i<0){pieDraw(-1,'Inserisci prima una nota.');return}const t=pc[i];
  if(UND[t]){pc[i]=UND[t];pieDraw(i,'Punto tolto.');return}
  if(!DOTM[t]){pieDraw(-1,'Il punto lo mettiamo su minima o semiminima.');return}
- const add=D(t).l/2;if(psum()+add>met){pieDraw(-1,`Non c'è spazio per il punto: servono ancora ${plb(add)} ${add>1?'fette':'fetta'}.`);return}
- pc[i]=DOTM[t];pieDraw(i,dotCalc(t)+' fette');const{e,beats}=evs([pc[i]]);play({ev:e,beats});
- if(psum()>=met){clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},3000)}};
+ const add=D(t).l/2;if(psum()+add>TT.tot+1e-9){pieDraw(-1,`Non c'è spazio per il punto: servono ancora ${fmt(add/TT.beat)} di fetta.`);return}
+ pc[i]=DOTM[t];{const l=D(t).l,b=TT.beat;pieDraw(i,`${D(t).n} puntata: ${fmt(l/b)} + ${fmt(l/2/b)} (metà) = ${fmt(1.5*l/b)} fette`)}const{e,beats}=evs([pc[i]]);play({ev:e,beats});
+ if(psum()>=TT.tot-1e-9){clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},3000)}};
 $('#pdel').onclick=()=>{stop();pc.pop();pieDraw()};
 $('#pclr').onclick=pieReset;
-$('#ppl').onclick=e=>{if(pc.length)playT(e.currentTarget,$('#prh'),pc,{m:met,onEv:i=>{hl($('#prh'),i);$$('#pie g').forEach(x=>x.classList.toggle('hi',x.id=='ps'+i))},onEnd:()=>$$('#pie g').forEach(x=>x.classList.remove('hi'))})};
-pieReset();
+$('#ppl').onclick=e=>{if(pc.length)playT(e.currentTarget,$('#prh'),pc,{m:TT.tot,onEv:i=>{hl($('#prh'),i);$$('#pie g').forEach(x=>x.classList.toggle('hi',x.id=='ps'+i))},onEnd:()=>$$('#pie g').forEach(x=>x.classList.remove('hi'))})};
+const TEMPI=[['2/4',2,4,2,1,.5],['3/4',3,4,3,1,.5],['4/4',4,4,4,1,.5],['5/4',5,4,5,1,.5],['2/2',2,2,4,2,1],['3/8',3,8,1.5,.5,.5],['6/8',6,8,3,1.5,.5],['9/8',9,8,4.5,1.5,.5],['12/8',12,8,6,1.5,.5]];
+$('#ptm').innerHTML=TEMPI.map((x,i)=>`<button data-pt="${i}">${x[0]}</button>`).join('');
+function ptSet(i){const x=TEMPI[i];TT={n:x[0],num:x[1],den:x[2],tot:x[3],beat:x[4],sub:x[5]};$$('[data-pt]').forEach(b=>b.classList.toggle('pl',+b.dataset.pt==i));pieReset()}
+$$('[data-pt]').forEach(b=>b.onclick=()=>ptSet(+b.dataset.pt));
+ptSet(2);
 
 /* tempi */
 $('#tsc').innerHTML=[2,3,4].map(n=>`<div class="card"><h3>${n}/4 e ${n*3}/8: ${n} battiti per battuta</h3>
