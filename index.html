@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-tema="bosco">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,11 +18,10 @@
    LAYOUT: barra lezioni in alto, una lezione per volta, schede grandi */
 :root{color-scheme:light dark;--bg:light-dark(#ffd84d,#1b1838);--card:light-dark(#fffdf5,#28244e);--ink:light-dark(#22204a,#fff3c4);--acc:#ff4f6d;--sup:#1fae9e;--mut:light-dark(#5b5880,#b9b4e0)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
-:root[data-tema=notte]{color-scheme:dark;--bg:#1b1838;--card:#28244e;--ink:#fff3c4;--mut:#b9b4e0}
 :root[data-tema=mare]{color-scheme:light;--bg:#4cc9f0;--card:#f2fbff;--ink:#0b2545;--acc:#ff6b35;--sup:#2a9d8f;--mut:#3d5a80}
 :root[data-tema=bosco]{color-scheme:light;--bg:#95d5b2;--card:#f4fff6;--ink:#1b4332;--acc:#e76f51;--sup:#2d6a4f;--mut:#40916c}
 :root[data-tema=fragola]{color-scheme:light;--bg:#ffafcc;--card:#fff5f8;--ink:#4a1942;--acc:#d62246;--sup:#3a86ff;--mut:#7a4a6e}
-:root[data-tema=lavagna]{color-scheme:dark;--bg:#2f4f3e;--card:#3b5e4c;--ink:#f5f5ef;--acc:#ffd166;--sup:#8ecae6;--mut:#cfe3d6;--on:#22204a}
+:root[data-tema=oceano]{color-scheme:dark;--bg:#023e5a;--card:#0a5c80;--ink:#e6f7ff;--acc:#ffb703;--sup:#48cae4;--mut:#a9d6e5;--on:#022b3f}
 :root[data-tema=lavanda]{color-scheme:light;--bg:#cdb4db;--card:#fbf7ff;--ink:#2b2140;--acc:#f15bb5;--sup:#00a6a6;--mut:#6a5a80}
 select{font:700 16px "Baloo 2",sans-serif;min-height:40px;border-radius:12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:0 8px}
 *{box-sizing:border-box;min-width:0}
@@ -99,10 +98,12 @@ nav a.cur b{background:var(--acc);color:var(--on,#fff)}
 .vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin:12px 0}
 .vs div{border:3px solid var(--ink);border-radius:18px;padding:12px 16px}.vs b{font-size:24px;display:block}
 .pop{animation:pop .45s ease-out;transform-box:view-box;transform-origin:110px 110px}@keyframes pop{from{transform:scale(.2);opacity:0}}
-#pie .hi path{stroke:var(--ink);stroke-width:6}
+#pie .hi path,#tpie .hi path{stroke:var(--ink);stroke-width:6}
 @media(prefers-reduced-motion:reduce){.pop{animation:none}}
 .lab .sym svg{width:62px;height:124px}
 .tema{display:flex;align-items:center;gap:4px;background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:2px 4px 2px 10px}.tema select{border:0;min-height:36px;font-size:15px;background:transparent}
+nav .sep{grid-column:1/-1;height:10px}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--ink);opacity:.13;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22420%22%20height%3D%22420%22%20viewBox%3D%220%200%20420%20420%22%3E%3Cg%20transform%3D%22translate%2870%2090%29%20rotate%28-12%29%20scale%280.24%29%20translate%28-256%20-256%29%22%3E%3Cg%20transform%3D%22translate%28150.4%20353.2%29%20scale%280.3191%20-0.3191%29%22%3E%3Cpath%20d%3D%22M434%202Q464%20-103%20464%20-170Q464%20-223%20427.0%20-257.0Q390%20-291%20337%20-291Q287%20-291%20250.0%20-261.5Q213%20-232%20213%20-190Q213%20-160%20233.5%20-133.5Q254%20-107%20283.5%20-107.0Q313%20-107%20331.5%20-128.5Q350%20-150%20350%20-178Q350%20-240%20280%20-240Q298%20-268%20338%20-268Q353%20-268%20368.5%20-263.5Q384%20-259%20401.0%20-248.0Q418%20-237%20428.5%20-213.5Q439%20-190%20439%20-157Q439%20-136%20411%20-6Q389%20-12%20356%20-12Q259%20-12%20189.5%2060.0Q120%20132%20120%20232Q120%20267%20131.5%20303.0Q143%20339%20157.5%20366.5Q172%20394%20200.5%20428.5Q229%20463%20248.5%20483.5Q268%20504%20303%20539Q280%20621%20280%20689Q280%20779%20313.0%20839.5Q346%20900%20379%20900Q389%20900%20401.5%20887.0Q414%20874%20426.0%20851.0Q438%20828%20446.5%20790.5Q455%20753%20455%20710Q455%20551%20342%20447L368%20329Q384%20332%20397%20332Q458%20332%20500.0%20282.5Q542%20233%20542%20162Q542%2044%20434%202ZM426%20746Q426%20801%20394%20801Q358%20801%20333.0%20748.0Q308%20695%20308%20630Q308%20588%20321%20557Q359%20580%20392.5%20639.5Q426%20699%20426%20746ZM498%20128Q498%20183%20466.0%20216.0Q434%20249%20383%20249L428%2023Q498%2052%20498%20128ZM407%2017%20361%20247Q334%20241%20311.5%20214.0Q289%20187%20289%20158Q289%20143%20295.0%20128.5Q301%20114%20309.5%20104.0Q318%2094%20327.0%2086.0Q336%2078%20342.0%2074.5Q348%2071%20348%2071L340%2066Q307%2075%20277.5%20106.0Q248%20137%20248%20184Q248%20231%20277.5%20270.5Q307%20310%20343%20323L325%20430Q168%20299%20168%20177Q168%20104%20223.0%2055.0Q278%206%20348%206Q365%206%20407%2017Z%22/%3E%3C/g%3E%3C/g%3E%3Cg%20transform%3D%22translate%28250%2070%29%20rotate%2810%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%228%22%20transform%3D%22rotate%28-22%29%22/%3E%3Crect%20x%3D%228.5%22%20y%3D%22-46%22%20width%3D%223.5%22%20height%3D%2246%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28300%20250%29%20rotate%28-8%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2210%22%20ry%3D%227.5%22%20transform%3D%22rotate%28-22%29%22/%3E%3Cellipse%20cx%3D%2238%22%20cy%3D%22-6%22%20rx%3D%2210%22%20ry%3D%227.5%22%20transform%3D%22rotate%28-22%2038%20-6%29%22/%3E%3Crect%20x%3D%228%22%20y%3D%22-44%22%20width%3D%223.5%22%20height%3D%2244%22/%3E%3Crect%20x%3D%2246%22%20y%3D%22-50%22%20width%3D%223.5%22%20height%3D%2244%22/%3E%3Cpath%20d%3D%22M8%20-44L49.5%20-50V-42L8%20-36Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28180%20320%29%20rotate%2810%29%20scale%280.2%29%20translate%28-256%20-256%29%22%3E%3Cg%20transform%3D%22translate%28150.4%20353.2%29%20scale%280.3191%20-0.3191%29%22%3E%3Cpath%20d%3D%22M434%202Q464%20-103%20464%20-170Q464%20-223%20427.0%20-257.0Q390%20-291%20337%20-291Q287%20-291%20250.0%20-261.5Q213%20-232%20213%20-190Q213%20-160%20233.5%20-133.5Q254%20-107%20283.5%20-107.0Q313%20-107%20331.5%20-128.5Q350%20-150%20350%20-178Q350%20-240%20280%20-240Q298%20-268%20338%20-268Q353%20-268%20368.5%20-263.5Q384%20-259%20401.0%20-248.0Q418%20-237%20428.5%20-213.5Q439%20-190%20439%20-157Q439%20-136%20411%20-6Q389%20-12%20356%20-12Q259%20-12%20189.5%2060.0Q120%20132%20120%20232Q120%20267%20131.5%20303.0Q143%20339%20157.5%20366.5Q172%20394%20200.5%20428.5Q229%20463%20248.5%20483.5Q268%20504%20303%20539Q280%20621%20280%20689Q280%20779%20313.0%20839.5Q346%20900%20379%20900Q389%20900%20401.5%20887.0Q414%20874%20426.0%20851.0Q438%20828%20446.5%20790.5Q455%20753%20455%20710Q455%20551%20342%20447L368%20329Q384%20332%20397%20332Q458%20332%20500.0%20282.5Q542%20233%20542%20162Q542%2044%20434%202ZM426%20746Q426%20801%20394%20801Q358%20801%20333.0%20748.0Q308%20695%20308%20630Q308%20588%20321%20557Q359%20580%20392.5%20639.5Q426%20699%20426%20746ZM498%20128Q498%20183%20466.0%20216.0Q434%20249%20383%20249L428%2023Q498%2052%20498%20128ZM407%2017%20361%20247Q334%20241%20311.5%20214.0Q289%20187%20289%20158Q289%20143%20295.0%20128.5Q301%20114%20309.5%20104.0Q318%2094%20327.0%2086.0Q336%2078%20342.0%2074.5Q348%2071%20348%2071L340%2066Q307%2075%20277.5%20106.0Q248%20137%20248%20184Q248%20231%20277.5%20270.5Q307%20310%20343%20323L325%20430Q168%20299%20168%20177Q168%20104%20223.0%2055.0Q278%206%20348%206Q365%206%20407%2017Z%22/%3E%3C/g%3E%3C/g%3E%3Cg%20transform%3D%22translate%2860%20300%29%20rotate%28-15%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%228%22%20transform%3D%22rotate%28-22%29%22/%3E%3Crect%20x%3D%228.5%22%20y%3D%22-46%22%20width%3D%223.5%22%20height%3D%2246%22/%3E%3C/g%3E%3C/svg%3E") 0 0/420px 420px repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22420%22%20height%3D%22420%22%20viewBox%3D%220%200%20420%20420%22%3E%3Cg%20transform%3D%22translate%2870%2090%29%20rotate%28-12%29%20scale%280.24%29%20translate%28-256%20-256%29%22%3E%3Cg%20transform%3D%22translate%28150.4%20353.2%29%20scale%280.3191%20-0.3191%29%22%3E%3Cpath%20d%3D%22M434%202Q464%20-103%20464%20-170Q464%20-223%20427.0%20-257.0Q390%20-291%20337%20-291Q287%20-291%20250.0%20-261.5Q213%20-232%20213%20-190Q213%20-160%20233.5%20-133.5Q254%20-107%20283.5%20-107.0Q313%20-107%20331.5%20-128.5Q350%20-150%20350%20-178Q350%20-240%20280%20-240Q298%20-268%20338%20-268Q353%20-268%20368.5%20-263.5Q384%20-259%20401.0%20-248.0Q418%20-237%20428.5%20-213.5Q439%20-190%20439%20-157Q439%20-136%20411%20-6Q389%20-12%20356%20-12Q259%20-12%20189.5%2060.0Q120%20132%20120%20232Q120%20267%20131.5%20303.0Q143%20339%20157.5%20366.5Q172%20394%20200.5%20428.5Q229%20463%20248.5%20483.5Q268%20504%20303%20539Q280%20621%20280%20689Q280%20779%20313.0%20839.5Q346%20900%20379%20900Q389%20900%20401.5%20887.0Q414%20874%20426.0%20851.0Q438%20828%20446.5%20790.5Q455%20753%20455%20710Q455%20551%20342%20447L368%20329Q384%20332%20397%20332Q458%20332%20500.0%20282.5Q542%20233%20542%20162Q542%2044%20434%202ZM426%20746Q426%20801%20394%20801Q358%20801%20333.0%20748.0Q308%20695%20308%20630Q308%20588%20321%20557Q359%20580%20392.5%20639.5Q426%20699%20426%20746ZM498%20128Q498%20183%20466.0%20216.0Q434%20249%20383%20249L428%2023Q498%2052%20498%20128ZM407%2017%20361%20247Q334%20241%20311.5%20214.0Q289%20187%20289%20158Q289%20143%20295.0%20128.5Q301%20114%20309.5%20104.0Q318%2094%20327.0%2086.0Q336%2078%20342.0%2074.5Q348%2071%20348%2071L340%2066Q307%2075%20277.5%20106.0Q248%20137%20248%20184Q248%20231%20277.5%20270.5Q307%20310%20343%20323L325%20430Q168%20299%20168%20177Q168%20104%20223.0%2055.0Q278%206%20348%206Q365%206%20407%2017Z%22/%3E%3C/g%3E%3C/g%3E%3Cg%20transform%3D%22translate%28250%2070%29%20rotate%2810%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%228%22%20transform%3D%22rotate%28-22%29%22/%3E%3Crect%20x%3D%228.5%22%20y%3D%22-46%22%20width%3D%223.5%22%20height%3D%2246%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28300%20250%29%20rotate%28-8%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2210%22%20ry%3D%227.5%22%20transform%3D%22rotate%28-22%29%22/%3E%3Cellipse%20cx%3D%2238%22%20cy%3D%22-6%22%20rx%3D%2210%22%20ry%3D%227.5%22%20transform%3D%22rotate%28-22%2038%20-6%29%22/%3E%3Crect%20x%3D%228%22%20y%3D%22-44%22%20width%3D%223.5%22%20height%3D%2244%22/%3E%3Crect%20x%3D%2246%22%20y%3D%22-50%22%20width%3D%223.5%22%20height%3D%2244%22/%3E%3Cpath%20d%3D%22M8%20-44L49.5%20-50V-42L8%20-36Z%22/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28180%20320%29%20rotate%2810%29%20scale%280.2%29%20translate%28-256%20-256%29%22%3E%3Cg%20transform%3D%22translate%28150.4%20353.2%29%20scale%280.3191%20-0.3191%29%22%3E%3Cpath%20d%3D%22M434%202Q464%20-103%20464%20-170Q464%20-223%20427.0%20-257.0Q390%20-291%20337%20-291Q287%20-291%20250.0%20-261.5Q213%20-232%20213%20-190Q213%20-160%20233.5%20-133.5Q254%20-107%20283.5%20-107.0Q313%20-107%20331.5%20-128.5Q350%20-150%20350%20-178Q350%20-240%20280%20-240Q298%20-268%20338%20-268Q353%20-268%20368.5%20-263.5Q384%20-259%20401.0%20-248.0Q418%20-237%20428.5%20-213.5Q439%20-190%20439%20-157Q439%20-136%20411%20-6Q389%20-12%20356%20-12Q259%20-12%20189.5%2060.0Q120%20132%20120%20232Q120%20267%20131.5%20303.0Q143%20339%20157.5%20366.5Q172%20394%20200.5%20428.5Q229%20463%20248.5%20483.5Q268%20504%20303%20539Q280%20621%20280%20689Q280%20779%20313.0%20839.5Q346%20900%20379%20900Q389%20900%20401.5%20887.0Q414%20874%20426.0%20851.0Q438%20828%20446.5%20790.5Q455%20753%20455%20710Q455%20551%20342%20447L368%20329Q384%20332%20397%20332Q458%20332%20500.0%20282.5Q542%20233%20542%20162Q542%2044%20434%202ZM426%20746Q426%20801%20394%20801Q358%20801%20333.0%20748.0Q308%20695%20308%20630Q308%20588%20321%20557Q359%20580%20392.5%20639.5Q426%20699%20426%20746ZM498%20128Q498%20183%20466.0%20216.0Q434%20249%20383%20249L428%2023Q498%2052%20498%20128ZM407%2017%20361%20247Q334%20241%20311.5%20214.0Q289%20187%20289%20158Q289%20143%20295.0%20128.5Q301%20114%20309.5%20104.0Q318%2094%20327.0%2086.0Q336%2078%20342.0%2074.5Q348%2071%20348%2071L340%2066Q307%2075%20277.5%20106.0Q248%20137%20248%20184Q248%20231%20277.5%20270.5Q307%20310%20343%20323L325%20430Q168%20299%20168%20177Q168%20104%20223.0%2055.0Q278%206%20348%206Q365%206%20407%2017Z%22/%3E%3C/g%3E%3C/g%3E%3Cg%20transform%3D%22translate%2860%20300%29%20rotate%28-15%29%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%228%22%20transform%3D%22rotate%28-22%29%22/%3E%3Crect%20x%3D%228.5%22%20y%3D%22-46%22%20width%3D%223.5%22%20height%3D%2246%22/%3E%3C/g%3E%3C/svg%3E") 0 0/420px 420px repeat}
 footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;font-size:14px}
 @media(max-width:700px){.row{grid-template-columns:minmax(0,1fr) auto}.lab{grid-row:auto;grid-column:1/3}.row .rh,.row .dots{grid-column:1/3}.row .pl{grid-row:auto;grid-column:1/3;justify-self:start}}
 @media(prefers-reduced-motion:reduce){.heart,.tk,.dots i{transition:none}.heart.p{transform:scale(1.05)}.tk.on{transform:none}.opt.no{animation:none}}
@@ -111,7 +112,7 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 <body>
 <header>
  <div class="top">
-  <div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1>SOLFEGGIO</h1><label class="tema" title="Tema"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.3-1.2-1.6-1.2-2.7 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4c0-4.3-4-7.7-9-7.7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="11" r="1.5" fill="#ff4f6d"/><circle cx="10" cy="7" r="1.5" fill="#1fae9e"/><circle cx="14.5" cy="7" r="1.5" fill="#ffb703"/><circle cx="17" cy="10.5" r="1.5" fill="#7b61ff"/></svg><select id="tema"><option value="">Sole</option><option value="notte">Notte</option><option value="mare">Mare</option><option value="bosco">Bosco</option><option value="fragola">Fragola</option><option value="lavanda">Lavanda</option><option value="lavagna">Lavagna</option></select></label></div><p class="sub">Ritmo, figure e solfeggio per la classe quinta</p></div>
+  <div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1>SOLFEGGIO</h1><label class="tema" title="Tema"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.3-1.2-1.6-1.2-2.7 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4c0-4.3-4-7.7-9-7.7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="11" r="1.5" fill="#ff4f6d"/><circle cx="10" cy="7" r="1.5" fill="#1fae9e"/><circle cx="14.5" cy="7" r="1.5" fill="#ffb703"/><circle cx="17" cy="10.5" r="1.5" fill="#7b61ff"/></svg><select id="tema"><option value="">Sole</option><option value="mare">Mare</option><option value="bosco">Bosco</option><option value="fragola">Fragola</option><option value="lavanda">Lavanda</option><option value="oceano">Oceano</option></select></label></div><p class="sub">Ritmo, figure e solfeggio per la classe quinta</p></div>
   <label class="vel">Suono <select id="inst"><option value="chitarra">Chitarra</option><option value="piano">Pianoforte</option><option value="violino">Violino</option><option value="clarinetto">Clarinetto</option><option value="flauto">Flauto</option><option value="campanella">Campanella</option><option value="nota">Nota semplice</option></select></label>
   <label class="vel">Velocità <input type="range" id="bpm" min="40" max="200" value="90"><output id="bpmo">90</output></label>
  </div>
@@ -180,6 +181,22 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
  <div id="lgx"></div>
 </section>
 
+<section class="pg" id="terzine">
+ <div class="card"><h2>Le terzine</h2>
+  <p>Di solito un battito (una semiminima) si divide in <b>2 crome</b>: TI-TI. A volte però vogliamo mettere <b>3 crome nello spazio di 2</b>: questa è la <b>terzina</b>!</p>
+  <p>Si riconosce perché le tre crome sono unite e sopra c'è il numero <b>3</b>. Le tre note devono essere <b>uguali</b> e stare tutte dentro <b>un solo battito</b>. Per contarle diciamo: <b>TER-ZI-NA</b>.</p>
+  <div class="eq">1 battito = 2 crome = 1 terzina (3 crome)</div></div>
+ <div class="card"><h3>La torta delle terzine</h3>
+  <p>Ogni fetta è un battito. Due crome dividono la fetta in <b>2 pezzi</b>, la terzina la divide in <b>3 pezzi</b> uguali. Tocca le figure e riempi la torta in 4/4!</p>
+  <div class="grid"><div><svg id="tpie" viewBox="-12 -12 244 244" style="width:100%;max-width:320px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="tpinfo" style="text-align:center"></div></div>
+  <div><div class="cards" id="tpal"></div><div class="rh" id="tprh" style="margin-top:10px"></div>
+   <div class="row2"><button class="pl" id="tppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="tpdel">Togli l'ultima</button><button id="tpclr">Svuota la torta</button></div></div></div></div>
+ <div class="card"><h3>Ascolta la differenza: il battito è sempre uguale</h3>
+  <div class="grid" style="align-items:start"><div><p style="margin:0"><b>Crome</b>: 2 note per battito</p><div class="rh" id="tz1"></div><div class="dots" id="tzd1"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta le crome" id="tzb1">▶ Ascolta le crome</button></div>
+  <div><p style="margin:0"><b>Terzine</b>: 3 note per battito</p><div class="rh" id="tz2"></div><div class="dots" id="tzd2"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta le terzine" id="tzb2">▶ Ascolta le terzine</button></div></div></div>
+ <div class="card"><h3>Esercizi con le terzine</h3><p>Leggi a ritmo, poi ascolta e controlla.</p><div id="tzx"></div></div>
+</section>
+
 <section class="pg" id="battuta">
  <div class="card"><h2>La battuta e il tempo</h2>
   <p>I battiti si raggruppano in <b>battute</b>, separate dalla <b>stanghetta</b>. Il primo battito di ogni battuta è <b>forte</b> (accento), gli altri sono <b>deboli</b>.</p>
@@ -207,7 +224,7 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 
 <section class="pg" id="mano">
  <div class="card"><h2>Solfeggiare con la mano</h2>
-  <p>Quando solfeggiamo, la mano batte il tempo: ogni battito ha un movimento. Il primo movimento va sempre <b>giù</b>, l'ultimo sempre <b>su</b>, e dopo ogni movimento la mano torna al <b>punto iniziale</b>. Negli ottavi (6/8, 9/8, 12/8) ogni movimento vale 3 ottavi: al 1° la mano <b>tocca</b>, al 2° è <b>al centro</b>, al 3° <b>torna al punto iniziale</b>. Muovi la mano insieme a quella disegnata.</p>
+  <p>Quando solfeggiamo, la mano batte il tempo: ogni battito ha un movimento. I movimenti hanno sempre lo stesso ordine: <b>1 giù</b>, <b>2 sinistra</b>, <b>3 destra</b>, <b>4 su</b>. Dopo ogni movimento la mano torna al <b>punto iniziale</b>. Negli ottavi (6/8, 9/8, 12/8) ogni movimento vale 3 ottavi: al 1° la mano <b>tocca</b>, al 2° è <b>al centro</b>, al 3° <b>torna al punto iniziale</b>. Muovi la mano insieme a quella disegnata.</p>
   <div class="row2"><button data-mm="2">2/4</button><button data-mm="3">3/4</button><button data-mm="4">4/4</button><button data-mm="6">6/8</button><button data-mm="9">9/8</button><button data-mm="12">12/8</button></div>
   <div class="grid"><svg id="hsvg" viewBox="0 0 320 300"></svg>
    <div style="text-align:center"><div class="big" id="hnum">1</div><div class="tn" id="hwd">giù</div><div id="hmv" style="font-weight:700;color:var(--mut)"></div>
@@ -256,18 +273,18 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 <script>
 {
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const PAGES=[['battito','Il battito'],['andamenti','Le velocità'],['ritmo','Ritmo o velocità?'],['figure','Le figure'],['pause','Le pause'],['punto','Punto di valore'],['legatura','Legatura di valore'],['battuta','La battuta'],['tempi','Tempi semplici e composti'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
-const T={w:{l:4,k:'w',s:'TA-A-A-A',n:'Semibreve'},h:{l:2,k:'h',s:'TA-A',n:'Minima'},q:{l:1,k:'q',s:'TA',n:'Semiminima'},e:{l:1,k:'ee',s:'TI-TI',sub:1,n:'Due crome'},c:{l:.5,k:'c',s:'TI'},rw:{l:4,k:'rw',s:'SST',rest:1},rh:{l:2,k:'rh',s:'SST',rest:1},r:{l:1,k:'rq',s:'SST',rest:1,n:'Pausa'},rc:{l:.5,k:'rc',s:'sst',rest:1},hd:{l:3,k:'hd',s:'TA-A-A',n:'Minima puntata'},qd:{l:1.5,k:'qd',s:'TA-I',n:'Semiminima puntata'},e3:{l:1,k:'e3',s:'TI-TI-TI',sub:3}};
+const PAGES=[['battito','Il battito'],['andamenti','Le velocità'],['ritmo','Il ritmo o la velocità'],['figure','Le figure'],['pause','Le pause'],['battuta','La battuta'],['tempi','Tempi semplici e composti'],['punto','Punto di valore'],['legatura','Legatura di valore'],['terzine','Le terzine'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
+const T={w:{l:4,k:'w',s:'TA-A-A-A',n:'Semibreve'},h:{l:2,k:'h',s:'TA-A',n:'Minima'},q:{l:1,k:'q',s:'TA',n:'Semiminima'},e:{l:1,k:'ee',s:'TI-TI',sub:1,n:'Due crome'},c:{l:.5,k:'c',s:'TI'},rw:{l:4,k:'rw',s:'SST',rest:1},rh:{l:2,k:'rh',s:'SST',rest:1},r:{l:1,k:'rq',s:'SST',rest:1,n:'Pausa'},rc:{l:.5,k:'rc',s:'sst',rest:1},hd:{l:3,k:'hd',s:'TA-A-A',n:'Minima puntata'},qd:{l:1.5,k:'qd',s:'TA-I',n:'Semiminima puntata'},e3:{l:1,k:'e3',s:'TI-TI-TI',sub:3},t3:{l:1,k:'t3',s:'TER-ZI-NA',sub:3}};
 const D=t=>T[t.replace('~','')];
 let bpm=90,inst='chitarra';
 const setT=v=>{if(v)document.documentElement.dataset.tema=v;else delete document.documentElement.dataset.tema;$('#tema').value=v;try{localStorage.setItem('ritmoTema',v)}catch(e){}};
 $('#tema').onchange=e=>setT(e.target.value);
-try{setT(localStorage.getItem('ritmoTema')||'')}catch(e){}
+try{let v=localStorage.getItem('ritmoTema');if(v===null||v=='notte'||v=='lavagna')v='bosco';setT(v)}catch(e){setT('bosco')}
 const setI=v=>{inst=v;$('#inst').value=v;try{localStorage.setItem('ritmoSuono',v)}catch(e){}};
 $('#inst').onchange=e=>{setI(e.target.value);stop();A();const t=ac.currentTime+.05,g=ac.createGain();g.connect(ac.destination);tone(g,t,.6)};
 try{setI(localStorage.getItem('ritmoSuono')||'chitarra')}catch(e){}
 
-function N(k,line){let w=k=='ee'?60:k=='e3'?86:40,b='';
+function N(k,line){let w=k=='ee'?60:(k=='e3'||k=='t3')?86:40,b='';
  const hd=(x,f)=>`<ellipse cx="${x}" cy="55" rx="8.5" ry="6" transform="rotate(-22 ${x} 55)" ${f?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="3"'}/>`;
  const st=x=>`<line x1="${x+7.5}" y1="53" x2="${x+7.5}" y2="14" stroke="currentColor" stroke-width="2.5"/>`;
  if(k=='w')b='<ellipse cx="20" cy="55" rx="10" ry="6.5" fill="none" stroke="currentColor" stroke-width="4"/>';
@@ -278,6 +295,7 @@ function N(k,line){let w=k=='ee'?60:k=='e3'?86:40,b='';
  if(k=='c')b=hd(16,1)+st(16)+'<path d="M23.5 14c2 9 12 12 10 25-1-8-6-11-10-12z" fill="currentColor"/>';
  if(k=='ee')b=hd(14,1)+st(14)+hd(42,1)+st(42)+'<rect x="20.3" y="13" width="30.4" height="6" fill="currentColor"/>';
  if(k=='e3')b=hd(14,1)+st(14)+hd(42,1)+st(42)+hd(70,1)+st(70)+'<rect x="20.3" y="13" width="58.4" height="6" fill="currentColor"/>';
+ if(k=='t3')b=hd(14,1)+st(14)+hd(42,1)+st(42)+hd(70,1)+st(70)+'<rect x="20.3" y="13" width="58.4" height="6" fill="currentColor"/><path d="M21 8V4H44M56 4H78V8" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="50" y="9" text-anchor="middle" font-size="12" font-weight="800" fill="currentColor">3</text>';
  if(k=='rw')b='<rect x="10" y="56" width="20" height="7" fill="currentColor"/>';
  if(k=='rh')b='<rect x="10" y="48" width="20" height="7" fill="currentColor"/>';
  if(k=='rq')b='<path d="M15 30l9 10-8 9 9 10c-8-3-12 3-6 10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>';
@@ -287,7 +305,7 @@ function N(k,line){let w=k=='ee'?60:k=='e3'?86:40,b='';
 
 function R(el,toks,o={}){let h='',acc=0;
  if(o.sig)h+=`<div class="sig"><b>${o.sig}</b><b>${o.den||4}</b></div>`;
- toks.forEach((t,i)=>{const d=D(t),w=d.k=='ee'?60:d.k=='e3'?86:40;
+ toks.forEach((t,i)=>{const d=D(t),w=d.k=='ee'?60:(d.k=='e3'||d.k=='t3')?86:40;
   h+=`<div class="tk${d.rest?' rs':''}${t.endsWith('~')?' ti':''}" data-i="${i}" ${o.tap?'tabindex="0" role="button"':''} style="flex-grow:${d.l};min-width:${Math.max(w+6,d.l*56)}px">${N(d.k)}${o.syl?`<span class="sy">${o.lyr?o.lyr[i]:d.s}</span>`:''}</div>`;
   acc+=d.l;if(o.m&&Math.abs(acc%o.m)<1e-6&&i<toks.length-1)h+='<i class="bar"></i>'});
  if(o.m)h+='<i class="bar end"></i>';el.innerHTML=h+'<svg class="tl"></svg>';ties(el)}
@@ -369,7 +387,7 @@ const FIG=[['Semibreve','dura 4 battiti',['w'],'w'],['Minima','dura 2 battiti',[
 const PAU=[['Pausa di semibreve','4 battiti di silenzio',['rw'],'rw'],['Pausa di minima','2 battiti di silenzio',['rh','rh'],'rh'],['Pausa di semiminima','1 battito di silenzio',['r','r','r','r'],'rq'],['Pausa di croma','½ battito di silenzio',Array(8).fill('rc'),'rc']];
 const DL={w:4,h:2,q:1,c:.5,rw:4,rh:2,rq:1,rc:.5};
 function tree(id,data){const box=$('#'+id);
- box.innerHTML=data.map((r,j)=>`<div class="row card"><div class="lab"><span class="sym">${N(r[3],1)}</span><div><h3>${r[0]}</h3><p>${r[1]}</p><p style="font-size:14px;display:flex;align-items:center;gap:6px;opacity:.85">${mini(DL[r[3]],4,r[3][0]=='r'?'#8d8aa8':'#ff4f6d').replace(/width="48" height="48"/,'width="34" height="34"')}${DL[r[3]]==.5?'½':DL[r[3]]} ${DL[r[3]]>1?'fette':'fetta'} della torta in 4/4</p></div></div><div class="rh"></div><div class="dots"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta">▶ Ascolta</button></div>`).join('');
+ box.innerHTML=data.map((r,j)=>`<div class="row card"><div class="lab"><span class="sym" style="display:flex;flex-direction:column;align-items:center;gap:4px">${mini(DL[r[3]],4,r[3][0]=='r'?'#8d8aa8':'#ff4f6d').replace(/width="48" height="48"/,'width="72" height="72"')}${N(r[3],1)}</span><div><h3>${r[0]}</h3><p>${r[1]}</p><p style="font-size:14px;display:flex;align-items:center;gap:8px">${DL[r[3]]==.5?'½':DL[r[3]]} ${DL[r[3]]>1?'fette':'fetta'} della torta in 4/4</p></div></div><div class="rh"></div><div class="dots"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta">▶ Ascolta</button></div>`).join('');
  [...box.children].forEach((c,j)=>{const el=c.querySelector('.rh'),d=c.querySelector('.dots');R(el,data[j][2],{m:4,syl:1});
   c.querySelector('.pl').onclick=e=>playT(e.currentTarget,el,data[j][2],{m:4,onBeat:b=>dots(d,b),onEnd:()=>dots(d,-1)})})}
 tree('tfig',FIG);tree('tpau',PAU);
@@ -400,6 +418,39 @@ $('#lgx').innerHTML=LGX.map(([x,t],i)=>`<div class="card"><h3>${t}</h3><div clas
 LGX.forEach(([x],i)=>{const el=$('#lg'+i);R(el,x,{m:4,sig:4,syl:0});
  $('#lgc'+i).onclick=e=>playT(e.currentTarget,el,x,{m:4});
  $('#lgs'+i).onclick=e=>playT(e.currentTarget,el,x.map(t=>t.replace('~','')),{m:4})});
+
+/* terzine */
+const TZ1=['e','e','e','e'],TZ2=['t3','t3','t3','t3'];
+R($('#tz1'),TZ1,{m:4,sig:4,syl:1});R($('#tz2'),TZ2,{m:4,sig:4,syl:1});
+$('#tzb1').onclick=e=>playT(e.currentTarget,$('#tz1'),TZ1,{m:4,onBeat:b=>dots($('#tzd1'),b),onEnd:()=>dots($('#tzd1'),-1)});
+$('#tzb2').onclick=e=>playT(e.currentTarget,$('#tz2'),TZ2,{m:4,onBeat:b=>dots($('#tzd2'),b),onEnd:()=>dots($('#tzd2'),-1)});
+const TZX=[['q','t3','q','t3'],['t3','t3','h'],['e','t3','q','r'],['t3','e','t3','q','t3','t3','h']];
+$('#tzx').innerHTML=TZX.map((x,i)=>`<div style="margin-bottom:14px"><h3>Esercizio ${i+1}</h3><div class="rh" id="tzx${i}"></div><button class="pl" data-t="▶ Ascolta" id="tzxb${i}">▶ Ascolta</button></div>`).join('');
+TZX.forEach((x,i)=>{R($('#tzx'+i),x,{m:4,sig:4,syl:1});$('#tzxb'+i).onclick=e=>playT(e.currentTarget,$('#tzx'+i),x,{m:4})});
+
+/* torta terzine */
+let tc=[],tAuto=0;const TCOL=['#ff4f6d','#1fae9e','#ffb703','#7b61ff','#fb8500','#3a86ff'];
+const tsum=()=>tc.reduce((x,t)=>x+D(t).l,0);
+function tDraw(nw,msg){const m=4,C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*f-Math.PI/2),C+r*Math.sin(2*Math.PI*f-Math.PI/2)];
+ const sec=(fa,fb,fill,lb)=>{const a=pt(fa,Rr),b=pt(fb,Rr),q=pt((fa+fb)/2,64);return `<path d="M${C} ${C}L${a[0]} ${a[1]}A${Rr} ${Rr} 0 ${fb-fa>.5?1:0} 1 ${b[0]} ${b[1]}Z" fill="${fill}" stroke="#fff" stroke-width="2"/><text x="${q[0]}" y="${q[1]+7}" text-anchor="middle" font-weight="800" font-size="${lb.length>2?14:19}" fill="#fff" stroke="#0005" stroke-width=".6">${lb}</text>`};
+ let g=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="color-mix(in srgb,var(--ink) 8%,var(--card))"/>`,acc=0;
+ tc.forEach((t,i)=>{const d=D(t),f0=acc/m,f1=(acc+d.l)/m,col=d.rest?'#8d8aa8':TCOL[i%6],n=d.sub||1;acc+=d.l;let h='';
+  for(let j=0;j<n;j++)h+=sec(f0+(f1-f0)*j/n,f0+(f1-f0)*(j+1)/n,col,d.rest?'sst':n==3?'⅓':n==2?'½':String(d.l));
+  g+=`<g id="tps${i}" class="${i==nw?'pop':''}">${h}</g>`});
+ for(let k=0;k<m;k++){const e=pt(k/m,Rr);g+=`<line x1="${C}" y1="${C}" x2="${e[0]}" y2="${e[1]}" stroke="currentColor" stroke-width="3.5"/>`;const l=pt((k+.5)/m,112);g+=`<text x="${l[0]}" y="${l[1]+5}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">fetta ${k+1}</text>`}
+ g+=`<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="5"/>`;
+ $('#tpie').innerHTML=g;R($('#tprh'),tc,{m,sig:m,syl:1});const u=tsum();
+ $('#tpinfo').textContent=msg||(u>=m?'Battuta piena!':`Fette prese: ${u} su 4`)}
+const TPAL=[['q','Semiminima','1 fetta intera'],['e','Due crome','1 fetta in 2 pezzi'],['t3','Terzina','1 fetta in 3 pezzi'],['h','Minima','2 fette'],['r','Pausa','1 fetta di silenzio']];
+$('#tpal').innerHTML=TPAL.map(([t,n,x])=>`<button data-tp="${t}">${N(D(t).k,1)}<span>${n}</span><small>${x}</small></button>`).join('');
+$('#tpal').addEventListener('click',ev=>{const b=ev.target.closest('[data-tp]');if(!b)return;stop();const t=b.dataset.tp,u=tsum();
+ if(u+D(t).l>4){tDraw(-1,u>=4?'La torta è finita!':`Non ci sta! Resta solo ${4-u} fetta.`);return}
+ tc.push(t);tDraw(tc.length-1);const{e,beats}=evs([t]);play({ev:e,beats});
+ if(tsum()>=4){tDraw(tc.length-1,'Battuta piena! Ora la torta si svuota…');clearTimeout(tAuto);tAuto=setTimeout(()=>{tc=[];tDraw(-1,'Torta vuota: inserisci altre figure!')},2200)}});
+$('#tpdel').onclick=()=>{stop();clearTimeout(tAuto);tc.pop();tDraw()};
+$('#tpclr').onclick=()=>{stop();clearTimeout(tAuto);tc=[];tDraw()};
+$('#tppl').onclick=e=>{if(tc.length){clearTimeout(tAuto);playT(e.currentTarget,$('#tprh'),tc,{m:4,onEv:i=>$$('#tpie g').forEach(x=>x.classList.toggle('hi',x.id=='tps'+i)),onEnd:()=>$$('#tpie g').forEach(x=>x.classList.remove('hi'))})}};
+tDraw();
 
 /* torta */
 const PCOL=['#ff4f6d','#1fae9e','#ffb703','#7b61ff','#fb8500','#3a86ff','#8ac926','#f15bb5'];
@@ -453,7 +504,7 @@ $('#tsc').innerHTML=[2,3,4].map(n=>`<div class="card"><h3>${n}/4 e ${n*3}/8: ${n
 
 /* mano */
 const PT={G:[160,255],S:[50,150],X:[270,150],U:[160,45]},H=[160,150];
-const MV={2:['G','U'],3:['G','S','U'],4:['G','S','X','U'],6:['G','U'],9:['G','S','U'],12:['G','S','X','U']},WD={G:'giù',S:'sinistra',X:'destra',U:'su'};
+const MV={2:['G','S'],3:['G','S','X'],4:['G','S','X','U'],6:['G','S'],9:['G','S','X'],12:['G','S','X','U']},WD={G:'giù',S:'sinistra',X:'destra',U:'su'};
 let hm=4,hT0=0,hOn=false;const cmp=()=>hm>4;
 const mid=P=>[(P[0]+H[0])/2,(P[1]+H[1])/2];
 function stations(){const st=[];MV[hm].forEach(k=>{const P=PT[k];if(cmp())st.push(P,mid(P),H);else st.push(P,H)});return st}
@@ -581,7 +632,7 @@ $('#qpl').onclick=()=>playT($('#qpl'),null,qz.ans,{m:qz.m});
 $('#qnew').onclick=newQ;lvSet(0);
 
 /* navigazione */
-$('#nav').innerHTML=PAGES.map(([h,t],i)=>`<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
+$('#nav').innerHTML=PAGES.map(([h,t],i)=>`${i==10?'<span class="sep"></span>':''}<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
 function show(){stop();let h=location.hash.slice(1);if(!PAGES.some(p=>p[0]==h))h='battito';
  $$('.pg').forEach(s=>s.hidden=s.id!=h);$$('#'+h+' .rh').forEach(ties);$$('#nav a').forEach(a=>a.classList.toggle('cur',a.hash=='#'+h));
  const i=PAGES.findIndex(p=>p[0]==h),n=PAGES[i+1];$('#nx').innerHTML=n?`<a class="nxt" href="#${n[0]}">Prossima lezione: ${n[1]} →</a>`:'';scrollTo(0,0)}
