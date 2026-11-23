@@ -198,6 +198,8 @@ nav a.gtile.cur{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 nav a.gtile,:root[data-stile] nav a.gtile{background:color-mix(in srgb,var(--sup) 22%,var(--card))!important;color:var(--ink)!important;border:2.5px solid var(--sup)!important}
 nav a.gtile b,:root[data-stile] nav a.gtile b{background:var(--sup)!important;color:#fff!important}
 nav a.gtile.cur,:root[data-stile] nav a.gtile.cur{background:color-mix(in srgb,var(--sup) 40%,var(--card))!important;border-color:var(--ink)!important}
+#tmc{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.tmi{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:2px 8px;padding:6px 10px;border:1.5px solid color-mix(in srgb,var(--ink) 25%,transparent);border-radius:12px;font-size:12.5px;line-height:1.2}
+.tmf{font-weight:800;font-size:16px;line-height:1;display:flex;flex-direction:column;text-align:center}.tmi br{display:none}.tmi small{grid-column:1/-1;color:var(--mut)}
 footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;font-size:14px}
 @media(max-width:700px){.row{grid-template-columns:minmax(0,1fr) auto}.lab{grid-row:auto;grid-column:1/3}.row .rh,.row .dots{grid-column:1/3}.row .pl{grid-row:auto;grid-column:1/3;justify-self:start}}
 @media(prefers-reduced-motion:reduce){.heart,.tk,.dots i{transition:none}.heart.p{transform:scale(1.05)}.tk.on{transform:none}.opt.no{animation:none}}
@@ -523,7 +525,7 @@ AND.forEach(([n,b],i)=>{const card=$('#ap'+i).parentElement,h=card.querySelector
   play({beats:1,loop:true,bpm:f,onBeat:()=>{h.classList.add('p');setTimeout(()=>h.classList.remove('p'),110)},onEnd:()=>{if(!b)$('#acb'+i).textContent=i==12?'accel.':'rall.'}})})});
 
 /* tempo */
-$('#tmc').innerHTML=[[2,'2 battiti per battuta'],[3,'3 battiti per battuta'],[4,'4 battiti per battuta']].map(([m,t])=>`<div class="card" style="margin:0;text-align:center;box-shadow:none;border:3px solid var(--ink)"><div style="font:800 34px/1 'Baloo 2';display:inline-flex;flex-direction:column">${m}<span>4</span></div>${mini(0,m,'#ffb703').replace(/width="48" height="48"/,'width="90" height="90" style="display:block;margin:8px auto"')}<b>${t}</b><br><small>${m} fette da una semiminima</small></div>`).join('');
+$('#tmc').innerHTML=[[2,'2 battiti per battuta'],[3,'3 battiti per battuta'],[4,'4 battiti per battuta']].map(([m,t])=>`<div class="tmi"><div class="tmf">${m}<span>4</span></div>${mini(0,m,'#ffb703').replace(/width="48" height="48"/,'width="40" height="40" style="display:block"')}<b>${t}</b><br><small>${m} fette da una semiminima</small></div>`).join('');
 const TMX=[['q','q','q','q'],['e','e','h'],['h','q','r'],['w']];
 $('#tmx').innerHTML=TMX.map((x,i)=>`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px"><div class="rh" id="tmr${i}" style="flex:1 1 260px"></div><button class="pl" data-t="▶ Ascolta" id="tmb${i}">▶ Ascolta</button></div>`).join('');
 TMX.forEach((x,i)=>{R($('#tmr'+i),x,{m:4,sig:4,syl:1});$('#tmb'+i).onclick=e=>playT(e.currentTarget,$('#tmr'+i),x,{m:4})});
