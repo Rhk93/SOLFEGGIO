@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" data-tema="bosco">
+<html lang="it" data-tema="bosco" data-stile="apple">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#1fae6a">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Patrick+Hand&family=Comic+Neue:wght@400;700&family=Bangers&family=Inter:wght@400;600;800&family=Lora:wght@500;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE: allegra, chiara, da classe quinta
    IDEA: il quaderno di musica con il rigo del ritmo
@@ -19,10 +19,14 @@
 :root{color-scheme:light dark;--bg:light-dark(#ffd84d,#1b1838);--card:light-dark(#fffdf5,#28244e);--ink:light-dark(#22204a,#fff3c4);--acc:#ff4f6d;--sup:#1fae9e;--mut:light-dark(#5b5880,#b9b4e0)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 :root[data-tema=mare]{color-scheme:light;--bg:#4cc9f0;--card:#f2fbff;--ink:#0b2545;--acc:#ff6b35;--sup:#2a9d8f;--mut:#3d5a80}
+:root[data-tema=apple]{color-scheme:light;--bg:#f2f2f7;--card:#ffffff;--ink:#1c1c1e;--acc:#007aff;--sup:#34c759;--mut:#8e8e93}
+:root[data-tema=salvia]{color-scheme:light;--bg:#dfe8dc;--card:#fbfdfa;--ink:#2f3e2c;--acc:#c8553d;--sup:#5b8e7d;--mut:#6b7d67}
+:root[data-tema=sabbia]{color-scheme:light;--bg:#efe6d8;--card:#fffdf8;--ink:#3d3226;--acc:#d1495b;--sup:#00798c;--mut:#7c6a55}
+:root[data-tema=glicine]{color-scheme:light;--bg:#e8e1f5;--card:#fdfbff;--ink:#2e2542;--acc:#d6336c;--sup:#4c6ef5;--mut:#6e6487}
+:root[data-tema=cielo]{color-scheme:light;--bg:#dcefff;--card:#ffffff;--ink:#10304f;--acc:#ff7f11;--sup:#1b98e0;--mut:#4a6a88}
+:root[data-tema=pesca]{color-scheme:light;--bg:#ffe4d6;--card:#fffaf7;--ink:#4a2c1d;--acc:#e4572e;--sup:#29a19c;--mut:#8a5a44}
 :root[data-tema=bosco]{color-scheme:light;--bg:#95d5b2;--card:#f4fff6;--ink:#1b4332;--acc:#e76f51;--sup:#2d6a4f;--mut:#40916c}
-:root[data-tema=fragola]{color-scheme:light;--bg:#ffafcc;--card:#fff5f8;--ink:#4a1942;--acc:#d62246;--sup:#3a86ff;--mut:#7a4a6e}
-:root[data-tema=oceano]{color-scheme:dark;--bg:#023e5a;--card:#0a5c80;--ink:#e6f7ff;--acc:#ffb703;--sup:#48cae4;--mut:#a9d6e5;--on:#022b3f}
-:root[data-tema=lavanda]{color-scheme:light;--bg:#cdb4db;--card:#fbf7ff;--ink:#2b2140;--acc:#f15bb5;--sup:#00a6a6;--mut:#6a5a80}
+:root[data-tema=carta]{color-scheme:light;--bg:#f4f2ec;--card:#ffffff;--ink:#222222;--acc:#d62828;--sup:#1d7874;--mut:#666666}
 select{font:700 16px "Baloo 2",sans-serif;min-height:40px;border-radius:12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:0 8px}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Baloo 2",system-ui,sans-serif;overflow-x:clip}
@@ -116,6 +120,84 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .ill{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;color:var(--ink)}.ill b{font-size:26px!important;display:inline!important}
 .vs.nob div{border:0;padding:4px 0}
 .exr{padding:8px 0 10px;border-top:2px solid color-mix(in srgb,var(--ink) 15%,transparent)}.exr:first-child{border-top:0;padding-top:0}.exr h3{font-size:17px;margin-bottom:4px}.exr p{font-size:15px}.exr .dots{margin:4px 0}
+.bkn{display:inline-flex;justify-content:center;width:44px;height:64px;border-radius:10px;border:3px solid var(--acc);overflow:hidden;transition:background .1s}.bkn svg{width:30px;height:60px}.bkn.d{border-color:var(--sup)}.bkn.half{width:30px}.bkn.on{background:color-mix(in srgb,var(--acc) 40%,transparent)}.bkn.d.on{background:color-mix(in srgb,var(--sup) 45%,transparent)}
+#acs{grid-template-columns:repeat(auto-fill,minmax(min(100%,175px),1fr));gap:8px}
+#acs .ac{grid-template-columns:auto minmax(0,1fr) auto;padding:8px 10px;margin:0;gap:0 8px;border-radius:14px;box-shadow:0 3px 0 color-mix(in srgb,var(--ink) 15%,transparent)}
+#acs .mh{width:28px}#acs h3{font-size:16px;line-height:1.1}#acs .tn{font-size:12.5px!important;line-height:1.1;display:block}
+#acs p{font-size:13px;line-height:1.25;grid-column:1/4}
+#acs .pl{grid-column:3;grid-row:1;min-height:34px;padding:0 11px;font-size:14px;justify-self:end}
+/* compatto */
+main{font-size:15px}main p{max-width:80ch}
+main h2{font-size:clamp(22px,2.6vw,28px);margin-bottom:4px}main h3{font-size:17px}
+main .card{padding:clamp(12px,2vw,20px);border-radius:18px;margin-bottom:14px}
+main .eq{font-size:16px;padding:8px 14px;border-radius:14px}
+main .vs{gap:10px;margin:8px 0}main .vs div{padding:10px 12px;border-radius:14px}main .vs b{font-size:19px}
+main button{font-size:15px;min-height:40px;padding:4px 14px}
+main .big{font-size:clamp(32px,5vw,50px)}main .tn{font-size:17px}
+main .cards button b{font-size:19px}#qmsg{font-size:18px}main .sy{font-size:13px}
+.nxt{font-size:15px}
+.exc{position:relative;margin-top:30px;background:color-mix(in srgb,var(--sup) 12%,var(--card));border:3px dashed var(--sup);box-shadow:none}
+.exc::before{content:attr(data-lab);position:absolute;top:-15px;left:18px;background:var(--sup);color:#fff;font-weight:800;font-size:13px;letter-spacing:.04em;padding:3px 14px;border-radius:999px}
+.tk.tg{background:color-mix(in srgb,var(--acc) 16%,transparent)}.tk.tg .sy{color:var(--acc)}
+.lsum{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 10px;font-size:20px}.lsum b{font-size:22px}
+.lc{min-width:42px;text-align:center;padding:2px 12px;border-radius:12px;border:3px solid var(--acc);font-weight:800}.lc.tot{background:var(--acc);color:var(--on,#fff)}
+.hlb{border:4px solid var(--acc)!important;background:color-mix(in srgb,var(--acc) 18%,var(--card))!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)}
+.ctl{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;align-items:center}.ctl .vel{padding:1px 10px;min-height:36px;gap:6px;font-size:14px;border-width:2px}.ctl select{font-size:14px;min-height:30px;border:0;background:transparent;padding:0 2px}.ctl input[type=range]{width:110px;height:26px}
+header{padding:12px max(4vw,14px) 4px!important}header .top{gap:8px 16px!important}nav{margin:6px 0 2px!important;gap:5px!important}main{padding-top:6px!important}
+.cf{position:absolute;top:-10px;width:10px;height:14px;border-radius:3px;animation:cf 1.6s ease-in forwards;pointer-events:none}@keyframes cf{to{top:105%;opacity:.3}}
+.pad{width:120px;height:120px;border-radius:50%!important;font-size:30px!important;font-weight:800;background:radial-gradient(circle at 35% 30%,#fff6,transparent 60%),var(--acc)!important;color:var(--on,#fff)!important;border:6px solid var(--ink)!important;touch-action:manipulation;user-select:none}
+.pad.bt{animation:bt .15s}@keyframes bt{50%{transform:scale(.9)}}
+#gfCC .cards{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px}
+#gfCC .cards button{padding:4px 4px 6px;border-radius:12px;border-width:2px;gap:0;min-height:0}
+#gfCC .cards button svg{width:auto;height:52px}#gfCC .cards button b{font-size:13px}#gfCC .cards button span{font-size:12px;line-height:1.15}#gfCC .cards button small{font-size:11px}
+#gfCC h3{font-size:15px;margin:8px 0 4px}
+.gmenu{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}.gmenu button{padding:12px 8px!important}.gmenu b{font-size:17px!important}
+.opt.big2 svg{width:60px;height:120px}
+.mm{position:relative;height:120px;border-radius:14px!important;padding:0!important;justify-content:center}.mm .mmf{display:none}.mm.up .mmb{display:none}.mm.up .mmf{display:block}.mm .mmb{font-size:40px;font-weight:800}.mm.up{background:color-mix(in srgb,#ffb703 25%,var(--card))!important}.mm.ok{background:color-mix(in srgb,#1fae9e 35%,var(--card))!important}.mm .mmf b{font-size:17px}
+#qopts{grid-template-columns:minmax(0,1fr)!important}
+nav a.gtile{grid-column:1/-1;min-height:56px;justify-content:center;font-size:19px!important;background:var(--sup);color:#fff;border-color:var(--sup);gap:10px}
+nav a.gtile b{background:#fff;color:var(--sup);width:32px;height:32px;font-size:18px}nav a.gtile small{font-size:13px;font-weight:700;opacity:.9}
+nav a.gtile.cur{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* stili */
+:root[data-stile=quaderno] *{font-family:'Patrick Hand','Comic Neue',cursive!important}
+:root[data-stile=quaderno] body{background-image:repeating-linear-gradient(transparent 0 31px,color-mix(in srgb,var(--ink) 13%,transparent) 31px 32px)}
+:root[data-stile=quaderno] .card{border-radius:4px;box-shadow:2px 3px 0 color-mix(in srgb,var(--ink) 18%,transparent);border-left:7px double #e63946}
+:root[data-stile=quaderno] button,:root[data-stile=quaderno] nav a,:root[data-stile=quaderno] .tema,:root[data-stile=quaderno] .vel{border-radius:6px;border-style:dashed}
+:root[data-stile=quaderno] h1{font-size:clamp(36px,6vw,54px)}
+:root[data-stile=fumetto] *{font-family:'Comic Neue',cursive!important;font-weight:700}
+:root[data-stile=fumetto] h1,:root[data-stile=fumetto] h2,:root[data-stile=fumetto] h3{font-family:'Bangers',cursive!important;letter-spacing:.04em;font-weight:400}
+:root[data-stile=fumetto] .card{border:4px solid var(--ink);box-shadow:7px 7px 0 var(--ink);border-radius:14px}
+:root[data-stile=fumetto] button,:root[data-stile=fumetto] nav a{border-width:3px;box-shadow:3px 3px 0 var(--ink);border-radius:10px}
+:root[data-stile=fumetto] button:active,:root[data-stile=fumetto] nav a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+:root[data-stile=minimal] *{font-family:'Inter',system-ui,sans-serif!important}
+:root[data-stile=minimal] .card{box-shadow:none;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:8px}
+:root[data-stile=minimal] button,:root[data-stile=minimal] nav a,:root[data-stile=minimal] .tema,:root[data-stile=minimal] .vel{border-width:1px;border-radius:8px;font-weight:600}
+:root[data-stile=minimal] h1{letter-spacing:-.03em}:root[data-stile=minimal] body::before{display:none}
+:root[data-stile=minimal] .eq{border-radius:8px}
+:root[data-stile=elegante] *{font-family:'Inter',system-ui,sans-serif!important}
+:root[data-stile=elegante] h1,:root[data-stile=elegante] h2,:root[data-stile=elegante] h3,:root[data-stile=elegante] .big{font-family:'Lora',Georgia,serif!important}
+:root[data-stile=elegante] h1{letter-spacing:.08em;font-weight:700}
+:root[data-stile=elegante] .card{border-radius:3px;border-top:4px solid var(--sup);box-shadow:0 10px 28px rgba(0,0,0,.08)}
+:root[data-stile=elegante] button,:root[data-stile=elegante] nav a,:root[data-stile=elegante] .tema,:root[data-stile=elegante] .vel{border-radius:3px;border-width:1.5px;font-weight:600}
+:root[data-stile=elegante] .eq{border-radius:3px}
+:root[data-stile=giocoso] *{font-family:'Fredoka',system-ui,sans-serif!important}
+:root[data-stile=giocoso] .card{border-radius:32px;box-shadow:0 8px 0 color-mix(in srgb,var(--acc) 40%,transparent)}
+:root[data-stile=giocoso] button,:root[data-stile=giocoso] nav a{border-radius:999px;transition:transform .12s}
+:root[data-stile=giocoso] button:hover,:root[data-stile=giocoso] nav a:hover{transform:translateY(-2px) rotate(-1deg)}
+:root[data-stile=giocoso] body::before{opacity:.2}:root[data-stile=giocoso] .eq{border-radius:24px}
+
+:root[data-stile=apple] *{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Helvetica Neue',Arial,sans-serif!important;letter-spacing:-.01em}
+:root[data-stile=apple] h1{font-weight:800;letter-spacing:-.03em}:root[data-stile=apple] h2,:root[data-stile=apple] h3{font-weight:700}
+:root[data-stile=apple] .card{border-radius:20px;border:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 6px 20px rgba(0,0,0,.06)}
+:root[data-stile=apple] button,:root[data-stile=apple] nav a,:root[data-stile=apple] .tema,:root[data-stile=apple] .vel{border:0;border-radius:12px;background:color-mix(in srgb,var(--ink) 7%,var(--card));font-weight:600}
+:root[data-stile=apple] button.pl,:root[data-stile=apple] nav a.cur{background:var(--acc);color:#fff}
+:root[data-stile=apple] nav a b{background:color-mix(in srgb,var(--ink) 75%,transparent)}
+:root[data-stile=apple] .eq{border-radius:14px}:root[data-stile=apple] body::before{opacity:.05}
+:root[data-stile=apple] .opt,:root[data-stile=apple] .cards button{border:1px solid color-mix(in srgb,var(--ink) 10%,transparent)!important}
+nav a.gtile,:root[data-stile] nav a.gtile{background:color-mix(in srgb,var(--sup) 22%,var(--card))!important;color:var(--ink)!important;border:2.5px solid var(--sup)!important}
+nav a.gtile b,:root[data-stile] nav a.gtile b{background:var(--sup)!important;color:#fff!important}
+nav a.gtile.cur,:root[data-stile] nav a.gtile.cur{background:color-mix(in srgb,var(--sup) 40%,var(--card))!important;border-color:var(--ink)!important}
 footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;font-size:14px}
 @media(max-width:700px){.row{grid-template-columns:minmax(0,1fr) auto}.lab{grid-row:auto;grid-column:1/3}.row .rh,.row .dots{grid-column:1/3}.row .pl{grid-row:auto;grid-column:1/3;justify-self:start}}
 @media(prefers-reduced-motion:reduce){.heart,.tk,.dots i{transition:none}.heart.p{transform:scale(1.05)}.tk.on{transform:none}.opt.no{animation:none}}
@@ -124,9 +206,9 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 <body>
 <header>
  <div class="top">
-  <div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1>SOLFEGGIO</h1><label class="tema" title="Tema"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.3-1.2-1.6-1.2-2.7 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4c0-4.3-4-7.7-9-7.7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="11" r="1.5" fill="#ff4f6d"/><circle cx="10" cy="7" r="1.5" fill="#1fae9e"/><circle cx="14.5" cy="7" r="1.5" fill="#ffb703"/><circle cx="17" cy="10.5" r="1.5" fill="#7b61ff"/></svg><select id="tema"><option value="">Sole</option><option value="mare">Mare</option><option value="bosco">Bosco</option><option value="fragola">Fragola</option><option value="lavanda">Lavanda</option><option value="oceano">Oceano</option></select></label></div><p class="sub">Ritmo, figure e solfeggio per la classe quinta</p></div>
-  <label class="vel">Suono <select id="inst"><option value="chitarra">Chitarra</option><option value="piano">Pianoforte</option><option value="violino">Violino</option><option value="clarinetto">Clarinetto</option><option value="flauto">Flauto</option><option value="campanella">Campanella</option><option value="nota">Nota semplice</option></select></label>
-  <label class="vel">Velocità <input type="range" id="bpm" min="40" max="200" value="90"><output id="bpmo">90</output></label>
+  <div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1>SOLFEGGIO</h1><label class="tema" title="Tema"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.3-1.2-1.6-1.2-2.7 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4c0-4.3-4-7.7-9-7.7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="11" r="1.5" fill="#ff4f6d"/><circle cx="10" cy="7" r="1.5" fill="#1fae9e"/><circle cx="14.5" cy="7" r="1.5" fill="#ffb703"/><circle cx="17" cy="10.5" r="1.5" fill="#7b61ff"/></svg><select id="tema"><option value="bosco">Bosco</option><option value="mare">Mare</option><option value="carta">Carta</option><option value="apple">Apple</option><option value="salvia">Salvia</option><option value="sabbia">Sabbia</option><option value="glicine">Glicine</option><option value="cielo">Cielo</option><option value="pesca">Pesca</option></select></label><label class="tema" title="Stile"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 3l7 7-8 8-4-1-3 3-2-2 3-3-1-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2"/></svg><select id="stile"><option value="">Classico</option><option value="quaderno">Quaderno</option><option value="fumetto">Fumetto</option><option value="minimal">Minimal</option><option value="elegante">Elegante</option><option value="giocoso">Giocoso</option><option value="apple">Apple</option></select></label></div><p class="sub">Ritmo, figure e solfeggio per la classe quinta</p></div>
+  <div class="ctl"><label class="vel" title="Suono" aria-label="Suono"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16" r="3" fill="currentColor"/></svg><select id="inst"><option value="soft">Soft</option><option value="chitarra">Chitarra</option><option value="piano">Pianoforte</option></select></label>
+  <label class="vel" title="Velocità" aria-label="Velocità"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 2h8l4 20H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 17l5-11" stroke="#e76f51" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17" r="2" fill="currentColor"/></svg><input type="range" id="bpm" min="40" max="200" value="90"><output id="bpmo">90</output></label></div>
  </div>
 </header>
 <div class="lay"><nav id="nav"></nav></div>
@@ -165,14 +247,14 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <div class="eq">Il tempo è la torta tagliata in fette, il ritmo è come la riempiamo.</div>
   <p style="margin-top:10px">Attenzione: per la velocità diciamo <b>andamento</b> (Andante, Allegro…), mentre <b>tempo</b> è la frazione.</p></div>
  <div class="card"><h3>I tempi più usati</h3><div class="cards" id="tmc"></div></div>
- <div class="card"><h3>Stesso tempo, ritmi diversi</h3><p>Il tempo è sempre 4/4 (4 fette), ma possiamo riempire la torta in tanti modi diversi.</p><div id="tmx"></div></div>
+ <div class="card exc" data-lab="ESEMPI"><h3>Stesso tempo, ritmi diversi</h3><p>Il tempo è sempre 4/4 (4 fette), ma possiamo riempire la torta in tanti modi diversi.</p><div id="tmx"></div></div>
 </section>
 
 <section class="pg" id="ritmo">
  <div class="card"><h2>Il ritmo</h2>
   <div class="vs" style="grid-template-columns:1fr"><div><b>Il ritmo</b>è <b style="display:inline;font-size:inherit">come</b> suoniamo sopra la pulsazione: suoni lunghi e corti, battiti divisi (crome, terzine) o uniti (minime, semibrevi) e anche i silenzi (pause). Risponde alla domanda: <i>come sono i suoni?</i></div></div>
   <div class="eq">La pulsazione è il passo che resta sempre uguale, il ritmo è il disegno dei suoni che ci mettiamo sopra.</div></div>
- <div class="card"><h3>Esempi di ritmo: la pulsazione è sempre la stessa</h3>
+ <div class="card exc" data-lab="ESEMPI"><h3>Esempi di ritmo: la pulsazione è sempre la stessa</h3>
   <p>In tutti gli esempi i pallini contano la stessa pulsazione (4 battiti). Cambia solo il ritmo, cioè come suoniamo sopra i battiti.</p><div id="rex"></div></div>
 </section>
 
@@ -186,9 +268,9 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 
 <section class="pg" id="punto">
  <div class="card"><h2>Il punto di valore</h2>
-  <p>Il <b>punto</b> si scrive a destra della nota e <b>aggiunge metà del suo valore</b>. Ogni quadratino vale ½ battito; i cerchietti sono la parte aggiunta dal punto. La torta mostra quanta parte di una battuta in 4/4 viene riempita.</p></div>
+  <p>Il <b>punto</b> si scrive a destra della nota e <b>aggiunge metà del suo valore</b>. Ogni quadratino è una <b>semiminima</b> (1 battito); il quadratino colorato in verde è la parte aggiunta dal punto: una semiminima per la minima puntata, una croma (½ battito) per la semiminima puntata. La torta mostra quanta parte di una battuta in 4/4 viene riempita.</p></div>
  <div id="dcards"></div>
- <div class="card"><h3>Esercizi con il punto</h3><div id="dex"></div></div>
+ <div class="card exc" data-lab="ESERCIZI"><h3>Esercizi con il punto</h3><div id="dex"></div></div>
 </section>
 
 <section class="pg" id="legatura">
@@ -205,13 +287,13 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <div class="eq">1 battito = 2 crome = 1 terzina (3 crome)</div></div>
  <div class="card"><h3>La torta delle terzine</h3>
   <p>Ogni fetta è un battito. Due crome dividono la fetta in <b>2 pezzi</b>, la terzina la divide in <b>3 pezzi</b> uguali. Tocca le figure e riempi la torta in 4/4!</p>
-  <div class="grid"><div><svg id="tpie" viewBox="-60 -30 340 280" style="width:100%;max-width:320px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="tpinfo" style="text-align:center"></div></div>
-  <div><div class="cards" id="tpal"></div><div class="rh" id="tprh" style="margin-top:10px"></div>
-   <div class="row2"><button class="pl" id="tppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="tpdel">Togli l'ultima</button><button id="tpclr">Svuota la torta</button></div></div></div></div>
+  <div><svg id="tpie" viewBox="-60 -30 340 280" style="width:100%;max-width:320px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="tpinfo" style="text-align:center"></div></div>
+  <h3 style="margin-top:10px">Figure da mettere nella torta</h3><div class="cards" id="tpal"></div><div class="rh" id="tprh" style="margin-top:10px"></div>
+  <div class="row2"><button class="pl" id="tppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="tpdel">Togli l'ultima</button><button id="tpclr">Svuota la torta</button></div></div>
  <div class="card"><h3>Ascolta la differenza: il battito è sempre uguale</h3>
   <div class="grid" style="align-items:start"><div><p style="margin:0"><b>Crome</b>: 2 note per battito</p><div class="rh" id="tz1"></div><div class="dots" id="tzd1"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta le crome" id="tzb1">▶ Ascolta le crome</button></div>
   <div><p style="margin:0"><b>Terzine</b>: 3 note per battito</p><div class="rh" id="tz2"></div><div class="dots" id="tzd2"><i></i><i></i><i></i><i></i></div><button class="pl" data-t="▶ Ascolta le terzine" id="tzb2">▶ Ascolta le terzine</button></div></div></div>
- <div class="card"><h3>Esercizi con le terzine</h3><p>Leggi a ritmo, poi ascolta e controlla.</p><div id="tzx"></div></div>
+ <div class="card exc" data-lab="ESERCIZI"><h3>Esercizi con le terzine</h3><p>Leggi a ritmo, poi ascolta e controlla.</p><div id="tzx"></div></div>
 </section>
 
 <section class="pg" id="triadi">
@@ -233,16 +315,18 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <p>I battiti si raggruppano in <b>battute</b>, separate dalla <b>stanghetta</b>. Il primo battito di ogni battuta è <b>forte</b> (accento), gli altri sono <b>deboli</b>.</p>
   <p>La frazione all'inizio si chiama <b>tempo</b>: il numero sopra dice quanti battiti ci sono in ogni battuta, il 4 sotto dice che ogni battito vale una semiminima.</p>
   <div class="row2"><button data-m="2">2/4 marcia</button><button data-m="3">3/4 valzer</button><button data-m="4">4/4 il più usato</button></div>
-  <div class="grid">
+  <div class="grid" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
    <div><div class="rh" id="brh"></div><div class="dots" id="bdots"></div><button class="pl" id="bpl" data-t="▶ Ascolta">▶ Ascolta</button></div>
    <div style="text-align:center"><div class="big" id="bnum">1</div><div class="tn" id="bfd">forte</div><p style="margin:auto">Conta ad alta voce e batti forte le mani sul primo battito!</p></div>
   </div></div>
  <div class="card"><h2>La battuta è una torta</h2>
-  <p>Immagina la battuta come una <b>torta</b>. Il tempo dice in quante <b>fette</b> è tagliata: in 4/4 ci sono 4 fette, in 3/4 tre, in 2/4 due (scegli il tempo con i pulsanti qui sotto: ci sono anche 5/4, 2/2 e i tempi in ottavi, dove ogni fetta vale 3 crome). Ogni nota che inseriamo <b>prende le sue fette</b>: la semiminima 1 fetta, la minima 2, la croma mezza fetta. Quando la torta è finita, la battuta è <b>piena</b>!</p>
+  <p>La torta è sempre <b>una battuta intera</b>. Il tempo dice in quante <b>fette</b> tagliarla: in 2/4 due, in 3/4 tre, in 4/4 quattro. Ogni fetta è <b>un battito</b> (una semiminima): se le fette sono meno sembrano più grandi, ma valgono sempre un battito. Quando tutte le fette sono piene, la battuta è completa!</p>
+  <p>Nei tempi in ottavi (6/8, 9/8, 12/8) ogni fetta è un battito diviso in <b>3 crome</b>. Con la stessa velocità del battito, una battuta di 9/8 dura come una di 3/4 (3 battiti): non è più veloce la battuta, sono più veloci le crome, perché ne entrano 3 per battito invece di 2.</p>
   <div class="row2" id="ptm"></div>
-  <div class="grid"><div><svg id="pie" viewBox="-60 -30 340 280" style="width:100%;max-width:340px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="pinfo" style="text-align:center"></div></div>
-  <div><div class="cards" id="ppal"></div><div class="rh" id="prh" style="margin-top:10px"></div>
-   <div class="row2"><button class="pl" id="ppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="pdot">• Aggiungi il punto</button><button id="pdel">Togli l'ultima</button><button id="pclr">Svuota la torta</button></div></div></div></div>
+  <div><svg id="pie" viewBox="-60 -30 340 280" style="width:100%;max-width:340px;display:block;margin:auto;color:var(--ink)"></svg><div class="tn" id="pinfo" style="text-align:center"></div></div>
+  <h3 style="margin-top:10px">Note e pause da mettere nella torta</h3><div class="cards" id="ppal"></div>
+  <div class="rh" id="prh" style="margin-top:10px"></div>
+  <div class="row2"><button class="pl" id="ppl" data-t="▶ Ascolta">▶ Ascolta</button><button id="pdot">• Aggiungi il punto</button><button id="pdel">Togli l'ultima</button><button id="pclr">Svuota la torta</button></div></div>
 </section>
 
 <section class="pg" id="tempi">
@@ -251,10 +335,10 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <div><b>Tempo composto</b>Ogni battito si divide in <b style="display:inline;font-size:inherit">3</b> crome (TI-TI-TI). Numero sotto: 8 (6/8, 9/8, 12/8).<div class="ill" id="tcI"></div></div></div>
   <p style="margin:0">Il battito resta uguale: cambia solo in quante parti lo dividiamo.</p></div>
  <div class="card"><h3>Guarda e ascolta: il battito si divide</h3>
-  <p>Al centro ci sono i <b>battiti</b>: quando si accendono, sopra (2/4) il battito si divide in 2, sotto (6/8) in 3.</p>
+  <p>Al centro c'è il <b>battito</b>. Ogni battito è una colonna: sopra (2/4) dentro ci sono <b>2 TI</b>, sotto (6/8) ci sono <b>3 TI</b>. Il battito è sempre lo stesso!</p>
   <svg id="tla" viewBox="0 0 640 300" style="width:100%;display:block;color:var(--ink)"></svg>
-  <div class="row2"><button class="pl" id="tlS" data-t="▶ Tempo semplice (2/4)">▶ Tempo semplice (2/4)</button><button class="pl" id="tlC" data-t="▶ Tempo composto (6/8)">▶ Tempo composto (6/8)</button><button class="pl" id="tlB" data-t="▶ Tutti e due insieme">▶ Tutti e due insieme</button></div></div>
- <div class="card"><h3 style="margin-bottom:6px">ESEMPI</h3><div id="tsc"></div></div>
+  <div class="row2"><button class="pl" id="tlS" data-t="▶ Tempo semplice (2/4)">▶ Tempo semplice (2/4)</button><button class="pl" id="tlC" data-t="▶ Tempo composto (6/8)">▶ Tempo composto (6/8)</button></div></div>
+ <div class="card exc" data-lab="ESEMPI"><div id="tsc"></div></div>
  <div class="card"><h3>Da ricordare</h3><div class="eq" style="margin-bottom:10px">Battiti = Pulsazioni<br><span style="font-size:16px;font-weight:700">Nei tempi semplici ogni pulsazione è una semiminima · Nei tempi composti ogni pulsazione è un gruppo di 3 crome (semiminima puntata)</span></div><div class="eq" style="margin-bottom:10px">Trucco: nei tempi composti dividi il numero sopra per 3 e trovi i battiti! Esempio: 6/8 → 6 : 3 = 2 battiti (da tre crome ciascuno)</div></div>
 </section>
 
@@ -271,7 +355,7 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
  <div class="card"><h2>Leggi il ritmo con le sillabe</h2>
   <p>Per leggere il ritmo diamo a ogni figura una sillaba. Tocca una scheda per sentirla.</p>
   <div class="cards" id="lcards"></div></div>
- <div class="card"><h3>Esercizi di lettura</h3><p>Leggi le sillabe a tempo, poi ascolta e controlla. Puoi cambiare la velocità in alto.</p><div id="lex"></div></div>
+ <div class="card exc" data-lab="ESERCIZI"><h3>Esercizi di lettura</h3><p>Leggi le sillabe a tempo, poi ascolta e controlla. Puoi cambiare la velocità in alto.</p><div id="lex"></div></div>
 </section>
 
 <section class="pg" id="filastrocca">
@@ -302,6 +386,14 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
   <div id="qmsg"></div><div id="qsc" class="tn"></div>
   <div class="grid" id="qopts" style="margin-top:10px"></div></div>
 </section>
+<section class="pg" id="finale">
+ <div class="card" style="position:relative;overflow:hidden"><h2>Giochi ed esercitazioni</h2>
+  <p>Tanti giochini per diventare campioni del ritmo! Scegli un gioco oppure fai la <b>Partita mista</b> con tutti i giochi insieme.</p>
+  <div class="tn" id="gfP"></div>
+  <div id="gfA"></div>
+  <div id="gfM" style="font-weight:800;font-size:18px;min-height:1.5em;margin-top:10px"></div>
+  <div class="row2"><button class="pl" id="gfN">Avanti →</button><button id="gfR">Scegli un altro gioco</button></div></div>
+</section>
 <div id="nx"></div>
 </main>
 <footer>Copyright © Ignazio Paolicelli</footer>
@@ -309,16 +401,19 @@ footer{text-align:center;padding:10px 0 26px;color:var(--mut);font-weight:700;fo
 <script>
 {
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const PAGES=[['battito','Il battito'],['andamenti','Gli andamenti (a seconda della velocità)'],['figure','Le figure e le pause'],['ritmo','Il ritmo'],['battuta','La battuta'],['tempo','Il tempo'],['tempi','Tempi semplici e composti'],['punto','Punto di valore'],['legatura','Legatura di valore'],['terzine','Le terzine'],['triadi','Le triadi'],['mano','La mano'],['leggi','Leggi il ritmo'],['filastrocca','Filastrocca'],['componi','Componi'],['quiz','Ascolta e gioca']];
+const PAGES=[['battito','Il Battito'],['andamenti','Andamenti (velocità)'],['figure','Figure e pause'],['ritmo','Il Ritmo'],['battuta','La battuta'],['tempo','Il tempo'],['tempi','Tempi semplici e composti'],['punto','Punto di valore'],['legatura','Legatura di valore'],['terzine','Le terzine'],['triadi','Le triadi'],['mano','Movimento della mano'],['filastrocca','Filastrocca'],['finale','Giochi ed esercitazioni']];
 const T={w:{l:4,k:'w',s:'TA-A-A-A',n:'Semibreve'},h:{l:2,k:'h',s:'TA-A',n:'Minima'},q:{l:1,k:'q',s:'TA',n:'Semiminima'},e:{l:1,k:'ee',s:'TI-TI',sub:1,n:'Due crome'},c:{l:.5,k:'c',s:'TI'},rw:{l:4,k:'rw',s:'SST',rest:1},rh:{l:2,k:'rh',s:'SST',rest:1},r:{l:1,k:'rq',s:'SST',rest:1,n:'Pausa'},rc:{l:.5,k:'rc',s:'sst',rest:1},hd:{l:3,k:'hd',s:'TA-A-A',n:'Minima puntata'},qd:{l:1.5,k:'qd',s:'TA-I',n:'Semiminima puntata'},e3:{l:1,k:'e3',s:'TI-TI-TI',sub:3},t3:{l:1,k:'t3',s:'TER-ZI-NA',sub:3}};
 const D=t=>T[t.replace('~','')];
-let bpm=90,inst='chitarra';
+let bpm=90,inst='soft';
 const setT=v=>{if(v)document.documentElement.dataset.tema=v;else delete document.documentElement.dataset.tema;$('#tema').value=v;try{localStorage.setItem('solfTema',v)}catch(e){}};
 $('#tema').onchange=e=>setT(e.target.value);
-try{let v=localStorage.getItem('solfTema');if(v===null||v=='notte'||v=='lavagna')v='bosco';setT(v)}catch(e){setT('bosco')}
+try{let v=localStorage.getItem('solfTema');if(!['bosco','mare','carta','apple','salvia','sabbia','glicine','cielo','pesca'].includes(v))v='bosco';setT(v)}catch(e){setT('bosco')}
+const setS=v=>{if(v)document.documentElement.dataset.stile=v;else delete document.documentElement.dataset.stile;$('#stile').value=v;try{localStorage.setItem('solfStile2',v)}catch(e){}};
+$('#stile').onchange=e=>setS(e.target.value);
+try{let v=localStorage.getItem('solfStile2');if(v===null)v='apple';setS(['quaderno','fumetto','minimal','elegante','giocoso','apple'].includes(v)?v:'')}catch(e){setS('apple')}
 const setI=v=>{inst=v;$('#inst').value=v;try{localStorage.setItem('ritmoSuono',v)}catch(e){}};
-$('#inst').onchange=e=>{setI(e.target.value);stop();A();const t=ac.currentTime+.05,g=ac.createGain();g.connect(ac.destination);tone(g,t,.6)};
-try{setI(localStorage.getItem('ritmoSuono')||'chitarra')}catch(e){}
+$('#inst').onchange=e=>{setI(e.target.value);stop();A();const t=ac.currentTime+.05,g=ac.createGain();g.connect(ac.destination);if(inst=='voce')voice(g,t,.5,'a');else if(inst=='vocen')say('a',.5);else tone(g,t,.6)};
+try{const v=localStorage.getItem('ritmoSuono');setI(['soft','chitarra','piano'].includes(v)?v:'soft')}catch(e){setI('soft')}
 
 function N(k,line){let w=k=='ee'?60:(k=='e3'||k=='t3')?86:40,b='';
  const hd=(x,f)=>`<ellipse cx="${x}" cy="55" rx="8.5" ry="6" transform="rotate(-22 ${x} 55)" ${f?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="3"'}/>`;
@@ -355,7 +450,7 @@ function hl(el,i){if(!el)return;el.querySelectorAll('.tk.on').forEach(x=>x.class
 function evs(toks){let s=0,tie=false;const e=[];toks.forEach((t,i)=>{const d=D(t),last=e[e.length-1];
  if(tie&&!d.rest&&last&&!last.rest){last.l+=d.sub?.5:d.l;e.push({s,l:0,vis:1,i});if(d.sub)e.push({s:s+.5,l:.5,i})}
  else if(d.sub){const k=d.sub==3?3:2;for(let j=0;j<k;j++)e.push({s:s+j/k,l:1/k,i})}else e.push({s,l:d.l,rest:d.rest,i});
- tie=t.endsWith('~')&&!d.rest;s+=d.l});return{e:e.filter(x=>x.vis||x.l>0),beats:Math.ceil(s)}}
+ tie=t.endsWith('~')&&!d.rest;s+=d.l});return{e:e.filter(x=>x.vis||x.l>0).map(x=>{const d=D(toks[x.i]);x.v=x.rest?'sh':(d.sub||d.l<1?'i':'a');return x}),beats:Math.ceil(s)}}
 function dots(el,b){if(el)[...el.children].forEach((d,k)=>d.classList.toggle('on',k==b))}
 
 /* audio */
@@ -370,6 +465,7 @@ function osc(type,f,t,d,dest,vib){const o=ac.createOscillator();o.type=type;o.fr
  o.connect(dest);o.start(t);o.stop(t+d+.05);return o}
 function lp(fr,dest){const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=fr;f.connect(dest);return f}
 function tone(g,t,d,F){const v=ac.createGain();v.connect(g);
+ if(inst=='soft'){const f=F||392,dd=Math.max(d,.12);v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(.26,t+.035);v.gain.exponentialRampToValueAtTime(.09,t+Math.max(.06,dd*.8));v.gain.linearRampToValueAtTime(0,t+dd+.08);const l=lp(1600,v);osc('sine',f,t,dd+.08,l);const h=ac.createGain();h.gain.value=.12;h.connect(l);osc('sine',f*2,t,dd+.08,h);return}
  if(inst=='chitarra'){const s=ac.createBufferSource();s.buffer=ks(F?Math.round(F):220);const f=lp(3200,v);s.connect(f);v.gain.setValueAtTime(.9,t);v.gain.setValueAtTime(.9,Math.max(t,t+d-.05));v.gain.linearRampToValueAtTime(0,t+d);s.start(t);s.stop(t+d+.05);return}
  if(inst=='piano'){[1,.45,.22,.1].forEach((a,k)=>{const h=ac.createGain();h.connect(v);h.gain.setValueAtTime(0,t);h.gain.linearRampToValueAtTime(a*.35,t+.008);h.gain.exponentialRampToValueAtTime(.0008,t+2.4/(k+1));osc('sine',(F||262)*(k+1),t,d,h)});
   v.gain.setValueAtTime(1,t);v.gain.setValueAtTime(1,Math.max(t,t+d-.06));v.gain.linearRampToValueAtTime(0,t+d);return}
@@ -378,12 +474,28 @@ function tone(g,t,d,F){const v=ac.createGain();v.connect(g);
  if(inst=='flauto'){env(v,t,d,.07,.32,.26);osc('sine',F||587,t,d,v,4);const n=ac.createGain();n.gain.value=.08;n.connect(v);osc('triangle',(F||587)*2,t,d,n);return}
  if(inst=='campanella'){v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(.35,t+.004);v.gain.exponentialRampToValueAtTime(.001,t+Math.min(d,1.2));osc('sine',F||784,t,d,v);const h=ac.createGain();h.gain.value=.25;h.connect(v);osc('sine',(F||784)*3.93,t,d,h);return}
  env(v,t,d,.015,.3,.24);osc('sine',F||523,t,d,v)}
+let NZ=null;
+function voice(g,t,d,v){const a=ac;if(!NZ){NZ=a.createBuffer(1,a.sampleRate,a.sampleRate);const x=NZ.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1}
+ const nz=(t0,dur,f,q,vol,att)=>{const s=a.createBufferSource();s.buffer=NZ;const fl=a.createBiquadFilter();fl.type='bandpass';fl.frequency.value=f;fl.Q.value=q;const v2=a.createGain();v2.gain.setValueAtTime(0,t0);v2.gain.linearRampToValueAtTime(vol,t0+att);v2.gain.exponentialRampToValueAtTime(.001,t0+dur);s.connect(fl).connect(v2).connect(g);s.start(t0);s.stop(t0+dur+.02)};
+ if(v=='sh'){nz(t,Math.min(Math.max(d,.18),.45),2600,.8,.45,.04);return}
+ nz(t,.035,4200,.9,.35,.003);
+ const dd=Math.max(.12,Math.min(d,1.6)),t1=t+.018,f0=v=='i'?250:220;
+ const o=a.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(f0*1.04,t1);o.frequency.exponentialRampToValueAtTime(f0,t1+.06);o.frequency.linearRampToValueAtTime(f0*.95,t1+dd);
+ const lf=a.createOscillator(),lg=a.createGain();lf.frequency.value=5.2;lg.gain.value=f0*.012;lf.connect(lg).connect(o.frequency);
+ const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=v=='i'?3800:3000;lp.Q.value=.5;
+ let node=o;node.connect(lp);node=lp;
+ (v=='i'?[[300,14,4],[2250,16,6],[3000,10,6]]:[[760,16,4],[1150,13,5],[2700,8,6]]).forEach(([f,gn,q])=>{const b=a.createBiquadFilter();b.type='peaking';b.frequency.value=f;b.gain.value=gn;b.Q.value=q;node.connect(b);node=b});
+ const hp=a.createBiquadFilter();hp.type='highpass';hp.frequency.value=120;node.connect(hp);
+ const out=a.createGain();out.gain.setValueAtTime(0,t1);out.gain.linearRampToValueAtTime(.16,t1+.025);out.gain.exponentialRampToValueAtTime(.11,t1+Math.max(.06,dd*.6));out.gain.linearRampToValueAtTime(0,t1+dd);hp.connect(out).connect(g);
+ o.start(t1);lf.start(t1);o.stop(t1+dd+.03);lf.stop(t1+dd+.03)}
+let VIT=null;
+function say(v,d){try{const S=speechSynthesis;if(!VIT)VIT=S.getVoices().find(x=>/^it/i.test(x.lang))||null;S.cancel();const u=new SpeechSynthesisUtterance(v=='sh'?'sst':v=='i'?'ti':(d>1.2?'taa':'ta'));u.lang='it-IT';if(VIT)u.voice=VIT;u.rate=1.5;u.volume=1;S.speak(u)}catch(e){}}
 function click(g,t,strong,soft){const o=ac.createOscillator(),v=ac.createGain();o.frequency.value=strong?1500:950;
  v.gain.setValueAtTime(strong?.3:(soft?.1:.2),t);v.gain.exponentialRampToValueAtTime(.001,t+.06);o.connect(v).connect(g);o.start(t);o.stop(t+.1)}
 function play(o){const a=A(),g=a.createGain();g.connect(a.destination);const Rn={g,tm:[],end:o.onEnd};run=Rn;
  const pass=()=>{if(run!==Rn)return;const B=typeof o.bpm=='function'?o.bpm():(o.bpm||bpm);if(!B){stop();return}const spb=60/B,t0=a.currentTime+.08;
   for(let b=0;b<o.beats;b++){if(o.clicks!==false)click(g,t0+b*spb,o.acc&&b%o.acc==0,o.ev&&o.ev.length);Rn.tm.push(setTimeout(()=>o.onBeat&&o.onBeat(b),(.08+b*spb)*1000))}
-  (o.ev||[]).forEach(e=>{if(!e.rest&&!e.vis)tone(g,t0+e.s*spb,e.l*spb*.88);Rn.tm.push(setTimeout(()=>o.onEv&&e.i>=0&&o.onEv(e.i),(.08+e.s*spb)*1000))});
+  (o.ev||[]).forEach(e=>{if(!e.vis){if(inst=='vocen')Rn.tm.push(setTimeout(()=>say(e.rest?'sh':(e.v||'a'),e.l*spb),(.08+e.s*spb)*1000));else if(inst=='voce')voice(g,t0+e.s*spb,e.l*spb*.88,e.rest?'sh':(e.v||'a'));else if(!e.rest)tone(g,t0+e.s*spb,e.l*spb*.88)}Rn.tm.push(setTimeout(()=>o.onEv&&e.i>=0&&o.onEv(e.i),(.08+e.s*spb)*1000))});
   Rn.tm.push(setTimeout(()=>{if(o.loop)pass();else stop()},(.08+o.beats*spb)*1000))};
  pass()}
 function stop(){if(run){run.tm.forEach(clearTimeout);try{run.g.disconnect()}catch(e){}const f=run.end;run=null;f&&f()}
@@ -404,7 +516,7 @@ $('#hb').onclick=()=>toggle($('#hb'),()=>{hc=0;play({beats:1,loop:true,onBeat:()
 
 /* andamenti */
 const AND=[['Grave',40,'molto lento e solenne'],['Largo',50,'lento e ampio, come un fiume calmo'],['Lento',56,'piano piano, senza fretta'],['Adagio',70,'lento, con calma e dolcezza'],['Andante',90,'come chi cammina tranquillo'],['Andantino',100,'un po\u2019 più mosso dell\u2019andante'],['Moderato',112,'né lento né veloce'],['Allegretto',120,'abbastanza veloce e leggero'],['Allegro',140,'veloce e allegro'],['Vivace',160,'veloce, pieno di energia'],['Presto',180,'molto veloce, come chi corre'],['Prestissimo',200,'il più veloce possibile!'],['Accelerando',0,'la velocità aumenta un po\u2019 alla volta (da 60 a 170)'],['Rallentando',0,'la velocità diminuisce un po\u2019 alla volta (da 170 a 50)']];
-$('#acs').innerHTML=AND.map(([n,b,d],i)=>`<div class="card ac">${'<svg class="mh" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 86C20 62 4 46 4 28 4 14 15 4 28 4c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 34-46 58z" fill="var(--acc)"/></svg>'}<div><h3>${n}</h3><span class="tn" style="font-size:17px" id="acb${i}">${b?b+' battiti al minuto':i==12?'accel.':'rall.'}</span></div><p>${d}</p><button class="pl" data-t="▶ Ascolta" id="ap${i}">▶ Ascolta</button></div>`).join('');
+$('#acs').innerHTML=AND.map(([n,b,d],i)=>`<div class="card ac">${'<svg class="mh" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 86C20 62 4 46 4 28 4 14 15 4 28 4c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 34-46 58z" fill="var(--acc)"/></svg>'}<div><h3>${n}</h3><span class="tn" style="font-size:17px" id="acb${i}">${b?b+' battiti al minuto':i==12?'accel.':'rall.'}</span></div><p>${d}</p><button class="pl" data-t="▶" id="ap${i}" aria-label="Ascolta">▶</button></div>`).join('');
 AND.forEach(([n,b],i)=>{const card=$('#ap'+i).parentElement,h=card.querySelector('.mh');
  $('#ap'+i).onclick=e=>toggle(e.currentTarget,()=>{let v=i==12?60:170;
   const f=b?b:()=>{const c=v;if(i==12){if(v>170)return 0;v+=5}else{if(v<50)return 0;v-=5}$('#acb'+i).textContent=c+' battiti al minuto';return c};
@@ -444,21 +556,26 @@ $('#bpl').onclick=()=>playT($('#bpl'),$('#brh'),Array(met*2).fill('q'),{m:met,lo
 setM(4);
 
 /* punto */
-const DOT=[['hd','Minima puntata','2 battiti + 1 del punto = 3 battiti',4,2],['qd','Semiminima puntata','1 battito + ½ del punto = 1 battito e ½',2,1]];
-$('#dcards').innerHTML=DOT.map(([t,n,x,a,b],j)=>`<div class="card dcard"><span class="sym">${N(t,1)}</span><div style="flex:1 1 260px"><h3>${n}</h3><p style="margin:0">${x}</p><div class="bks" id="bk${j}">${'<i class="bk"></i>'.repeat(a)+'<i class="bk d"></i>'.repeat(b)}</div><button class="pl" data-t="▶ Ascolta" id="dp${j}">▶ Ascolta</button></div><div class="pie" id="pie${j}"></div></div>`).join('');
-function pie(el,k,a){const A=Math.min(k,a)/8*100,B=Math.max(0,k-a)/8*100;el.style.background=`conic-gradient(var(--acc) 0 ${A}%,var(--sup) ${A}% ${A+B}%,color-mix(in srgb,var(--ink) 12%,transparent) ${A+B}% 100%)`}
+const DOT=[['hd','Minima puntata','2 battiti + 1 del punto = 3 battiti',2,1],['qd','Semiminima puntata','1 battito + ½ del punto = 1 battito e ½',1,.5]];
+const bkH=(a,b)=>`<span class="bkn">${N('q')}</span>`.repeat(a)+(b==1?`<span class="bkn d">${N('q')}</span>`:`<span class="bkn d half">${N('c')}</span>`);
+$('#dcards').innerHTML=DOT.map(([t,n,x,a,b],j)=>`<div class="card dcard"><span class="sym">${N(t,1)}</span><div style="flex:1 1 260px"><h3>${n}</h3><p style="margin:0">${x}</p><div class="bks" id="bk${j}">${bkH(a,b)}</div><button class="pl" data-t="▶ Ascolta" id="dp${j}">▶ Ascolta</button></div><div class="pie" id="pie${j}"></div></div>`).join('');
+function pie(el,k,a){const A=Math.min(k,a)/4*100,B=Math.max(0,k-a)/4*100;el.style.background=`conic-gradient(var(--acc) 0 ${A}%,var(--sup) ${A}% ${A+B}%,color-mix(in srgb,var(--ink) 12%,transparent) ${A+B}% 100%)`}
 DOT.forEach(([t,n,x,a,b],j)=>{const bx=$('#bk'+j),pe=$('#pie'+j);pie(pe,a+b,a);
  $('#dp'+j).onclick=e=>toggle(e.currentTarget,()=>{const bk=[...bx.children];bk.forEach(z=>z.classList.remove('on'));pie(pe,0,a);
-  const ev=[{s:0,l:(a+b)/2,i:-1}].concat(bk.map((z,k)=>({s:k/2,l:0,vis:1,i:k})));
-  play({ev,beats:4,acc:4,onEv:k=>{bk[k].classList.add('on');pie(pe,k+1,a)},onEnd:()=>{}})})});
+  const ev=[{s:0,l:a+b,i:-1}].concat(bk.map((z,k)=>({s:k,l:0,vis:1,i:k})));
+  play({ev,beats:4,acc:4,onEv:k=>{bk[k].classList.add('on');pie(pe,Math.min(k+1,a)+(k>=a?b:0),a)},onEnd:()=>{}})})});
 const DEX=[['hd','q','qd','c','h'],['q','qd','c','q','hd','q'],['qd','c','qd','c','w']];
 $('#dex').innerHTML=DEX.map((x,i)=>`<div style="margin-bottom:14px"><h3>Esercizio ${i+1}</h3><div class="rh" id="dx${i}"></div><button class="pl" data-t="▶ Ascolta" id="dxb${i}">▶ Ascolta</button></div>`).join('');
 DEX.forEach((x,i)=>{R($('#dx'+i),x,{m:4,sig:4,syl:1});$('#dxb'+i).onclick=e=>playT(e.currentTarget,$('#dx'+i),x,{m:4})});
 
 /* legatura */
 const LGX=[[['h~','q','q'],'Minima legata a semiminima: 2 + 1 = 3 battiti, come la minima puntata'],[['q~','q','h','q','q','h'],'Due semiminime legate: 1 + 1 = 2 battiti'],[['q','q','q','q~','q','q','h'],'La legatura attraversa la stanghetta: 1 + 1 = 2 battiti'],[['w~','w'],'Semibreve legata a semibreve: 4 + 4 = 8 battiti']];
-$('#lgx').innerHTML=LGX.map(([x,t],i)=>`<div class="card"><h3>${t}</h3><div class="rh" id="lg${i}"></div><div class="row2"><button class="pl" data-t="▶ Con legatura" id="lgc${i}">▶ Con legatura</button><button data-t="▶ Senza legatura" id="lgs${i}">▶ Senza legatura</button></div></div>`).join('');
-LGX.forEach(([x],i)=>{const el=$('#lg'+i);R(el,x,{m:4,sig:4,syl:0});
+$('#lgx').innerHTML=LGX.map(([x,t],i)=>`<div class="card"><h3>${t}</h3><div class="rh" id="lg${i}"></div><div class="lsum" id="ls${i}"></div><div class="row2"><button class="pl" data-t="▶ Con legatura" id="lgc${i}">▶ Con legatura</button><button data-t="▶ Senza legatura" id="lgs${i}">▶ Senza legatura</button></div></div>`).join('');
+const vf=l=>l==.5?'½':l==1.5?'1½':String(l);
+function lgGroups(x){const G=[];let cur=null;x.forEach((t,i)=>{if(cur)cur.push(i);else if(t.endsWith('~'))cur=[i];if(cur&&!t.endsWith('~')){G.push(cur);cur=null}});return G}
+LGX.forEach(([x],i)=>{const el=$('#lg'+i);R(el,x,{m:4,sig:4,syl:1,lyr:x.map(t=>D(t).rest?'sst':vf(D(t).l))});
+ const G=lgGroups(x);G.flat().forEach(k=>el.querySelector(`.tk[data-i="${k}"]`)?.classList.add('tg'));
+ $('#ls'+i).innerHTML=G.map(g=>g.map(k=>`<span class="lc">${vf(D(x[k]).l)}</span>`).join('<b>+</b>')+`<b>=</b><span class="lc tot">${vf(g.reduce((a,k)=>a+D(x[k]).l,0))} battiti</span>`).join('<span style="width:24px"></span>');
  $('#lgc'+i).onclick=e=>playT(e.currentTarget,el,x,{m:4});
  $('#lgs'+i).onclick=e=>playT(e.currentTarget,el,x.map(t=>t.replace('~','')),{m:4})});
 
@@ -485,11 +602,11 @@ function tDraw(nw,msg){const m=4,C=110,Rr=100,pt=(f,r)=>[C+r*Math.cos(2*Math.PI*
  $('#tpie').innerHTML=g;R($('#tprh'),tc,{m,sig:m,syl:1});const u=tsum();
  $('#tpinfo').textContent=msg||(u>=m?'Battuta piena!':`Fette prese: ${u} su 4`)}
 const TPAL=[['q','Semiminima','1 fetta intera'],['e','Due crome','1 fetta in 2 pezzi'],['t3','Terzina','1 fetta in 3 pezzi'],['h','Minima','2 fette'],['r','Pausa','1 fetta di silenzio']];
-$('#tpal').innerHTML=TPAL.map(([t,n,x])=>`<button data-tp="${t}">${N(D(t).k,1)}<span>${n}</span><small>${x}</small></button>`).join('');
+$('#tpal').innerHTML=TPAL.map(([t,n,x])=>`<button data-tp="${t}"${t=='t3'?' class="hlb"':''}>${N(D(t).k,1)}<span>${n}</span><small>${x}</small></button>`).join('');
 $('#tpal').addEventListener('click',ev=>{const b=ev.target.closest('[data-tp]');if(!b)return;stop();const t=b.dataset.tp,u=tsum();
  if(u+D(t).l>4){tDraw(-1,u>=4?'La torta è finita!':`Non ci sta! Resta solo ${4-u} fetta.`);return}
  tc.push(t);tDraw(tc.length-1);const{e,beats}=evs([t]);play({ev:e,beats});
- if(tsum()>=4){tDraw(tc.length-1,'Battuta piena! Ora la torta si svuota…');clearTimeout(tAuto);tAuto=setTimeout(()=>{tc=[];tDraw(-1,'Torta vuota: inserisci altre figure!')},2200)}});
+ if(tsum()>=4)tDraw(tc.length-1,'Battuta piena! Premi «Ascolta», poi «Svuota la torta» per ricominciare.')});
 $('#tpdel').onclick=()=>{stop();clearTimeout(tAuto);tc.pop();tDraw()};
 $('#tpclr').onclick=()=>{stop();clearTimeout(tAuto);tc=[];tDraw()};
 $('#tppl').onclick=e=>{if(tc.length){clearTimeout(tAuto);playT(e.currentTarget,$('#tprh'),tc,{m:4,onEv:i=>$$('#tpie g').forEach(x=>x.classList.toggle('hi',x.id=='tps'+i)),onEnd:()=>$$('#tpie g').forEach(x=>x.classList.remove('hi'))})}};
@@ -574,7 +691,7 @@ palDraw();
 $('#ppal').addEventListener('click',ev=>{const b=ev.target.closest('[data-pa]');if(!b)return;stop();const t=b.dataset.pa,l=D(t).l,u=psum();
  if(u+l>TT.tot){pieDraw(-1,u>=TT.tot?'La torta è finita! Svuotala per ricominciare.':`Non ci sta! Restano solo ${fmt((TT.tot-u)/TT.beat)} di fetta.`);return}
  pc.push(t);pieDraw(pc.length-1);const{e,beats}=evs([t]);play({ev:e,beats});
- if(psum()>=TT.tot-1e-9){pieDraw(pc.length-1,'Battuta piena! Ora la torta si svuota per inserire altre note…');clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},2200)}});
+ if(psum()>=TT.tot-1e-9)pieDraw(pc.length-1,'Battuta piena! Premi «Ascolta» per sentirla, poi «Svuota la torta» per ricominciare.')});
 const DOTM={h:'hd',q:'qd'},UND={hd:'h',qd:'q'};
 function dotCalc(b){const l=D(b).l;return `${D(b).n} puntata: ${plb(l)} + ${plb(l/2)} (metà) = ${plb(l*1.5)}`}
 $('#pdot').onclick=()=>{stop();const i=pc.length-1;if(i<0){pieDraw(-1,'Inserisci prima una nota.');return}const t=pc[i];
@@ -582,7 +699,7 @@ $('#pdot').onclick=()=>{stop();const i=pc.length-1;if(i<0){pieDraw(-1,'Inserisci
  if(!DOTM[t]){pieDraw(-1,'Il punto lo mettiamo su minima o semiminima.');return}
  const add=D(t).l/2;if(psum()+add>TT.tot+1e-9){pieDraw(-1,`Non c'è spazio per il punto: servono ancora ${fmt(add/TT.beat)} di fetta.`);return}
  pc[i]=DOTM[t];{const l=D(t).l,b=TT.beat;pieDraw(i,`${D(t).n} puntata: ${fmt(l/b)} + ${fmt(l/2/b)} (metà) = ${fmt(1.5*l/b)} fette`)}const{e,beats}=evs([pc[i]]);play({ev:e,beats});
- if(psum()>=TT.tot-1e-9){clearTimeout(pAuto);pAuto=setTimeout(()=>{pc=[];pieDraw(-1,'Torta vuota: inserisci altre note!')},3000)}};
+ };
 $('#pdel').onclick=()=>{stop();pc.pop();pieDraw()};
 $('#pclr').onclick=pieReset;
 $('#ppl').onclick=e=>{if(pc.length)playT(e.currentTarget,$('#prh'),pc,{m:TT.tot,onEv:i=>{hl($('#prh'),i);$$('#pie g').forEach(x=>x.classList.toggle('hi',x.id=='ps'+i))},onEnd:()=>$$('#pie g').forEach(x=>x.classList.remove('hi'))})};
@@ -599,23 +716,23 @@ $('#tsI').innerHTML=`${N('q',1)}<b>=</b>${N('ee',1)}${split(2)}<small>1 battito 
 $('#tcI').innerHTML=`${N('qd',1)}<b>=</b>${N('e3',1)}${split(3)}<small>1 battito = 3 crome</small>`;
 
 /* linea animata semplice/composto */
-{const X0=70,BW=135,YS=60,YC=232,YB=146;let tlT=0,tlOn=false,tlM='';
+{const X0=100,BW=260,YS=62,YC=238,YB=150;let tlT=0,tlOn=false,tlM='';
  function tlDraw(el){const sb=el==null?-1:Math.floor(el*2),cb=el==null?-1:Math.floor(el*3),bb=el==null?-1:Math.floor(el);let g='';
-  g+=`<rect x="${X0-8}" y="${YS-48}" width="300" height="26" rx="8" fill="#ffb703" opacity=".3" stroke="currentColor" stroke-width="1.5"/><rect x="${X0-8}" y="${YC+38}" width="304" height="26" rx="8" fill="#1fae9e" opacity=".3" stroke="currentColor" stroke-width="1.5"/>`;
-  g+=`<text x="${X0}" y="${YS-30}" font-size="15" font-weight="800" fill="currentColor">Tempo semplice 2/4: 2 crome per battito</text><text x="${X0}" y="${YC+56}" font-size="15" font-weight="800" fill="currentColor">Tempo composto 6/8: 3 crome per battito</text>`;
-  [['2/4',YS],['6/8',YC]].forEach(([t,y])=>g+=`<text x="34" y="${y+7}" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">${t}</text>`);
-  g+=`<text x="34" y="${YB+6}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">battiti</text>`;
-  [YS,YC].forEach(y=>g+=`<line x1="${X0}" x2="${X0+4*BW}" y1="${y}" y2="${y}" stroke="currentColor" stroke-width="3"/>`);
-  for(let k=0;k<=4;k++){const x=X0+k*BW;g+=`<line x1="${x}" x2="${x}" y1="${YS-18}" y2="${YC+12}" stroke="currentColor" stroke-width="${k%2?1.5:3}" stroke-dasharray="${k%2?'5 5':''}" opacity="${k%2?.5:.8}"/>`}
-  for(let k=0;k<4;k++){const x=X0+k*BW+BW/2,on=k==bb;g+=`<circle cx="${x}" cy="${YB}" r="${on?24:18}" fill="${on?'var(--acc)':'var(--card)'}" stroke="currentColor" stroke-width="3"/><text x="${x}" y="${YB+7}" text-anchor="middle" font-size="18" font-weight="800" fill="${on?'var(--on,#fff)':'currentColor'}">${k+1}</text>`}
-  for(let j=0;j<8;j++){const x=X0+j*BW/2+BW/4,on=j==sb&&(tlM!='c');g+=`<circle cx="${x}" cy="${YS}" r="${on?15:11}" fill="${on?'#ffb703':'var(--card)'}" stroke="currentColor" stroke-width="2.5"/><text x="${x}" y="${YS+30}" text-anchor="middle" font-size="12" font-weight="800" fill="currentColor">TI</text>`}
-  for(let j=0;j<12;j++){const x=X0+j*BW/3+BW/6,on=j==cb&&(tlM!='s');g+=`<circle cx="${x}" cy="${YC}" r="${on?14:10}" fill="${on?'#1fae9e':'var(--card)'}" stroke="currentColor" stroke-width="2.5"/><text x="${x}" y="${YC+30}" text-anchor="middle" font-size="12" font-weight="800" fill="currentColor">TI</text>`}
-  if(el!=null){const x=X0+el*BW;g+=`<line x1="${x}" x2="${x}" y1="${YS-16}" y2="${YC+20}" stroke="var(--acc)" stroke-width="4" stroke-linecap="round"/>`}
+  for(let k=0;k<2;k++)g+=`<rect x="${X0+k*BW+3}" y="8" width="${BW-6}" height="284" rx="16" fill="currentColor" fill-opacity="${k==bb?.10:.04}"/>`;
+  g+=`<rect x="6" y="${YS-44}" width="628" height="84" rx="14" fill="#ffb703" fill-opacity=".28" stroke="#d99a00" stroke-width="2.5"/><rect x="6" y="${YC-40}" width="628" height="84" rx="14" fill="#1fae9e" fill-opacity=".25" stroke="#14806f" stroke-width="2.5"/>`;
+  g+=`<text x="50" y="${YS-8}" text-anchor="middle" font-size="22" font-weight="800" fill="currentColor">2/4</text><text x="50" y="${YS+16}" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">semplice</text>`;
+  g+=`<text x="50" y="${YC-8}" text-anchor="middle" font-size="22" font-weight="800" fill="currentColor">6/8</text><text x="50" y="${YC+16}" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">composto</text>`;
+  g+=`<text x="50" y="${YB+5}" text-anchor="middle" font-size="13" font-weight="800" fill="currentColor">battiti</text>`;
+  for(let k=0;k<2;k++){const x=X0+k*BW+BW/2,on=k==bb;g+=`<circle cx="${x}" cy="${YB}" r="${on?32:26}" fill="${on?'var(--acc)':'var(--card)'}" stroke="currentColor" stroke-width="3"/><text x="${x}" y="${YB+8}" text-anchor="middle" font-size="24" font-weight="800" fill="${on?'var(--on,#fff)':'currentColor'}">${k+1}</text>`;
+   g+=`<path d="M${x} ${YB-34}V${YS+28}M${x} ${YB+34}V${YC-28}" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5" opacity=".5"/>`}
+  for(let j=0;j<4;j++){const x=X0+Math.floor(j/2)*BW+(j%2?3:1)*BW/4,on=j==sb&&tlM!='c';g+=`<circle cx="${x}" cy="${YS}" r="${on?24:20}" fill="${on?'#ffb703':'var(--card)'}" stroke="currentColor" stroke-width="2.5"/><text x="${x}" y="${YS+6}" text-anchor="middle" font-size="16" font-weight="800" fill="currentColor">TI</text>`}
+  for(let j=0;j<6;j++){const x=X0+Math.floor(j/3)*BW+(2*(j%3)+1)*BW/6,on=j==cb&&tlM!='s';g+=`<circle cx="${x}" cy="${YC}" r="${on?24:20}" fill="${on?'#1fae9e':'var(--card)'}" stroke="currentColor" stroke-width="2.5"/><text x="${x}" y="${YC+6}" text-anchor="middle" font-size="16" font-weight="800" fill="currentColor">TI</text>`}
+  if(el!=null){const x=X0+el*BW;g+=`<line x1="${x}" x2="${x}" y1="14" y2="286" stroke="var(--acc)" stroke-width="4" stroke-linecap="round" opacity=".8"/>`}
   $('#tla').innerHTML=g}
- function fr(){if(!tlOn)return;const el=(performance.now()-tlT)/(60000/bpm);tlDraw(Math.max(0,Math.min(3.999,el)));requestAnimationFrame(fr)}
- const go=(btn,m)=>toggle(btn,()=>{tlM=m;const ev=[];if(m!='c')for(let j=0;j<8;j++)ev.push({s:j/2,l:.45,i:0});if(m!='s')for(let j=0;j<12;j++)ev.push({s:j/3,l:.3,i:0});
-  tlT=performance.now()+80;tlOn=true;requestAnimationFrame(fr);play({ev,beats:4,acc:2,loop:true,onBeat:b=>{if(b==0)tlT=performance.now()},onEnd:()=>{tlOn=false;tlDraw(null)}})});
- $('#tlS').onclick=e=>go(e.currentTarget,'s');$('#tlC').onclick=e=>go(e.currentTarget,'c');$('#tlB').onclick=e=>go(e.currentTarget,'b');
+ function fr(){if(!tlOn)return;const el=(performance.now()-tlT)/(60000/bpm);tlDraw(Math.max(0,Math.min(1.999,el)));requestAnimationFrame(fr)}
+ const go=(btn,m)=>toggle(btn,()=>{tlM=m;const ev=[];if(m!='c')for(let j=0;j<4;j++)ev.push({s:j/2,l:.45,i:0,v:'i'});if(m!='s')for(let j=0;j<6;j++)ev.push({s:j/3,l:.3,i:0,v:'i'});
+  tlT=performance.now()+80;tlOn=true;requestAnimationFrame(fr);play({ev,beats:2,acc:2,loop:true,onBeat:b=>{if(b==0)tlT=performance.now()},onEnd:()=>{tlOn=false;tlDraw(null)}})});
+ $('#tlS').onclick=e=>go(e.currentTarget,'s');$('#tlC').onclick=e=>go(e.currentTarget,'c');
  tlDraw(null)}
 
 /* tempi */
@@ -690,18 +807,50 @@ const FILS=[
 {t:'La legatura',v:[['Due note per la mano',['q','e','e','q','h','r','r'],['Due','no-te','per la','ma-','no','sst','sst']],
  ['la legatura le tiene insieme così:',['e','e','e','e','e','e','q','r'],['la le-','ga-tu-','ra le','tie-ne','in-sie-','me co-','sì:','sst']],
  ['Uuuuno, duuuue!',['h~','q','q','h~','h'],['Uuuu-','…','no,','duuuu-','e!']],
- ['Non si suona due volte, si somma e va!',['e','e','e','e','e','q','h'],['Non si','suo-na','due vol-','te, si','som-ma','e','va!']]]}];
+ ['Non si suona due volte, si somma e va!',['e','e','e','e','e','q','h'],['Non si','suo-na','due vol-','te, si','som-ma','e','va!']]]},
+{t:'La pioggia',v:[['Plin plin plon, la pioggia fa plin!',['q','q','q','r','e','e','h'],['Plin','plin','plon,','sst','la piog-','gia fa','plin!']],
+ ['Gocce gocce sulla città: tic tic tic tac!',['e','e','e','e','q','q','q','q'],['Goc-ce','goc-ce','sul-la','cit-tà:','tic','tic','tic','tac!']],
+ ['Il temporale fa: BUUUM!',['e','e','e','r','w'],['Il tem-','po-ra-','le fa:','sst','BUUUM!']],
+ ['e poi torna il sole, ecco qua!',['e','e','e','r','e','h','r'],['e poi','tor-na il','so-le,','sst','ec-co','qua!','sst']]]},
+{t:'Il cavallino',v:[['Galoppa, galoppa il cavallino,',['t3','t3','t3','q','h','r','r'],['Ga-lop-pa,','ga-lop-pa','il ca-val-','li-','no,','sst','sst']],
+ ['corre corre nel prato e va!',['e','e','e','e','h','r','r'],['cor-re','cor-re','nel pra-','to e','va!','sst','sst']],
+ ['Trotta trotta di qua, trotta trotta di là!',['t3','t3','q','q','t3','t3','q','q'],['Trot-ta trot-','ta, trot-ta','di','qua,','trot-ta trot-','ta, trot-ta','di','là!']],
+ ['Hop! Salta e si feeerma!',['q','r','e','e','h','h'],['Hop!','sst','sal-ta','e si','feeer-','ma!']]]},
+{t:"L'orologio",v:[["Tic tac, tic tac, l'orologio va,",['q','q','q','q','e','e','h'],['Tic','tac,','tic','tac,',"l'o-ro-",'lo-gio','va,']],
+ ['segna i minuti uno per uno,',['e','e','e','e','q','q','h'],['se-gna','i mi-','nu-ti','u-no','per','u-','no,']],
+ ["Dong! Suona l'ora, dong, dong!",['h','e','e','h','h'],['Dong!','suo-na',"l'o-ra,",'dong,','dong!']],
+ ['e il tempo passa: tic tac, va!',['e','e','e','r','q','q','h'],['e il','tem-po','pas-sa:','sst','tic','tac,','va!']]]},
+{t:'La minima',v:[['La minima è luuunga, lunga,',['e','e','h','h','q','q'],['La mi-','ni-ma è','luuun-','ga,','lun-','ga,']],
+ ['dura due battiti, conta con me:',['e','e','e','r','e','q','q','r'],['du-ra','due bat-','ti-ti,','sst','con-ta','con','me:','sst']],
+ ['Uuuno, duuue!',['h','h','h','h'],['Uuu-','no,','duuu-','e!']],
+ ['TA-A, TA-A, che bello è!',['h','h','e','q','q','r'],['TA-A,','TA-A,','che bel-','lo','è!','sst']]]},
+{t:'La semibreve',v:[['Semibreve, grande regina,',['e','e','e','e','h','r','r'],['Se-mi-','bre-ve,','gran-de','re-gi-','na,','sst','sst']],
+ ['dura tutta la battuta:',['e','e','e','e','rw'],['du-ra','tut-ta','la bat-','tu-ta:','sst']],
+ ['quattro battiti, ascolta bene:',['e','e','e','e','h','h'],['quat-tro','bat-ti-','ti, a-','scol-ta','beee-','ne:']],
+ ['TA-A-A-A… che lungo fiato!',['w','e','e','q','r'],['TA-A-A-A…','che lun-','go fia-','to!','sst']]]},
+{t:'Il valzer (3/4)',m:3,v:[['Un, due, tre, giriamo in tre,',['q','q','q','e','e','q'],['Un,','due,','tre,','gi-ria-','mo in','tre,']],
+ ['il valzer balla con me,',['e','q','q','q','q','q'],['il val-','zer','bal-','la','con','me,']],
+ ['gira gira tutto il mondo,',['e','e','e','h','q'],['gi-ra','gi-ra','tut-to il','moon-','do,']],
+ ['un, due, tre… e stop!',['q','q','q','q','q','r'],['un,','due,','tre…','e','stop!','sst']]]},
+{t:'La terzina',v:[['Terzina, terzina, tre nel posto di due!',['t3','t3','e','e','q','h','r'],['Ter-zi-na,','ter-zi-na,','tre nel','po-sto','di','due!','sst']],
+ ['Cioccolata, cioccolata, che bontà!',['t3','q','t3','q','e','q','r','r'],['Cioc-co-la-','ta,','cioc-co-la-','ta,','che bon-','tà!','sst','sst']],
+ ['TI-TI-TI in un battito sta!',['t3','e','e','q','h','r','r'],['TI-TI-TI','in un','bat-ti-','to','sta!','sst','sst']],
+ ['TER-ZI-NA, TER-ZI-NA, sì!',['t3','t3','h','rw'],['TER-ZI-NA,','TER-ZI-NA,','sì!','sst']]]},
+{t:'Gli animali',v:[['Il gatto fa miao, miao, miaaao!',['e','q','q','e','e','r','h'],['Il gat-','to','fa','mia-o,','mia-o,','sst','miaaao!']],
+ ['il cane fa bau bau bauuu!',['e','q','q','r','q','q','h'],['il ca-','ne','fa','sst','bau','bau,','bauuu!']],
+ ['la mucca lenta fa muuuuu!',['e','e','e','r','w'],['la muc-','ca len-','ta fa','sst','muuuuu!']],
+ ['e il pulcino pio pio pio pio piooo!',['e','e','q','q','q','q','h'],['e il pul-','ci-no','pio','pio','pio,','pio,','piooo!']]]}];
 let fi=0,FALL=[],FMAP=[];
 function fShow(i){stop();fi=i;const F=FILS[i];$('#ftit').textContent=F.t;
  $('#ftx').innerHTML=F.v.map((f,k)=>`<span id="fl${k}" style="display:block;border-radius:10px;padding:0 8px">${f[0]}</span>`).join('');
  $('#frh').innerHTML=F.v.map((f,k)=>`<div class="rh" id="fr${k}"></div>`).join('');
- F.v.forEach((f,k)=>R($('#fr'+k),f[1],{m:4,sig:k?0:4,syl:1,lyr:f[2]}));
+ const FM=F.m||4;F.v.forEach((f,k)=>R($('#fr'+k),f[1],{m:FM,sig:k?0:FM,syl:1,lyr:f[2]}));
  FALL=[].concat(...F.v.map(f=>f[1]));FMAP=[];F.v.forEach((f,k)=>f[1].forEach((t,j)=>FMAP.push([k,j])));
  $$('#fsel button').forEach((b,k)=>b.classList.toggle('pl',k==i))}
 $('#fsel').innerHTML=FILS.map((F,i)=>`<button data-f="${i}">${i+1}. ${F.t}</button>`).join('');
 $$('#fsel button').forEach(b=>b.onclick=()=>fShow(+b.dataset.f));
 function fHl(k){FILS[fi].v.forEach((f,i)=>{const on=k>=0&&FMAP[k][0]==i;hl($('#fr'+i),on?FMAP[k][1]:-1);$('#fl'+i).style.background=on?'color-mix(in srgb,var(--acc) 30%,transparent)':''})}
-$('#fpl').onclick=e=>toggle(e.currentTarget,()=>{const{e:ev,beats}=evs(FALL);play({ev,beats,acc:4,onEv:fHl,onEnd:()=>fHl(-1)})});
+$('#fpl').onclick=e=>toggle(e.currentTarget,()=>{const{e:ev,beats}=evs(FALL);play({ev,beats,acc:FILS[fi].m||4,onEv:fHl,onEnd:()=>fHl(-1)})});
 fShow(0);
 
 /* componi */
@@ -756,8 +905,114 @@ $$('[data-lv]').forEach(b=>b.onclick=()=>lvSet(+b.dataset.lv));
 $('#qpl').onclick=()=>playT($('#qpl'),null,qz.ans,{m:qz.m});
 $('#qnew').onclick=newQ;lvSet(0);
 
+/* sposta Ascolta e gioca dentro il Gioco finale */
+{const qc=$('#quiz .card');qc.id='gfQC';qc.hidden=true;$('#finale').appendChild(qc);$('#quiz').remove();const cc=$('#componi .card');cc.id='gfCC';cc.hidden=true;$('#finale').appendChild(cc);$('#componi').remove();const lc=document.createElement('div');lc.id='gfLC';lc.hidden=true;$$('#leggi .card').forEach(c=>lc.appendChild(c));$('#finale').appendChild(lc);$('#leggi').remove()}
+
+/* gioco finale */
+{const BANK=[["Il ritmo è…","come suoniamo sopra la pulsazione: suoni lunghi, corti e pause","la velocità della musica","il numero sopra della frazione","il volume del suono"],
+ ["La pulsazione è…","il battito regolare che non cambia","una nota lunga","una pausa","un accordo"],
+ ["Nel tempo 3/4 quanti battiti ci sono in ogni battuta?","3","4","2","6"],
+ ["Nel 6/8 quante pulsazioni ci sono in ogni battuta?","2","6","3","8"],
+ ["Nei tempi composti ogni battito si divide in…","3 crome","2 crome","4 crome","1 croma"],
+ ["Il punto di valore…","aggiunge metà del valore della nota","raddoppia il valore","toglie metà del valore","non cambia niente"],
+ ["La legatura di valore unisce…","due note uguali e somma i loro valori","due note diverse","una nota e una pausa","due battute"],
+ ["Minima legata a semiminima: quanto dura?","3 battiti","2 battiti","4 battiti","1 battito"],
+ ["Una terzina è…","3 crome nello spazio di 2","3 semiminime","una nota con il punto","un accordo di 3 note"],
+ ["La triade è formata da…","fondamentale, terza e quinta","prima, seconda e terza","tre note uguali","tre pause"],
+ ["In una triade maggiore, tra 1° e 3° grado ci sono…","2 toni","1 tono e mezzo","3 toni","1 tono"],
+ ["In una triade minore, tra 1° e 3° grado c'è…","1 tono e mezzo","2 toni","1 tono","3 toni e mezzo"],
+ ["Quale grado caratterizza la triade (maggiore o minore)?","il 3° grado","il 1° grado","il 5° grado","nessuno"],
+ ["Con la mano, nel 4/4 il primo movimento va…","giù","su","a destra","a sinistra"],
+ ["L'ordine dei movimenti della mano è…","giù, sinistra, destra, su","su, giù, destra, sinistra","giù, su, giù, su","destra, sinistra, giù, su"],
+ ["Il numero sotto nella frazione 3/4 dice che…","ogni battito vale una semiminima","ci sono 4 battute","ci sono 4 battiti","la musica è veloce"],
+ ["Il tempo (la frazione) è…","la cornice: come si raggruppano i battiti","quanto è veloce la musica","il ritmo","una pausa"],
+ ["Quante crome ci sono in una minima?","4","2","8","3"],
+ ["La pausa di minima…","è seduta sopra la riga","è appesa sotto la riga","ha la forma di un 7","ha il punto"],
+ ["La pausa di semibreve…","è appesa sotto la riga","è seduta sopra la riga","ha la forma di un 7","dura 1 battito"],
+ ["Andante significa…","come chi cammina","velocissimo","fermo","molto lento e solenne"],
+ ["2/4 e 6/8 alla stessa velocità del battito…","durano uguale, cambiano solo le crome","il 6/8 dura il triplo","il 2/4 è più lungo","non si possono confrontare"]];
+ const sh=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]),pk=a=>a[Math.random()*a.length|0];
+ const LB={4:'4 battiti',2:'2 battiti',1:'1 battito',.5:'½ battito',3:'3 battiti',1.5:'1 battito e ½'},FN={w:'semibreve',h:'minima',q:'semiminima',e:'coppia di crome',c:'croma',hd:'minima puntata',qd:'semiminima puntata',r:'pausa di semiminima',rh:'pausa di minima',rc:'pausa di croma',rw:'pausa di semibreve'};
+ const st={i:0,sc:0,rs:[],done:false},A=()=>$('#gfA'),M=t=>$('#gfM').innerHTML=t;
+ function party(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const c=$('#finale .card');for(let k=0;k<36;k++){const d=document.createElement('i');d.className='cf';d.style.cssText=`left:${Math.random()*100}%;background:${pk(['#ff4f6d','#ffb703','#1fae9e','#3a86ff','#7b61ff'])};animation-delay:${Math.random()*.3}s;transform:rotate(${Math.random()*360}deg)`;c.appendChild(d);setTimeout(()=>d.remove(),1800)}}
+ function win(p,t){if(st.done)return;st.done=true;st.sc+=p;$('#gfP').textContent=`Prova ${st.i} di ${st.N} · Punti: ${st.sc}`;M(t);if(p>=1)party();$('#gfN').style.display=''}
+ function head(){$('#gfP').textContent=`Prova ${Math.min(st.i+1,st.N)} di ${st.N} · Punti: ${st.sc}`}
+ const R1={
+ fill(){const m=pk([2,3,4]),tg=pk(['h','qd','e','r'].concat(m>=3?['hd']:[]).concat(m==4?['w']:[])),pal=['w','h','hd','q','qd','e','c','r','rh','rc'];let cs=[];
+  A().innerHTML=`<p style="font-size:18px"><b>Riempi la battuta!</b> Tempo <b>${m}/4</b>: usa almeno una <b>${FN[tg]}</b>.</p><div class="rh" id="fbR"></div><div class="cards" id="fbP" style="margin-top:8px"></div><div class="row2"><button id="fbD">Togli l'ultima</button></div>`;
+  $('#fbP').innerHTML=pal.map(t=>`<button data-fb="${t}">${N(D(t).k,1)}<small>${FN[t]}</small></button>`).join('');
+  const sum=()=>cs.reduce((x,t)=>x+D(t).l,0),dr=()=>{R($('#fbR'),cs,{m,sig:m,syl:1});const u=sum();if(!st.done)M(u<m?`Mancano ${LB[m-u]||((m-u)+' battiti')}.`:'')};dr();
+  $('#fbP').onclick=e=>{const b=e.target.closest('[data-fb]');if(!b||st.done)return;const t=b.dataset.fb,l=D(t).l,u=sum();if(u+l>m+1e-9){M(u>=m-1e-9?`La battuta è piena, ma manca la ${FN[tg]}: togli qualcosa e riprova!`:`Non ci sta! Restano ${LB[m-u]||((m-u)+' battiti')}.`);return}
+   cs.push(t);dr();const{e:ev,beats}=evs([t]);play({ev,beats});
+   if(sum()>=m-1e-9){if(cs.includes(tg)){setTimeout(()=>{const{e:ev2,beats:b2}=evs(cs);stop();play({ev:ev2,beats:b2,acc:m,onEv:i=>hl($('#fbR'),i),onEnd:()=>hl($('#fbR'),-1)})},500);win(1,'Battuta perfetta! Ascoltala!')}else M(`La battuta è piena, ma manca la ${FN[tg]}: togli qualcosa e riprova!`)}};
+  $('#fbD').onclick=()=>{if(st.done)return;cs.pop();dr()};$('#gfN').style.display=''},
+ tap(){const P=pk([['q','q','h','r'],['q','e','q','e','h'],['e','e','q','h'],['q','r','e','q','h'],['h','e','e','q','r','q']]),x=bar(4,['q','e','h','r','q','e']).concat(sh(P).slice(0,0)),toks=x.concat(bar(4,['q','e','h','r','q']));
+  A().innerHTML=`<p style="font-size:18px"><b>Batti il ritmo!</b> Prima ascoltalo, poi premi «Tocca tu!»: dopo il conto 1-2-3-4 tocca il tamburo a ogni nota (sulle pause stai fermo!).</p><div class="rh" id="tpR"></div>
+   <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:10px"><button id="tpPad" class="pad" aria-label="Tamburo">TA!</button><div class="big" id="tpC" style="min-width:2ch"></div></div>
+   <div class="row2"><button class="pl" id="tpL" data-t="▶ Ascolta il ritmo">▶ Ascolta il ritmo</button><button class="pl" id="tpGo" data-t="Tocca tu!">Tocca tu!</button></div>`;
+  R($('#tpR'),toks,{m:4,sig:4,syl:1});let taps=null,t0=0,spb=0,exp=[];const pad=$('#tpPad');
+  const hit=()=>{pad.classList.remove('bt');void pad.offsetWidth;pad.classList.add('bt');if(taps)taps.push(performance.now())};
+  pad.onpointerdown=e=>{e.preventDefault();hit()};
+  $('#tpL').onclick=e=>playT(e.currentTarget,$('#tpR'),toks,{m:4});
+  $('#tpGo').onclick=e=>{if(st.done)return;toggle(e.currentTarget,()=>{const{e:ev}=evs(toks);spb=60000/bpm;exp=ev.filter(z=>!z.rest&&!z.vis).map(z=>({t:(4+z.s)*spb,i:z.i}));taps=[];t0=performance.now()+80;
+   play({ev:ev.map(z=>({s:z.s+4,l:z.l,i:z.i,vis:1})),beats:12,acc:4,onBeat:b=>{$('#tpC').textContent=b<4?b+1:'';if(b==0)t0=performance.now()},onEv:i=>hl($('#tpR'),i),onEnd:()=>{hl($('#tpR'),-1);
+    const T=taps.map(x=>x-t0),used=new Set(),tol=Math.min(230,Math.max(140,spb*.3));let h=0;const ok=new Set(),bad=new Set();
+    exp.forEach(z=>{let bi=-1,bd=1e9;T.forEach((x,k)=>{const d=Math.abs(x-z.t);if(!used.has(k)&&d<bd){bd=d;bi=k}});if(bi>=0&&bd<=tol){used.add(bi);h++;ok.add(z.i)}else bad.add(z.i)});
+    const extra=T.length-used.size,sc=h/Math.max(exp.length,h+extra);taps=null;
+    $$('#tpR .tk').forEach(el=>{const i=+el.dataset.i;el.style.background=ok.has(i)?'color-mix(in srgb,#1fae9e 40%,transparent)':bad.has(i)?'color-mix(in srgb,#ff4f6d 40%,transparent)':''});
+    const p=sc>=.8?1:sc>=.5?.5:0;if(p)win(p,`Hai preso ${h} note su ${exp.length}${extra?` (e ${extra} colpi in più)`:''}! ${p==1?'Fantastico!':'Bene, quasi!'}`);else M(`Hai preso ${h} note su ${exp.length}. In verde quelle giuste, in rosso quelle perse: riprova!`)}})})};
+  addEventListener('keydown',function kd(e){if(!document.body.contains(pad)){removeEventListener('keydown',kd);return}if(e.code=='Space'&&taps){e.preventDefault();hit()}});
+  $('#gfN').style.display=''},
+ li(){const m=pk([2,3,4]),P=['q','e','r','h','c','qd','rh'],mk=()=>bar(m,P).concat(bar(m,P));let c;do c=mk();while(c.every(t=>D(t).rest));const o=[c];let g=0;while(o.length<3&&g++<200){const x=mk();if(!o.some(y=>y.join()==x.join()))o.push(x)}const oo=sh(o);
+  A().innerHTML=`<p style="font-size:18px"><b>Ascolta e scegli!</b> Premi «Ascolta» e tocca il ritmo che senti.</p><div class="row2"><button class="pl" id="liL" data-t="▶ Ascolta">▶ Ascolta</button></div><div id="liO" style="display:grid;gap:8px"></div>`;
+  $('#liO').innerHTML=oo.map((x,k)=>`<button class="opt" data-k="${k}"><div class="rh"></div></button>`).join('');
+  $$('#liO .opt').forEach((b,k)=>{R(b.firstElementChild,oo[k],{m,sig:m,syl:1});b.onclick=()=>{if(st.done)return;if(oo[k]==c){b.classList.add('ok');win(1,'Che orecchio!')}else{b.classList.remove('no');void b.offsetWidth;b.classList.add('no');M('Non è questo: ascolta ancora!');st.li=(st.li||0)+1;if(st.li>=2){$$('#liO .opt')[oo.indexOf(c)].classList.add('ok');win(0,'Ecco quello giusto, in verde.')}}}});
+  st.li=0;$('#liL').onclick=e=>playT(e.currentTarget,null,c,{m});$('#gfN').style.display='none'},
+ sig(){const m=pk([2,3,4]),P=['q','e','h','r','qd','c'];let x;do x=bar(m,P).concat(bar(m,P),bar(m,P));while(x.every(t=>D(t).rest));
+  A().innerHTML=`<p style="font-size:18px"><b>Trova il tempo!</b> Guarda le battute: qual è la frazione giusta?</p><div class="rh" id="sgR"></div><div class="row2" id="sgO"></div><div class="row2"><button class="pl" id="sgL" data-t="▶ Ascolta">▶ Ascolta</button></div>`;
+  R($('#sgR'),x,{m,syl:1});$('#sgO').innerHTML=[2,3,4].map(n=>`<button class="opt" style="width:auto;font-size:26px;font-weight:800;padding:4px 22px" data-n="${n}">${n}/4</button>`).join('');
+  $$('#sgO .opt').forEach(b=>b.onclick=()=>{if(st.done)return;if(+b.dataset.n==m){b.classList.add('ok');win(1,`Giusto! Ogni battuta ha ${m} battiti.`)}else{b.classList.add('no');$$('#sgO .opt').find(z=>+z.dataset.n==m).classList.add('ok');win(0,`Era ${m}/4: conta i battiti tra una stanghetta e l'altra!`)}});
+  $('#sgL').onclick=e=>playT(e.currentTarget,$('#sgR'),x,{m});$('#gfN').style.display='none'},
+ lung(){const P=['w','h','q','c','hd','qd','rw','rh','r','rc'];let a,b;do{a=pk(P);b=pk(P)}while(D(a).l==D(b).l);const lo=Math.random()<.5,o=[a,b],g=lo?(D(a).l<D(b).l?0:1):(D(a).l>D(b).l?0:1);
+  A().innerHTML=`<p style="font-size:18px"><b>${lo?'Più corta!':'Più lunga!'}</b> Tocca quella che dura di <b>${lo?'meno':'più'}</b>.</p><div style="display:flex;gap:14px;flex-wrap:wrap">${o.map((t,k)=>`<button class="opt big2" data-k="${k}" style="width:auto;flex:1 1 150px">${N(D(t).k,1)}</button>`).join('')}</div>`;
+  $$('#gfA .opt').forEach((x,k)=>x.onclick=()=>{if(st.done)return;$$('#gfA .opt')[g].classList.add('ok');const tx=`${FN[o[0]]}: ${LB[D(o[0]).l]} · ${FN[o[1]]}: ${LB[D(o[1]).l]}`;if(k==g)win(1,'Giusto! '+tx);else{x.classList.add('no');win(0,tx)}});$('#gfN').style.display='none'},
+ caccia(){let x;do x=bar(4,['q','e','h','r','rh','c','rc','qd']).concat(bar(4,['q','e','h','r','rh','qd']));while(x.filter(t=>D(t).rest).length<2);let err=0,found=0;const tot=x.filter(t=>D(t).rest).length;
+  A().innerHTML=`<p style="font-size:18px"><b>Caccia alla pausa!</b> Tocca tutte le pause del pentagramma. Sono <b>${tot}</b>.</p><div class="rh" id="ccR"></div>`;R($('#ccR'),x,{m:4,sig:4,syl:0});
+  $$('#ccR .tk').forEach(el=>{el.style.cursor='pointer';el.onclick=()=>{if(st.done||el.dataset.f)return;const t=x[+el.dataset.i];el.dataset.f=1;
+   if(D(t).rest){el.style.background='color-mix(in srgb,#1fae9e 45%,transparent)';found++;M(`Trovate ${found} su ${tot}!`);if(found==tot)win(err?.5:1,err?'Tutte trovate, ma con qualche errore!':'Perfetto, tutte le pause!')}
+   else{el.style.background='color-mix(in srgb,#ff4f6d 40%,transparent)';err++;M('Questa è una nota, non una pausa!');setTimeout(()=>{el.style.background='';delete el.dataset.f},700)}}});$('#gfN').style.display=''},
+ memo(){const P=sh(['w','h','q','c','hd','qd']).slice(0,3);let cs=sh(P.flatMap(t=>[{t,f:1},{t,f:0}])),op=[],ok=0,mv=0;
+  A().innerHTML=`<p style="font-size:18px"><b>Memory!</b> Gira due carte: trova la figura e la sua durata.</p><div id="mmG" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px"></div>`;
+  $('#mmG').innerHTML=cs.map((c,k)=>`<button class="mm" data-k="${k}"><span class="mmb">?</span><span class="mmf">${c.f?N(D(c.t).k,1):`<b>${LB[D(c.t).l]}</b>`}</span></button>`).join('');
+  $$('#mmG .mm').forEach(b=>b.onclick=()=>{if(st.done||b.classList.contains('up')||op.length==2)return;b.classList.add('up');op.push(b);if(op.length==2){mv++;const[a1,a2]=op,c1=cs[+a1.dataset.k],c2=cs[+a2.dataset.k];
+   if(c1.t==c2.t&&c1.f!=c2.f){a1.classList.add('ok');a2.classList.add('ok');op=[];ok++;const{e:ev,beats}=evs([c1.t]);play({ev,beats});if(ok==3)win(mv<=5?1:.5,`Finito in ${mv} mosse!`)}
+   else setTimeout(()=>{a1.classList.remove('up');a2.classList.remove('up');op=[]},900)}});$('#gfN').style.display=''},
+ torta(){const RM={.5:'c',1:'q',1.5:'qd',2:'h',3:'hd'},rm=pk([.5,1,1.5,2,3]),f=4-rm,o=sh(sh(Object.keys(RM).map(Number).filter(x=>x!=rm)).slice(0,3).concat([rm]));
+  A().innerHTML=`<p style="font-size:18px"><b>Finisci la torta!</b> La battuta in 4/4 è piena per ${LB[f]||f+' battiti'}. Quale figura la completa?</p><div style="display:flex;justify-content:center">${mini(f,4,'#ffb703').replace('width="48" height="48"','width="150" height="150"')}</div><div id="toO" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:8px"></div>`;
+  $('#toO').innerHTML=o.map(l=>`<button class="opt" style="text-align:center">${N(D(RM[l]).k,1)}<br>${FN[RM[l]]}</button>`).join('');
+  $$('#toO .opt').forEach((b,k)=>b.onclick=()=>{if(st.done)return;$$('#toO .opt')[o.indexOf(rm)].classList.add('ok');if(o[k]==rm)win(1,`Esatto! Mancava ${LB[rm]}.`);else{b.classList.add('no');win(0,`Mancava ${LB[rm]}: la ${FN[RM[rm]]}.`)}});$('#gfN').style.display='none'},
+ and(){const C=[['Largo',50],['Andante',90],['Presto',180]],c=pk(C);
+  A().innerHTML=`<p style="font-size:18px"><b>Indovina l'andamento!</b> Ascolta il battito: è lento, normale o veloce?</p><div class="row2"><button class="pl" id="anL" data-t="▶ Ascolta il battito">▶ Ascolta il battito</button></div><div class="row2" id="anO"></div>`;
+  $('#anO').innerHTML=C.map(x=>`<button class="opt" style="width:auto;padding:6px 20px;font-size:18px">${x[0]}</button>`).join('');
+  $('#anL').onclick=e=>toggle(e.currentTarget,()=>play({beats:8,acc:4,bpm:c[1],ev:Array.from({length:8},(_,k)=>({s:k,l:.5,i:0}))}));
+  $$('#anO .opt').forEach((b,k)=>b.onclick=()=>{if(st.done)return;stop();const g=C.indexOf(c);$$('#anO .opt')[g].classList.add('ok');if(k==g)win(1,`Bravo! ${c[0]}: ${c[1]} battiti al minuto.`);else{b.classList.add('no');win(0,`Era ${c[0]} (${c[1]} battiti al minuto).`)}});$('#gfN').style.display='none'},
+ quiz(){let q;if(Math.random()<.6){const b=pk(BANK),o=sh(b.slice(1));q={q:b[0],o,a:o.indexOf(b[1])}}else{const k=pk(['w','h','q','c','hd','qd','rw','rh','r','rc']),l=D(k).l,o=sh(sh([4,2,1,.5,3,1.5].filter(x=>x!=l)).slice(0,3).concat([l]));q={q:`<span style="color:var(--ink)">${N(D(k).k,1)}</span><br>Quanto dura questa ${D(k).rest?'pausa':'figura'}?`,o:o.map(x=>LB[x]),a:o.indexOf(l)}}
+  A().innerHTML=`<p style="font-size:18px"><b>Domanda a sorpresa!</b></p><div style="font-size:18px;font-weight:700;margin-bottom:8px">${q.q}</div><div id="qzO" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px"></div>`;
+  $('#qzO').innerHTML=q.o.map((x,k)=>`<button class="opt">${x}</button>`).join('');
+  $$('#qzO .opt').forEach((b,k)=>b.onclick=()=>{if(st.done)return;$$('#qzO .opt')[q.a].classList.add('ok');if(k==q.a)win(1,'Esatto!');else{b.classList.add('no');win(0,'La risposta giusta è in verde.')}});$('#gfN').style.display='none'}};
+ function nx(){stop();if(st.i>=st.N){end();return}st.done=false;M('');head();R1[st.rs[st.i]]();st.i++}
+ function end(){const n=st.sc,N=st.N,stars=Math.round(n/N*5);$('#gfP').textContent='Partita finita!';A().innerHTML=`<div class="big" style="color:#ffb703;font-size:56px">${'★'.repeat(stars)}<span style="opacity:.25">${'★'.repeat(5-stars)}</span></div><p style="font-size:20px">Hai fatto <b>${n} punti su ${N}</b>. ${n>=N*.85?'Siete campioni del ritmo!':n>=N/2?'Molto bene, continuate così!':'Ripassate le lezioni e riprovate!'}</p><div class="row2"><button class="pl" id="gfA2">Gioca ancora</button></div>`;M('');$('#gfN').style.display='none';if(n>=N/2)party();$('#gfA2').onclick=()=>start(st.ty)}
+ const GAMES=[['mix','Partita mista','tutti i giochi insieme'],['fill','Riempi la battuta','metti le note giuste'],['tap','Batti il ritmo','suona sul tamburo'],['li','Ascolta e scegli','allena l\'orecchio'],['livelli','Ascolta e gioca','4 livelli: da Facile a Campione'],['componi','Componi il tuo ritmo','scrivi e ascolta'],['leggi','Leggi il ritmo','TA, TI-TI ed esercizi'],['sig','Trova il tempo','2/4, 3/4 o 4/4?'],['lung','Più lunga!','quale dura di più?'],['caccia','Caccia alla pausa','trova tutte le pause'],['memo','Memory','figura e durata'],['torta','Finisci la torta','cosa manca?'],['and','Indovina l\'andamento','lento o veloce?'],['quiz','Domande a sorpresa','teoria veloce']];
+ function menu(){stop();$('#gfQC').hidden=true;$('#gfCC').hidden=true;$('#gfLC').hidden=true;$('#gfP').textContent='Scegli un gioco!';M('');$('#gfN').style.display='none';$('#gfR').style.display='none';
+  A().innerHTML=`<div class="cards gmenu">${GAMES.map(([k,n,d])=>`<button data-gm="${k}"${k=='mix'?' class="hlb"':''}><b>${n}</b><small>${d}</small></button>`).join('')}</div>`;
+  $$('[data-gm]').forEach(b=>b.onclick=()=>start(b.dataset.gm))}
+ function start(ty){$('#gfR').style.display='';if(ty=='leggi'){A().innerHTML='';M('');$('#gfP').textContent='';$('#gfN').style.display='none';$('#gfQC').hidden=true;$('#gfCC').hidden=true;$('#gfLC').hidden=false;return}
+ if(ty=='componi'){$('#gfLC').hidden=true;A().innerHTML='';M('');$('#gfP').textContent='';$('#gfN').style.display='none';$('#gfQC').hidden=true;$('#gfCC').hidden=false;cr();return}
+ if(ty=='livelli'){$('#gfCC').hidden=true;$('#gfLC').hidden=true;A().innerHTML='';M('');$('#gfP').textContent='';$('#gfN').style.display='none';$('#gfQC').hidden=false;newQ();return}$('#gfQC').hidden=true;$('#gfCC').hidden=true;$('#gfLC').hidden=true;st.ty=ty;st.i=0;st.sc=0;const all=GAMES.slice(1).map(g=>g[0]).filter(k=>!['livelli','componi','leggi'].includes(k));st.rs=ty=='mix'?sh(all).slice(0,8):Array(5).fill(ty);st.N=st.rs.length;nx()}
+ $('#gfN').onclick=nx;$('#gfR').onclick=menu;menu()}
+
 /* navigazione */
-$('#nav').innerHTML=PAGES.map(([h,t],i)=>`${i==11?'<span class="sep"></span>':''}<a href="#${h}"><b>${i+1}</b>${t}</a>`).join('');
+$('#nav').innerHTML=PAGES.map(([h,t],i)=>`${i==11?'<span class="sep"></span>':''}<a href="#${h}"${h=='finale'?' class="gtile"':''}><b>${h=='finale'?'★':i+1}</b>${t}${h=='finale'?'<small>giochi, ascolto, componi</small>':''}</a>`).join('');
 function show(){stop();let h=location.hash.slice(1);if(!PAGES.some(p=>p[0]==h))h='battito';
  $$('.pg').forEach(s=>s.hidden=s.id!=h);$$('#'+h+' .rh').forEach(ties);$$('#nav a').forEach(a=>a.classList.toggle('cur',a.hash=='#'+h));
  const i=PAGES.findIndex(p=>p[0]==h),n=PAGES[i+1];$('#nx').innerHTML=n?`<a class="nxt" href="#${n[0]}">Prossima lezione: ${n[1]} →</a>`:'';scrollTo(0,0)}
