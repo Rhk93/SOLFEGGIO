@@ -718,8 +718,9 @@ $$('[data-pt]').forEach(b=>b.onclick=()=>ptSet(+b.dataset.pt));
 ptSet(2);
 
 /* illustrazioni semplice/composto */
-function split(n){const C=26,Rr=23,c=['#ffb703','#1fae9e','#ff4f6d'];let g='';for(let k=0;k<n;k++){const a0=2*Math.PI*k/n-Math.PI/2,a1=2*Math.PI*(k+1)/n-Math.PI/2;g+=`<path d="M${C} ${C}L${C+Rr*Math.cos(a0)} ${C+Rr*Math.sin(a0)}A${Rr} ${Rr} 0 0 1 ${C+Rr*Math.cos(a1)} ${C+Rr*Math.sin(a1)}Z" fill="${c[k]}" stroke="#fff" stroke-width="2"/>`}
- return `<svg viewBox="0 0 52 52" width="52" height="52" aria-hidden="true">${g}<circle cx="${C}" cy="${C}" r="${Rr}" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>`}
+function split(n){const W=96,c=['#ffb703','#1fae9e','#ff4f6d'];let g=`<path transform="translate(${W/2-12} 0) scale(.13)" d="M50 86C20 62 4 46 4 28 4 14 15 4 28 4c10 0 18 6 22 14 4-8 12-14 22-14 13 0 24 10 24 24 0 18-16 34-46 58z" fill="#e63946"/><text x="${W/2+4}" y="10" font-size="10" font-weight="800" fill="currentColor">1 battito</text><path d="M4 16V20H${W+4}V16" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
+ for(let k=0;k<n;k++){const x=4+k*W/n;g+=`<rect x="${x+1}" y="24" width="${W/n-2}" height="22" rx="5" fill="${c[k]}"/><text x="${x+W/n/2}" y="39.5" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">TI</text>`}
+ return `<svg viewBox="0 0 104 50" width="104" height="50" aria-hidden="true">${g}</svg>`}
 $('#tsI').innerHTML=`${N('q',1)}<b>=</b>${N('ee',1)}${split(2)}<small>1 battito = 2 crome</small>`;
 $('#tcI').innerHTML=`${N('qd',1)}<b>=</b>${N('e3',1)}${split(3)}<small>1 battito = 3 crome</small>`;
 
